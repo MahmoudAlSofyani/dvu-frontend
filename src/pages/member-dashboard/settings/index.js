@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import MemberDashboardMenu from "../../../components/dashboard-menu/members";
 import Layout from "../../../components/layout";
-import { PencilAltIcon, PlusCircleIcon } from "@heroicons/react/outline";
+import { PlusCircleIcon } from "@heroicons/react/outline";
 import InputField from "../../../components/input-field";
 import DropdownField from "../../../components/dropdown-field";
 import CustomButton from "../../../components/custom-button";
@@ -63,7 +63,7 @@ const MemberDashboard_Settings = () => {
 
   return (
     <Layout>
-      <div className="container flex flex-col items-center space-y-6 bg-darkGray p-5 w-4/5 rounded-lg mx-auto max-w-md ">
+      <div className="container flex flex-col items-center space-y-6 bg-darkGray p-5 rounded-lg mx-auto max-w-md ">
         <h6 className="text-white uppercase font-bold tracking-widest text-xl">
           Settings
         </h6>
@@ -72,9 +72,10 @@ const MemberDashboard_Settings = () => {
           <img
             className="rounded-full w-3/4 mx-auto"
             src="https://picsum.photos/200"
+            alt="Profile"
           />
         </div>
-        <div className="flex flex-col space-y-3">
+        <div className="flex flex-col space-y-3 w-full">
           <label className="text-md text-white">First Name</label>
           <InputField
             name="firstName"
@@ -83,7 +84,7 @@ const MemberDashboard_Settings = () => {
             disabled
           />
         </div>
-        <div className="flex flex-col space-y-3">
+        <div className="flex flex-col space-y-3 w-full">
           <label className="text-md text-white">Last Name</label>
           <InputField
             name="lastName"
@@ -92,7 +93,7 @@ const MemberDashboard_Settings = () => {
             disabled
           />
         </div>
-        <div className="flex flex-col space-y-3">
+        <div className="flex flex-col space-y-3 w-full">
           <label className="text-md text-white">Mobile Number</label>
           <InputField
             name="mobileNumber"
@@ -100,7 +101,7 @@ const MemberDashboard_Settings = () => {
             placeholder="+971565676762"
           />
         </div>
-        <div className="flex flex-col space-y-3">
+        <div className="flex flex-col space-y-3 w-full">
           <label className="text-md text-white">WhatsApp Number</label>
           <InputField
             name="whatsappNumber"
@@ -108,7 +109,7 @@ const MemberDashboard_Settings = () => {
             placeholder="+971565676762"
           />
         </div>
-        <div className="flex flex-col space-y-3">
+        <div className="flex flex-col space-y-3 w-full">
           <label className="text-md text-white">Email</label>
           <InputField
             name="firstName"
@@ -116,7 +117,7 @@ const MemberDashboard_Settings = () => {
             placeholder="msafar95@hotmail.com"
           />
         </div>
-        <div className="flex flex-col space-y-3">
+        <div className="flex flex-col space-y-3 w-full">
           <label className="text-md text-white">Instagram</label>
           <InputField name="instagramName" type="text" placeholder="msafar95" />
         </div>
@@ -124,7 +125,7 @@ const MemberDashboard_Settings = () => {
           <hr className="text-white border-dotted w-full opacity-20 rounded" />
         </div>
         <p className="text-white">Your rides</p>
-        <div className="text-center text-white bg-charcoal p-5 rounded-md leading-9 shadow-md">
+        <div className="text-center text-white bg-charcoal p-5 rounded-md leading-9 shadow-md w-full">
           <p>2016 Golf GTI</p>
           <p>Blue</p>
           <p>DXB R 47164</p>

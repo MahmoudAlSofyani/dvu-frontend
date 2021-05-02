@@ -1,4 +1,3 @@
-import Header from "./components/header";
 import Layout from "./components/layout";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import PortalPage from "./pages/portal";
@@ -9,7 +8,13 @@ import SponsorsPage from "./pages/sponsors";
 import MembersDashboardIndexPage from "./pages/member-dashboard";
 import MemberDashboard_Settings from "./pages/member-dashboard/settings";
 import MemberDashboard_Events from "./pages/member-dashboard/events";
+import MemberDashboard_Admin from "./pages/member-dashboard/admin-tab";
 import SponsorsLoginPage from "./pages/portal/sponsors/login";
+import AdminTab_Announcements from "./pages/member-dashboard/admin-tab/announcements";
+import AdminTab_Announcements_Add from "./pages/member-dashboard/admin-tab/announcements/add";
+import AdminTab_Announcements_Edit from "./pages/member-dashboard/admin-tab/announcements/edit";
+import AdminTab_Events from "./pages/member-dashboard/admin-tab/events";
+import AdminTab_Events_Add from "./pages/member-dashboard/admin-tab/events/add";
 function App() {
   return (
     <Router>
@@ -37,6 +42,24 @@ function App() {
           path="/members/events"
           component={MemberDashboard_Events}
         />
+        <Route exact path="/members/admin" component={MemberDashboard_Admin} />
+        <Route
+          exact
+          path="/admin/announcements"
+          component={AdminTab_Announcements}
+        />
+        <Route
+          exact
+          path="/admin/announcements/add"
+          component={AdminTab_Announcements_Add}
+        />
+        <Route
+          exact
+          path="/admin/announcements/edit"
+          component={AdminTab_Announcements_Edit}
+        />
+        <Route exact path="/admin/events" component={AdminTab_Events} />
+        <Route exact path="/admin/events/add" component={AdminTab_Events_Add} />
       </Switch>
     </Router>
   );

@@ -1,10 +1,10 @@
-import React, { useState } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 import { MenuIcon } from "@heroicons/react/outline";
 import NavMenu from "../nav-menu";
 import { useStoreActions, useStoreState } from "easy-peasy";
 
-const Header = ({ open }) => {
+const Header = () => {
   const isMenuOpen = useStoreState((state) => state.mobileSideBar.isMenuOpen);
   const toggleMenu = useStoreActions(
     (actions) => actions.mobileSideBar.toggleMenu
@@ -75,7 +75,7 @@ const Header = ({ open }) => {
           ) : _item.type === "img" ? (
             <Link key={index} to={_item.to}>
               <div className="w-60 sm:w-80">
-                <img src={_item.src} className="w-auto h-auto" />
+                <img src={_item.src} className="w-auto h-auto" alt="" />
               </div>
             </Link>
           ) : _item.type === "button" ? (

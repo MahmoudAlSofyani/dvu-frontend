@@ -11,7 +11,7 @@ const InputField = ({
   return (
     <>
       <input
-        className="bg-transparent focus:outline-none border-b-2 w-full border-red text-white"
+        className="bg-transparent focus:outline-none border-b-2 w-full border-red text-white rounded-none"
         placeholder={required ? placeholder + " *" : placeholder}
         onChange={handleInputChange}
         name={name}

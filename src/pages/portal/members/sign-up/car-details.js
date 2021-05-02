@@ -4,7 +4,7 @@ import CustomButton from "../../../../components/custom-button";
 import DropdownField from "../../../../components/dropdown-field";
 import InputField from "../../../../components/input-field";
 
-const MembersSignUpPage_CarDetails = () => {
+const MembersSignUpPageCarDetails = () => {
   const [_yearsArray, _setYearsArray] = useState([]);
   const setStepNumber = useStoreActions(
     (actions) => actions.memberSignupForm.setStepNumber
@@ -134,4 +134,4 @@ const MembersSignUpPage_CarDetails = () => {
   );
 };
 
-export default MembersSignUpPage_CarDetails;
+export default MembersSignUpPageCarDetails;

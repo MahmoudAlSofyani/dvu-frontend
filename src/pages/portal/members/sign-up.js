@@ -1,11 +1,9 @@
-import { useStoreActions, useStoreState } from "easy-peasy";
-import React, { useState } from "react";
-import CustomButton from "../../../components/custom-button";
-import InputField from "../../../components/input-field";
+import {useStoreState } from "easy-peasy";
+import React from "react";
 import Layout from "../../../components/layout";
-import MembersSignUpPage_AccountDetails from "./sign-up/account-details";
-import MembersSignUpPage_CarDetails from "./sign-up/car-details";
-import MembersSignUpPage_PersonalDetails from "./sign-up/personal-details";
+import MembersSignUpPageAccountDetails from "./sign-up/account-details";
+import MembersSignUpPageCarDetails from "./sign-up/car-details";
+import MembersSignUpPagePersonalDetails from "./sign-up/personal-details";
 
 const MembersSignUpPage = () => {
   const stepNumber = useStoreState(
@@ -19,11 +17,11 @@ const MembersSignUpPage = () => {
           Register
         </h6>
         {stepNumber === 1 ? (
-          <MembersSignUpPage_PersonalDetails />
+          <MembersSignUpPagePersonalDetails />
         ) : stepNumber === 2 ? (
-          <MembersSignUpPage_CarDetails />
+          <MembersSignUpPageCarDetails />
         ) : stepNumber === 3 ? (
-          <MembersSignUpPage_AccountDetails />
+          <MembersSignUpPageAccountDetails />
         ) : null}
       </div>
     </Layout>

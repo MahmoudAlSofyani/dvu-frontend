@@ -1,9 +1,7 @@
-import { useStoreActions, useStoreState } from "easy-peasy";
-import React, { useState } from "react";
+import React from "react";
 import Header from "./header";
 
 const Layout = ({ children }) => {
-  const isMenuOpen = useStoreState((state) => state.mobileSideBar.isMenuOpen);
 
   return (
     <div className="container h-screen">
