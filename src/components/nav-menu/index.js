@@ -1,10 +1,9 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { XIcon } from "@heroicons/react/solid";
 import { useStoreActions } from "easy-peasy";
 import { Link } from "react-router-dom";
 import CustomButton from "../custom-button";
-import { useHistory, useLocation, withRouter } from "react-router-dom";
-const NavMenu = (props) => {
+const NavMenu = () => {
   const toggleMenu = useStoreActions(
     (actions) => actions.mobileSideBar.toggleMenu
   );

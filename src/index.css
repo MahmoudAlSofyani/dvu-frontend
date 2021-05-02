@@ -1,3 +1,51 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* @font-face {
+  font-family: "AvantGardeBk";
+  src: local("ITCAvantGardeStdBk"),
+    url(./fonts/ITCAvantGardeStdBk.otf) format("otf");
+}
+
+@font-face {
+  font-family: "AvantGardeMd";
+  src: local("ITCAvantGardeStdMd"),
+    url(./fonts/ITCAvantGardeStdMd.otf) format("otf");
+}
+
+@font-face {
+  font-family: "AvantGardeBold";
+  src: local("ITCAvantGardeStdBold"),
+    url(./fonts/ITCAvantGardeStdBold.otf) format("otf");
+}
+
+@font-face {
+  font-family: "NCAAReg";
+  src: local("NCAA Illinois Fighting Illini"),
+    url(./fonts/NCAA_Illinois_Fighting_Illini.otf) format("otf");
+}
+
+@font-face {
+  font-family: "NCAABold";
+  src: local("NCAA Illinois Fighting IlliniBold"),
+    url(./fonts/NCAA_Illinois_Fighting_IlliniBold.otf) format("otf");
+} */
+.ck-editor__editable {
+  min-height: 100px;
+}
+
+@layer base {
+  ol {
+    list-style: decimal;
+  }
+
+  ul {
+    list-style: disc;
+  }
+
+  ol,
+  ul {
+    margin: 10px;
+  }
+}

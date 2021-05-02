@@ -3,7 +3,7 @@ import React from "react";
 import CustomButton from "../../../../components/custom-button";
 import InputField from "../../../../components/input-field";
 
-const MembersSignUpPage_PersonalDetails = () => {
+const MembersSignUpPagePersonalDetails = () => {
   const setStepNumber = useStoreActions(
     (actions) => actions.memberSignupForm.setStepNumber
   );
@@ -80,4 +80,4 @@ const MembersSignUpPage_PersonalDetails = () => {
   );
 };
 
-export default MembersSignUpPage_PersonalDetails;
+export default MembersSignUpPagePersonalDetails;

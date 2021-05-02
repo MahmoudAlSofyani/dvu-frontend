@@ -22,7 +22,9 @@ const MemberDashboardMenu = () => {
       <Link to="/members/settings">
         <CogIcon className="text-red w-10" />
       </Link>
-      <LockClosedIcon className="text-red w-10" />
+      <Link to="/members/admin">
+        <LockClosedIcon className="text-red w-10" />
+      </Link>
     </div>
   );
 };

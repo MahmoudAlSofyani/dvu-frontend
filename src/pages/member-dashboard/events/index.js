@@ -39,7 +39,7 @@ const MemberDashboard_Events = () => {
 
   return (
     <Layout>
-      <div className="container flex flex-col items-center space-y-6 bg-darkGray p-5 w-4/5 rounded-lg mx-auto max-w-md ">
+      <div className="container flex flex-col items-center space-y-6 bg-darkGray p-5 rounded-lg mx-auto max-w-md ">
         <h6 className="text-white uppercase font-bold tracking-widest text-xl">
           Events
         </h6>

@@ -1,5 +1,4 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import CustomButton from "../../components/custom-button";
 import Layout from "../../components/layout";
 
