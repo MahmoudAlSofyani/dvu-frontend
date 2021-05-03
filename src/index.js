@@ -4,6 +4,10 @@ import "./index.css";
 import App from "./App";
 import { StoreProvider } from "easy-peasy";
 import store from "./store";
+import setUpAxios from "./setUpAxios";
+import axios from "axios";
+
+setUpAxios(axios);
 
 ReactDOM.render(
   <React.StrictMode>

@@ -14,10 +14,25 @@ const store = createStore({
       };
     }),
   },
+  memberLoginForm: {
+    formData: {},
+    setFormData: action((state, payload) => {
+      state.formData = {
+        ...state.formData,
+        [payload.id || payload.name]: payload.value,
+      };
+    }),
+  },
   mobileSideBar: {
     isMenuOpen: false,
     toggleMenu: action((state, payload) => {
       state.isMenuOpen = !state.isMenuOpen;
+    }),
+  },
+  currentUser: {
+    currentUserId: {},
+    setCurrentUserId: action((state, payload) => {
+      state.currentUserId = payload;
     }),
   },
 });

@@ -74,6 +74,7 @@ const NavMenu = () => {
             </Link>
           ) : _item.type === "button" ? (
             <CustomButton
+              key={index}
               handleOnClick={toggleMenu}
               label={_item.text}
               link={_item.to}

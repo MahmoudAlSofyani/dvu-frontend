@@ -80,7 +80,7 @@ const MemberDashboard_Settings = () => {
           <InputField
             name="firstName"
             type="text"
-            placeholder="Mahmoud"
+            placeholder="First Name"
             disabled
           />
         </div>
@@ -89,7 +89,7 @@ const MemberDashboard_Settings = () => {
           <InputField
             name="lastName"
             type="text"
-            placeholder="AlSofyani"
+            placeholder="Last Name"
             disabled
           />
         </div>
@@ -98,7 +98,7 @@ const MemberDashboard_Settings = () => {
           <InputField
             name="mobileNumber"
             type="tel"
-            placeholder="+971565676762"
+            placeholder="+971123456789"
           />
         </div>
         <div className="flex flex-col space-y-3 w-full">
@@ -106,7 +106,7 @@ const MemberDashboard_Settings = () => {
           <InputField
             name="whatsappNumber"
             type="tel"
-            placeholder="+971565676762"
+            placeholder="+971123456789"
           />
         </div>
         <div className="flex flex-col space-y-3 w-full">
@@ -114,12 +114,12 @@ const MemberDashboard_Settings = () => {
           <InputField
             name="firstName"
             type="email"
-            placeholder="msafar95@hotmail.com"
+            placeholder="hello@email.com"
           />
         </div>
         <div className="flex flex-col space-y-3 w-full">
           <label className="text-md text-white">Instagram</label>
-          <InputField name="instagramName" type="text" placeholder="msafar95" />
+          <InputField name="instagramName" type="text" placeholder="instagramName" />
         </div>
         <div className="w-1/2 py-5">
           <hr className="text-white border-dotted w-full opacity-20 rounded" />
@@ -128,8 +128,8 @@ const MemberDashboard_Settings = () => {
         <div className="text-center text-white bg-charcoal p-5 rounded-md leading-9 shadow-md w-full">
           <p>2016 Golf GTI</p>
           <p>Blue</p>
-          <p>DXB R 47164</p>
-          <p>WVWFK2AU1GW066747</p>
+          <p>DXB A 12345</p>
+          <p>WVWFK</p>
         </div>
         <div>
           <PlusCircleIcon
