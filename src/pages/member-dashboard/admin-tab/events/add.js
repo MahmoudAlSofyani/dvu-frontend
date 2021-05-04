@@ -29,7 +29,6 @@ const AdminTab_Events_Add = () => {
   };
 
   const handleOnClick = () => {
-    console.log(formData);
     history.push("/admin/events");
   };
 

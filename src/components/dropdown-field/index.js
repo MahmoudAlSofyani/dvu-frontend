@@ -8,6 +8,8 @@ const DropdownField = ({
   name,
   disabled = false,
 }) => {
+
+
   return (
     <>
       <div className="flex flex-col mb-6">
@@ -23,7 +25,7 @@ const DropdownField = ({
         >
           <option selected disabled hidden></option>
           {options.map((_option, index) => (
-            <option value={_option.value}>{_option.label}</option>
+            <option key={index} value={_option.value}>{_option.label}</option>
           ))}
         </select>
       </div>

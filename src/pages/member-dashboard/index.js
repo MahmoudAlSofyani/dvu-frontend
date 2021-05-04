@@ -8,13 +8,22 @@ import moment from "moment";
 const MembersDashboardIndexPage = () => {
   const [isDataLoaded, setIsDataLoaded] = useState(false);
   const [announcements, setAnnouncements] = useState([]);
+  const [memberStatus, setMemberStatus] = useState(false);
+  const [memberBrowniePoints, setMemberBrowniePoints] = useState(0)
   const [events, setEvents] = useState([]);
+  const history = useHistory();
+
   const currentUserId = useStoreState(
     (state) => state.currentUser.currentUserId
   );
 
   useEffect(() => {
-    Promise.all([axios.get("/announcements"), axios.get("/events")])
+    Promise.all([
+      axios.get("/announcements"),
+      axios.get("/events"),
+      axios.get(`/members/status/${currentUserId}`),
+      axios.get(`/members/brownie-points/${currentUserId}`)
+    ])
       .then((_responses) => {
         if (_responses[0].status === 200) {
           setAnnouncements(_responses[0].data);
@@ -23,44 +32,26 @@ const MembersDashboardIndexPage = () => {
           setEvents(_responses[1].data);
         }
 
+        if (_responses[2].status === 200) {
+          const { _isActive } = _responses[2].data;
+
+          if (_isActive) {
+            setMemberStatus(true);
+          } else {
+            setMemberStatus(false);
+          }
+        }
+
+        if(_responses[3].status === 200) {
+          const {_browniePoints} = _responses[3].data;
+
+          setMemberBrowniePoints(_browniePoints)
+        }
+
         setIsDataLoaded(true);
       })
       .catch((err) => console.log(err));
-  });
-
-  const history = useHistory();
-  const EVENTS = [
-    {
-      id: "1",
-      date: "15 Jan",
-      title: "Karting in Abu Dhabi",
-      meetingPoint: "Last Exit AD Bound",
-      meetingTime: "15:00 GMT +4",
-      details:
-        "Join us for an evening of karting. We will be competing with Wolfsvagen AUH. Ticket prices are 150AED per 15 minute session",
-      isEnded: false,
-    },
-    {
-      id: "2",
-      date: "15 Jan",
-      title: "Karting in Abu Dhabi",
-      meetingPoint: "Last Exit AD Bound",
-      meetingTime: "15:00 GMT +4",
-      details:
-        "Join us for an evening of karting. We will be competing with Wolfsvagen AUH. Ticket prices are 150AED per 15 minute session",
-      isEnded: false,
-    },
-    {
-      id: "3",
-      date: "15 Jan",
-      title: "Karting in Abu Dhabi",
-      meetingPoint: "Last Exit AD Bound",
-      meetingTime: "15:00 GMT +4",
-      details:
-        "Join us for an evening of karting. We will be competing with Wolfsvagen AUH. Ticket prices are 150AED per 15 minute session",
-      isEnded: false,
-    },
-  ];
+  }, [setAnnouncements, setEvents, currentUserId]);
 
   return (
     <Layout>
@@ -72,17 +63,20 @@ const MembersDashboardIndexPage = () => {
           <>
             <div className="bg-charcoal w-full rounded-md p-3 shadow-md">
               <h6 className="text-white font-bold">Status</h6>
-
-              <p className="text-green text-sm">Active</p>
+              {memberStatus ? (
+                <p className="text-green text-sm">Active</p>
+              ) : (
+                <p className="text-red text-sm">Not Active</p>
+              )}
             </div>
             <div className="bg-charcoal w-full rounded-md p-3 shadow-md">
               <h6 className="text-white font-bold">Brownie Points</h6>
-              <p className="text-white opacity-80 text-sm">69420</p>
+              <p className="text-white opacity-80 text-sm">{memberBrowniePoints}</p>
             </div>
-            <div className="bg-charcoal w-full rounded-md p-3 shadow-md">
+            {/* <div className="bg-charcoal w-full rounded-md p-3 shadow-md">
               <h6 className="text-white font-bold">Warnings</h6>
               <p className="text-green opacity-80 text-sm">0</p>
-            </div>
+            </div> */}
             <div className="bg-charcoal w-full rounded-md p-3 shadow-md">
               <h6 className="text-white font-bold mb-2">Announcements</h6>
 
@@ -91,7 +85,7 @@ const MembersDashboardIndexPage = () => {
                   announcements.map((_announcement, index) => (
                     <>
                       <p
-                        // onClick={() => handleEditAnnouncement(_announcement.id)}
+                        onClick={() => history.push("/members/announcements")}
                         key={index}
                         className="text-white opacity-80 text-sm py-2 cursor-pointer"
                       >

@@ -35,6 +35,15 @@ const store = createStore({
       state.currentUserId = payload;
     }),
   },
+  settingsFormData: {
+    formData: {},
+    setFormData: action((state, payload) => {
+      state.formData = {
+        ...state.formData,
+        [payload.id || payload.name]: payload.value,
+      };
+    }),
+  },
 });
 
 export default store;

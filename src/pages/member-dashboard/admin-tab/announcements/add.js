@@ -27,7 +27,6 @@ const AdminTab_Announcements_Add = () => {
   };
 
   const handleOnClick = () => {
-    console.log(formData);
     history.push("/admin/announcements");
   };
 

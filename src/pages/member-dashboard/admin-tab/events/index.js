@@ -5,6 +5,7 @@ import CustomButton from "../../../../components/custom-button";
 import { useHistory } from "react-router-dom";
 const AdminTab_Events = () => {
   const history = useHistory();
+
   const EVENTS = [
     {
       id: "1",

@@ -19,16 +19,13 @@ const MemberDashboardMenu = () => {
   useEffect(() => {
     try {
       axios
-        .get(`/members/${currentUserId}`)
+        .post("/members/role", {id: currentUserId, role: "Admin"})
         .then((_response) => {
           if (_response.status === 200) {
-            const { roles } = _response.data;
+            const { _isRoleExist } = _response.data;
 
-            if (!roles.some((_role) => _role.name === "ADMIN")) {
-              setIsAdmin(false);
-            } else {
-              setIsAdmin(true);
-            }
+            if (_isRoleExist) setIsAdmin(true);
+            else setIsAdmin(false);
           }
         })
         .catch((err) => console.log(err));
@@ -44,7 +41,9 @@ const MemberDashboardMenu = () => {
       <Link to="/members/dashboard">
         <HomeIcon className="text-red w-10" />
       </Link>
-      <SpeakerphoneIcon className="text-red w-10" />
+      <Link to="/members/announcements">
+        <SpeakerphoneIcon className="text-red w-10" />
+      </Link>
       <Link to="/members/settings">
         <CogIcon className="text-red w-10" />
       </Link>
