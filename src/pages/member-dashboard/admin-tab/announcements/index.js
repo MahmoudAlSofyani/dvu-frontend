@@ -4,8 +4,10 @@ import MemberDashboardMenu from "../../../../components/dashboard-menu/members";
 import CustomButton from "../../../../components/custom-button";
 import axios from "axios";
 import moment from "moment";
+import { useHistory } from "react-router-dom";
 const AdminTab_Announcements = () => {
   const [announcements, setAnnouncements] = useState([]);
+  const history = useHistory();
 
   useEffect(() => {
     try {
@@ -19,10 +21,11 @@ const AdminTab_Announcements = () => {
     }
   }, [setAnnouncements]);
 
-
-  const handleEditAnnouncement = (eventId) => {
-    console.log(eventId)
-    // history.push("/admin/announcements/edit");
+  const handleEditAnnouncement = (announcementId) => {
+    history.push({
+      pathname: "/admin/announcements/edit",
+      state: { announcementId },
+    });
   };
 
   return (

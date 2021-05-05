@@ -30,7 +30,7 @@ const MemberDashboardMenu = () => {
         })
         .catch((err) => console.log(err));
     } catch (err) {}
-  });
+  }, [setIsAdmin]);
 
   return (
     <div className="fixed right-0 left-0 bottom-0 flex items-center justify-center space-x-6 p-3 bg-darkGray">

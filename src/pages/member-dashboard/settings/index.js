@@ -252,7 +252,6 @@ const MemberDashboard_Settings = () => {
               options={plateEmirates}
               placeholder="Plate Emirate"
               name="plateEmirate"
-              // handleInputChange={() => console.log(formData)}
               handleInputChange={handleFormChange}
             />
             <DropdownField
