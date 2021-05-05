@@ -3,7 +3,7 @@ import MemberDashboardMenu from "../../../components/dashboard-menu/members";
 import Layout from "../../../components/layout";
 import EventCard from "../../../components/event-card";
 import axios from "axios";
-import moment from "moment"
+import moment from "moment";
 const MemberDashboard_Events = () => {
   const [events, setEvents] = useState([]);
   const [isDataLoaded, setIsDataLoaded] = useState(false);
@@ -30,21 +30,23 @@ const MemberDashboard_Events = () => {
         <h6 className="text-white uppercase font-bold tracking-widest text-xl">
           Events
         </h6>
-        {isDataLoaded
-          ? events.map((_event, index) =>
-              !_event.isEnded ? (
-                <EventCard
-                  key={index}
-                  id={_event.id}
-                  date={moment(_event.date).format("DD MMM")}
-                  title={_event.name}
-                  meetingPoint={_event.meetingPoint}
-                  meetingTime={_event.meetingTime}
-                  details={_event.details}
-                />
-              ) : null
-            )
-          : null}
+        <div className="w-full flex flex-col space-y-5">
+          {isDataLoaded
+            ? events.map((_event, index) =>
+                !_event.isEnded ? (
+                  <EventCard
+                    key={index}
+                    id={_event.id}
+                    date={moment(_event.date).format("DD MMM")}
+                    title={_event.name}
+                    meetingPoint={_event.meetingPoint}
+                    meetingTime={_event.meetingTime}
+                    details={_event.details}
+                  />
+                ) : null
+              )
+            : null}
+        </div>
       </div>
       <div className="p-10 ">
         <MemberDashboardMenu />

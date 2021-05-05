@@ -2,6 +2,7 @@ import { useStoreState } from "easy-peasy";
 import React, { useEffect, useState } from "react";
 import CustomButton from "../custom-button";
 import axios from "axios";
+import moment from "moment";
 const EventCard = ({ id, date, title, meetingPoint, meetingTime, details }) => {
   const [status, setStatus] = useState({
     message: "",
@@ -23,7 +24,6 @@ const EventCard = ({ id, date, title, meetingPoint, meetingTime, details }) => {
               ...status,
               isRegistered: _isRegistered,
             });
-            
           }
         });
     } catch (err) {
@@ -64,11 +64,16 @@ const EventCard = ({ id, date, title, meetingPoint, meetingTime, details }) => {
       </div>
       <div className="text-left w-full">
         <p className="text-red uppercase font-bold">Meeting Time</p>
-        <p className="text-white">{meetingTime}</p>
+        <p className="text-white">
+          {moment(meetingTime).format("hh:mm a").toUpperCase()}
+        </p>
       </div>
       <div className="text-left w-full">
         <p className="text-red uppercase font-bold">Event Details</p>
-        <p className="text-white">{details}</p>
+        <p className="text-white">
+          {" "}
+          <div dangerouslySetInnerHTML={{ __html: `${details}` }} />
+        </p>
       </div>
       <div className="w-full">
         {!status.isRegistered ? (
