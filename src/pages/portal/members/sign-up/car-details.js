@@ -3,9 +3,20 @@ import React, { useEffect, useState } from "react";
 import CustomButton from "../../../../components/custom-button";
 import DropdownField from "../../../../components/dropdown-field";
 import InputField from "../../../../components/input-field";
+import {
+  getCarColors,
+  getCarModels,
+  getPlateCodes,
+  getPlateEmirates,
+} from "../../../../helpers/api-callers";
 
 const MembersSignUpPageCarDetails = () => {
   const [_yearsArray, _setYearsArray] = useState([]);
+  const [carModels, setCarModels] = useState([]);
+  const [carColors, setCarColors] = useState([]);
+  const [plateEmirates, setPlateEmirates] = useState([]);
+  const [plateCodes, setPlateCodes] = useState([]);
+
   const setStepNumber = useStoreActions(
     (actions) => actions.memberSignupForm.setStepNumber
   );
@@ -26,45 +37,22 @@ const MembersSignUpPageCarDetails = () => {
       });
     }
     _setYearsArray(_tempYearsArray);
-  }, []);
 
-  const _carModels = [
-    {
-      label: "Golf GTI",
-      value: "Golf GTI",
-    },
-  ];
+    Promise.all([
+      getCarModels(),
+      getCarColors(),
+      getPlateEmirates(),
+      getPlateCodes(),
+    ])
+      .then((_responses) => {
+        if (_responses[0]) setCarModels(_responses[0]);
+        if (_responses[1]) setCarColors(_responses[1]);
+        if (_responses[2]) setPlateEmirates(_responses[2]);
+        if (_responses[3]) setPlateCodes(_responses[3]);
+      })
+      .catch((err) => console.log(err));
+  }, [setCarColors, setCarModels, setPlateCodes, setPlateEmirates]);
 
-  const _carColors = [
-    {
-      label: "Blue",
-      value: "Blue",
-    },
-  ];
-
-  const _plateEmirates = [
-    {
-      label: "Dubai",
-      value: "Dubai",
-    },
-    {
-      label: "Abu Dhabi",
-      value: "Abu Dhabi",
-    },
-  ];
-
-  const _plateCodes = [
-    {
-      label: "A",
-      value: "A",
-      emirate: "Dubai",
-    },
-    {
-      label: "B",
-      value: "B",
-      emirate: "Abu Dhabi",
-    },
-  ];
 
   const handleFormChange = (e) => setFormData(e.target);
 
@@ -75,14 +63,14 @@ const MembersSignUpPageCarDetails = () => {
         <div className="lg:grid lg:grid-cols-2 lg:gap-8 lg:space-y-0  flex flex-col ">
           <DropdownField
             name="carModel"
-            options={_carModels}
+            options={carModels}
             placeholder="Car Model"
             required
             handleInputChange={handleFormChange}
           />
           <DropdownField
             name="carColor"
-            options={_carColors}
+            options={carColors}
             placeholder="Car Color"
             required
             handleInputChange={handleFormChange}
@@ -98,7 +86,7 @@ const MembersSignUpPageCarDetails = () => {
           />
           <DropdownField
             name="plateEmirate"
-            options={_plateEmirates}
+            options={plateEmirates}
             placeholder="Plate Emirate"
             required
             handleInputChange={handleFormChange}
@@ -106,12 +94,11 @@ const MembersSignUpPageCarDetails = () => {
         </div>
         <div className="lg:grid lg:grid-cols-2 lg:gap-8 lg:space-y-0  flex flex-col space-y-4 ">
           <DropdownField
-            name="plateCode"
-            options={_plateCodes.filter(
+            options={plateCodes.filter(
               (_plateCode) => _plateCode.emirate === formData.plateEmirate
             )}
             placeholder="Plate Code"
-            required
+            name="plateCode"
             handleInputChange={handleFormChange}
             disabled={!formData.plateEmirate ? true : false}
           />

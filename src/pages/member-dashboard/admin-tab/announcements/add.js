@@ -5,6 +5,7 @@ import { useHistory } from "react-router-dom";
 import InputField from "../../../../components/input-field";
 import CustomButton from "../../../../components/custom-button";
 import CustomEditor from "../../../../components/custom-editor";
+import axios from "axios";
 
 const AdminTab_Announcements_Add = () => {
   const [formData, setFormData] = useState({});
@@ -26,9 +27,12 @@ const AdminTab_Announcements_Add = () => {
     });
   };
 
-  const handleOnClick = () => {
-    console.log(formData);
-    history.push("/admin/announcements");
+  const handleOnClick = async () => {
+    const _response = await axios.post("/announcements", formData);
+
+    if (_response.status === 200) {
+      history.push("/admin/announcements");
+    }
   };
 
   return (

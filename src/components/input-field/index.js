@@ -7,6 +7,8 @@ const InputField = ({
   required,
   disabled = false,
   type,
+  value,
+  defaultValue
 }) => {
   return (
     <>
@@ -18,6 +20,8 @@ const InputField = ({
         required={required}
         type={type}
         disabled={disabled}
+        value={value}
+        defaultValue={defaultValue}
       />
     </>
   );

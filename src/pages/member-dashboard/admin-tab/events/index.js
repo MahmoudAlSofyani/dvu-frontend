@@ -1,36 +1,34 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Layout from "../../../../components/layout";
 import MemberDashboardMenu from "../../../../components/dashboard-menu/members";
 import CustomButton from "../../../../components/custom-button";
 import { useHistory } from "react-router-dom";
+import axios from "axios";
+import moment from "moment";
 const AdminTab_Events = () => {
   const history = useHistory();
-  const EVENTS = [
-    {
-      id: "1",
-      date: "15 Jan",
-      title: "Event 1",
-      details:
-        "Join us for an evening of karting. We will be competing with Wolfsvagen AUH. Ticket prices are 150AED per 15 minute session",
-    },
-    {
-      id: "2",
-      date: "15 Jan",
-      title: "Event 2",
-      details:
-        "Join us for an evening of karting. We will be competing with Wolfsvagen AUH. Ticket prices are 150AED per 15 minute session",
-    },
-    {
-      id: "3",
-      date: "15 Jan",
-      title: "Event 3",
-      details:
-        "Join us for an evening of karting. We will be competing with Wolfsvagen AUH. Ticket prices are 150AED per 15 minute session",
-    },
-  ];
+  const [events, setEvents] = useState([]);
+  const [isDataLoaded, setIsDataLoaded] = useState(false);
+
+  useEffect(() => {
+    try {
+      axios
+        .get("/events")
+        .then((_response) => {
+          if (_response.status === 200) {
+            setEvents(_response.data);
+            setIsDataLoaded(true);
+          }
+        })
+        .catch((err) => console.log(err));
+    } catch (err) {}
+  }, [setEvents]);
 
   const handleEditEvent = (eventId) => {
-    history.push("/admin/event/edit");
+    history.push({
+      pathname: "/admin/events/edit",
+      state: {eventId}
+    })
   };
 
   return (
@@ -42,8 +40,8 @@ const AdminTab_Events = () => {
         <p className="text-white">Events</p>
         <div className="bg-charcoal w-full rounded-md p-3 shadow-md">
           <div className="flex flex-col space-y-2 text-center">
-            {EVENTS.map((_event, index) =>
-              !_event.isEnded ? (
+            {isDataLoaded && events.length > 0 ? (
+              events.map((_event, index) => (
                 <>
                   <p
                     onClick={() => handleEditEvent(_event.id)}
@@ -51,15 +49,17 @@ const AdminTab_Events = () => {
                     className="text-white opacity-80 text-sm py-2 cursor-pointer"
                   >
                     <span className="text-red font-bold">
-                      {_event.date.toUpperCase()}
+                      {moment(_event.date).format("DD MMM").toUpperCase()}
                     </span>{" "}
-                    {_event.title}
+                    {_event.name}
                   </p>
-                  {index + 1 < EVENTS.length ? (
+                  {index + 1 < events.length ? (
                     <hr className="text-white  w-1/2 opacity-20 rounded mx-auto" />
                   ) : null}
                 </>
-              ) : null
+              ))
+            ) : (
+              <p className="text-white">No Events</p>
             )}
           </div>
         </div>

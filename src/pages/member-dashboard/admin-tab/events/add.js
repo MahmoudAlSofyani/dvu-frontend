@@ -7,6 +7,7 @@ import CustomButton from "../../../../components/custom-button";
 import CustomEditor from "../../../../components/custom-editor";
 import CustomDatePicker from "../../../../components/custom-date-picker";
 import CustomTimePicker from "../../../../components/custom-time-picker";
+import axios from "axios";
 
 const AdminTab_Events_Add = () => {
   const [formData, setFormData] = useState({});
@@ -28,9 +29,13 @@ const AdminTab_Events_Add = () => {
     });
   };
 
-  const handleOnClick = () => {
-    console.log(formData);
-    history.push("/admin/events");
+  const handleOnClick = async () => {
+
+    const _response = await axios.post("/events", formData);
+
+    if (_response.status === 200) {
+      history.push("/admin/events");
+    }
   };
 
   const handleDatePicker = (date) => {
@@ -84,7 +89,7 @@ const AdminTab_Events_Add = () => {
             handleOnChange={(e, editor) => handleEditorChange(e, editor)}
           />
         </div>
-        <CustomButton label="Edit" handleOnClick={handleOnClick} />
+        <CustomButton label="Add" handleOnClick={handleOnClick} />
       </div>
       <div className="p-10 ">
         <MemberDashboardMenu />

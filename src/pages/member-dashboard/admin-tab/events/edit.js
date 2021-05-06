@@ -5,17 +5,21 @@ import { useHistory, useLocation } from "react-router-dom";
 import InputField from "../../../../components/input-field";
 import CustomButton from "../../../../components/custom-button";
 import CustomEditor from "../../../../components/custom-editor";
+import CustomDatePicker from "../../../../components/custom-date-picker";
+import CustomTimePicker from "../../../../components/custom-time-picker";
 import axios from "axios";
-const AdminTab_Announcements_Edit = () => {
+import moment from "moment";
+
+const AdminTab_Events_Edit = () => {
   const [formData, setFormData] = useState({});
   const [isDataLoaded, setIsDataLoaded] = useState(false);
   const history = useHistory();
   const location = useLocation();
-  const { announcementId } = location.state;
+
+  const { eventId } = location.state;
 
   const handleEditorChange = (event, editor) => {
     const data = editor.getData();
-
     setFormData({
       ...formData,
       details: data,
@@ -33,28 +37,45 @@ const AdminTab_Announcements_Edit = () => {
   const handleOnClick = async () => {
     try {
       let body = {
-        id: announcementId,
+        id: eventId,
         ...formData,
       };
-      const _response = await axios.patch("/announcements", body);
+
+      const _response = await axios.patch("/events", body);
 
       if (_response.status === 200) {
-        history.push("/admin/announcements");
+        history.push("/admin/events");
       }
     } catch (err) {
       console.log(err);
     }
   };
 
-  useEffect(() => {
-    axios.get(`/announcements/${announcementId}`).then((_response) => {
-      if (_response.status === 200) {
-        const { data } = _response;
-
-        setFormData(data);
-        setIsDataLoaded(true);
-      }
+  const handleDatePicker = (date) => {
+    setFormData({
+      ...formData,
+      date: date,
     });
+  };
+
+  const handleTimePicker = (time) => {
+    setFormData({
+      ...formData,
+      meetingTime: time,
+    });
+  };
+
+  useEffect(() => {
+    axios
+      .get(`/events/${eventId}`)
+      .then((_response) => {
+        if (_response.status === 200) {
+          const { data } = _response;
+          setFormData(data);
+          setIsDataLoaded(true);
+        }
+      })
+      .catch((err) => console.log(err));
   }, [setFormData]);
 
   return (
@@ -63,16 +84,36 @@ const AdminTab_Announcements_Edit = () => {
         <h6 className="text-white uppercase font-bold tracking-widest text-xl">
           Admin
         </h6>
-        <p className="text-white">Edit Announcement</p>
+        <p className="text-white">Add Event</p>
         {isDataLoaded ? (
           <>
             <InputField
-              placeholder="Title"
-              name="title"
+              placeholder="Name"
+              defaultValue={formData.name}
+              name="name"
               required
               type="text"
               handleInputChange={handleFormChange}
-              defaultValue={formData.title}
+            />
+            <CustomDatePicker
+              //   selected={formData.date}
+              selected={moment(formData.date).toDate()}
+              handleDateChange={handleDatePicker}
+              placeHolder="Date"
+              id="date"
+            />
+            <InputField
+              placeholder="Meeting Point"
+              name="meetingPoint"
+              defaultValue={formData.meetingPoint}
+              required
+              type="text"
+              handleInputChange={handleFormChange}
+            />
+            <CustomTimePicker
+              placeHolder="Meeting Time"
+              selected={moment(formData.meetingTime).toDate()}
+              handleTimeChange={handleTimePicker}
             />
             <div className="w-full ckeditor_list">
               <CustomEditor
@@ -91,4 +132,4 @@ const AdminTab_Announcements_Edit = () => {
   );
 };
 
-export default AdminTab_Announcements_Edit;
+export default AdminTab_Events_Edit;

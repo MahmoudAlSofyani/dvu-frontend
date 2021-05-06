@@ -15,6 +15,8 @@ import AdminTab_Announcements_Add from "./pages/member-dashboard/admin-tab/annou
 import AdminTab_Announcements_Edit from "./pages/member-dashboard/admin-tab/announcements/edit";
 import AdminTab_Events from "./pages/member-dashboard/admin-tab/events";
 import AdminTab_Events_Add from "./pages/member-dashboard/admin-tab/events/add";
+import MemberDashboard_Announcements from "./pages/member-dashboard/announcements";
+import AdminTab_Events_Edit from "./pages/member-dashboard/admin-tab/events/edit";
 function App() {
   return (
     <Router>
@@ -42,6 +44,11 @@ function App() {
           path="/members/events"
           component={MemberDashboard_Events}
         />
+        <Route
+          exact
+          path="/members/announcements"
+          component={MemberDashboard_Announcements}
+        />
         <Route exact path="/members/admin" component={MemberDashboard_Admin} />
         <Route
           exact
@@ -60,6 +67,11 @@ function App() {
         />
         <Route exact path="/admin/events" component={AdminTab_Events} />
         <Route exact path="/admin/events/add" component={AdminTab_Events_Add} />
+        <Route
+          exact
+          path="/admin/events/edit"
+          component={AdminTab_Events_Edit}
+        />
       </Switch>
     </Router>
   );

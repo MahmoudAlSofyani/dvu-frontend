@@ -1,9 +1,54 @@
-import React from "react";
+import { useStoreState } from "easy-peasy";
+import React, { useEffect, useState } from "react";
 import CustomButton from "../custom-button";
-
+import axios from "axios";
+import moment from "moment";
 const EventCard = ({ id, date, title, meetingPoint, meetingTime, details }) => {
-  const handleEventSignup = (id) => {
-    console.log(id);
+  const [status, setStatus] = useState({
+    message: "",
+    isRegistered: false,
+  });
+  const currentUserId = useStoreState(
+    (state) => state.currentUser.currentUserId
+  );
+
+  useEffect(() => {
+    try {
+      axios
+        .post("/events/check", { eventId: id, memberId: currentUserId })
+        .then((_response) => {
+          if (_response.status === 200) {
+            const { _isRegistered } = _response.data;
+
+            setStatus({
+              ...status,
+              isRegistered: _isRegistered,
+            });
+          }
+        });
+    } catch (err) {
+      console.log(err);
+    }
+  }, [setStatus]);
+
+  const handleEventSignup = async (eventId) => {
+    try {
+      let _body = {
+        memberId: currentUserId,
+        eventId,
+      };
+
+      const _response = await axios.post("/events/register", _body);
+
+      if (_response.status === 200) {
+        setStatus({
+          ...status,
+          message: "You have successfully registered for this event!",
+        });
+      }
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   return (
@@ -19,15 +64,35 @@ const EventCard = ({ id, date, title, meetingPoint, meetingTime, details }) => {
       </div>
       <div className="text-left w-full">
         <p className="text-red uppercase font-bold">Meeting Time</p>
-        <p className="text-white">{meetingTime}</p>
+        <p className="text-white">
+          {moment(meetingTime).format("hh:mm a").toUpperCase()}
+        </p>
       </div>
       <div className="text-left w-full">
         <p className="text-red uppercase font-bold">Event Details</p>
-        <p className="text-white">{details}</p>
+        <p className="text-white">
+          {" "}
+          <div dangerouslySetInnerHTML={{ __html: `${details}` }} />
+        </p>
       </div>
       <div className="w-full">
-        <CustomButton handleOnClick={() => handleEventSignup(id)} label="I'm In!" />
+        {!status.isRegistered ? (
+          <CustomButton
+            handleOnClick={() => handleEventSignup(id)}
+            label="I'm In!"
+          />
+        ) : (
+          <CustomButton
+            disabled
+            label="You have already registered for this event"
+          />
+        )}
       </div>
+      {status.message ? (
+        <div className="w-full">
+          <p className="text-green text-sm">{status.message}</p>
+        </div>
+      ) : null}
     </div>
   );
 };

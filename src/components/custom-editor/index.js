@@ -2,7 +2,7 @@ import React from "react";
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 
-const CustomEditor = ({ handleOnChange }) => {
+const CustomEditor = ({ handleOnChange, value }) => {
   const editorConfig = {
     toolbar: {
       items: [
@@ -18,7 +18,9 @@ const CustomEditor = ({ handleOnChange }) => {
 
   ClassicEditor.defaultConfig = editorConfig;
 
-  return <CKEditor editor={ClassicEditor} onChange={handleOnChange} />;
+  return (
+    <CKEditor editor={ClassicEditor} onChange={handleOnChange} data={value} />
+  );
 };
 
 export default CustomEditor;

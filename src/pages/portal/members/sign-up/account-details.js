@@ -2,6 +2,8 @@ import { useStoreActions, useStoreState } from "easy-peasy";
 import React from "react";
 import CustomButton from "../../../../components/custom-button";
 import InputField from "../../../../components/input-field";
+import axios from "axios";
+import { useHistory } from "react-router-dom";
 
 const MembersSignUpPageAccountDetails = () => {
   const setStepNumber = useStoreActions(
@@ -12,11 +14,16 @@ const MembersSignUpPageAccountDetails = () => {
   );
   const formData = useStoreState((state) => state.memberSignupForm.formData);
 
-  const handleFormChange = (e) => setFormData(e.target);
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  const history = useHistory();
 
-    console.log(formData);
+  const handleFormChange = (e) => setFormData(e.target);
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const _response = await axios.post("/members", formData);
+
+    if (_response.status === 200) {
+      history.push("/members/login");
+    }
   };
   return (
     <>

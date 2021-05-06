@@ -34,7 +34,7 @@ const MembersSignUpPagePersonalDetails = () => {
       </div>
       <div className="lg:grid lg:grid-cols-2 lg:gap-8 lg:space-y-0  space-y-8">
         <InputField
-          name="email"
+          name="emailAddress"
           placeholder="Email"
           required
           type="email"
@@ -66,7 +66,7 @@ const MembersSignUpPagePersonalDetails = () => {
       </div>
       <div className="lg:grid lg:grid-cols-2 lg:gap-8 lg:space-y-0  space-y-8">
         <InputField
-          name="instagram"
+          name="instagramName"
           placeholder="Instagram"
           type="text"
           handleInputChange={handleChange}

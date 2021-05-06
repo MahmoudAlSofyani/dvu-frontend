@@ -1,36 +1,31 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Layout from "../../../../components/layout";
 import MemberDashboardMenu from "../../../../components/dashboard-menu/members";
 import CustomButton from "../../../../components/custom-button";
+import axios from "axios";
+import moment from "moment";
 import { useHistory } from "react-router-dom";
 const AdminTab_Announcements = () => {
+  const [announcements, setAnnouncements] = useState([]);
   const history = useHistory();
-  const ANNOUNCEMENTS = [
-    {
-      id: "1",
-      date: "15 Jan",
-      title: "Announcement 1",
-      details:
-        "Join us for an evening of karting. We will be competing with Wolfsvagen AUH. Ticket prices are 150AED per 15 minute session",
-    },
-    {
-      id: "2",
-      date: "15 Jan",
-      title: "Announcement 2",
-      details:
-        "Join us for an evening of karting. We will be competing with Wolfsvagen AUH. Ticket prices are 150AED per 15 minute session",
-    },
-    {
-      id: "3",
-      date: "15 Jan",
-      title: "Announcement 3",
-      details:
-        "Join us for an evening of karting. We will be competing with Wolfsvagen AUH. Ticket prices are 150AED per 15 minute session",
-    },
-  ];
 
-  const handleEditAnnouncement = (eventId) => {
-    history.push("/admin/announcements/edit");
+  useEffect(() => {
+    try {
+      axios.get("/announcements").then((_response) => {
+        if (_response.status === 200) {
+          setAnnouncements(_response.data);
+        }
+      });
+    } catch (err) {
+      console.log(err);
+    }
+  }, [setAnnouncements]);
+
+  const handleEditAnnouncement = (announcementId) => {
+    history.push({
+      pathname: "/admin/announcements/edit",
+      state: { announcementId },
+    });
   };
 
   return (
@@ -42,24 +37,28 @@ const AdminTab_Announcements = () => {
         <p className="text-white">Announcements</p>
         <div className="bg-charcoal w-full rounded-md p-3 shadow-md">
           <div className="flex flex-col space-y-2 text-center">
-            {ANNOUNCEMENTS.map((_event, index) =>
-              !_event.isEnded ? (
+            {announcements.length > 0 ? (
+              announcements.map((_announcement, index) => (
                 <>
                   <p
-                    onClick={() => handleEditAnnouncement(_event.id)}
+                    onClick={() => handleEditAnnouncement(_announcement.id)}
                     key={index}
                     className="text-white opacity-80 text-sm py-2 cursor-pointer"
                   >
                     <span className="text-red font-bold">
-                      {_event.date.toUpperCase()}
+                      {moment(_announcement.createdAt)
+                        .format("DD MMM")
+                        .toUpperCase()}
                     </span>{" "}
-                    {_event.title}
+                    {_announcement.title}
                   </p>
-                  {index + 1 < ANNOUNCEMENTS.length ? (
+                  {index + 1 < announcements.length ? (
                     <hr className="text-white  w-1/2 opacity-20 rounded mx-auto" />
                   ) : null}
                 </>
-              ) : null
+              ))
+            ) : (
+              <p className="text-white">No announcements..</p>
             )}
           </div>
         </div>
