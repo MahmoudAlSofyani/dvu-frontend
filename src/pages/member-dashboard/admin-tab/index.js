@@ -47,7 +47,7 @@ const MemberDashboard_Admin = () => {
         <div className="flex flex-col space-y-4 w-full">
           <CustomButton link="/admin/announcements" label="Announcements" />
           <CustomButton label="Events" link="/admin/events" />
-          <CustomButton label="Members" />
+          <CustomButton label="Members" link="/admin/members" />
         </div>
       </div>
       <div className="p-10 ">

@@ -17,6 +17,9 @@ import AdminTab_Events from "./pages/member-dashboard/admin-tab/events";
 import AdminTab_Events_Add from "./pages/member-dashboard/admin-tab/events/add";
 import MemberDashboard_Announcements from "./pages/member-dashboard/announcements";
 import AdminTab_Events_Edit from "./pages/member-dashboard/admin-tab/events/edit";
+import AdminTab_Members from "./pages/member-dashboard/admin-tab/members";
+import AdminTab_Members_Verify from "./pages/member-dashboard/admin-tab/members/verify";
+
 function App() {
   return (
     <Router>
@@ -72,6 +75,8 @@ function App() {
           path="/admin/events/edit"
           component={AdminTab_Events_Edit}
         />
+        <Route exact path="/admin/members" component={AdminTab_Members} />
+        <Route exact path="/admin/members/verify" component={AdminTab_Members_Verify} />
       </Switch>
     </Router>
   );
