@@ -19,6 +19,7 @@ import MemberDashboard_Announcements from "./pages/member-dashboard/announcement
 import AdminTab_Events_Edit from "./pages/member-dashboard/admin-tab/events/edit";
 import AdminTab_Members from "./pages/member-dashboard/admin-tab/members";
 import AdminTab_Members_Verify from "./pages/member-dashboard/admin-tab/members/verify";
+import MemberDashboard_BarCode from "./pages/member-dashboard/barcode";
 
 function App() {
   return (
@@ -52,6 +53,11 @@ function App() {
           path="/members/announcements"
           component={MemberDashboard_Announcements}
         />
+        <Route
+          exact
+          path="/members/barcode"
+          component={MemberDashboard_BarCode}
+        />
         <Route exact path="/members/admin" component={MemberDashboard_Admin} />
         <Route
           exact
@@ -76,7 +82,11 @@ function App() {
           component={AdminTab_Events_Edit}
         />
         <Route exact path="/admin/members" component={AdminTab_Members} />
-        <Route exact path="/admin/members/verify" component={AdminTab_Members_Verify} />
+        <Route
+          exact
+          path="/admin/members/verify"
+          component={AdminTab_Members_Verify}
+        />
       </Switch>
     </Router>
   );

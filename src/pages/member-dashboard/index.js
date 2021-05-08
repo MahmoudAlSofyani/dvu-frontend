@@ -9,20 +9,18 @@ const MembersDashboardIndexPage = () => {
   const [isDataLoaded, setIsDataLoaded] = useState(false);
   const [announcements, setAnnouncements] = useState([]);
   const [memberStatus, setMemberStatus] = useState(false);
-  const [memberBrowniePoints, setMemberBrowniePoints] = useState(0)
+  const [memberBrowniePoints, setMemberBrowniePoints] = useState(0);
   const [events, setEvents] = useState([]);
   const history = useHistory();
 
-  const currentUserId = useStoreState(
-    (state) => state.currentUser.currentUserId
-  );
+  const currentUser = useStoreState((state) => state.currentUser.currentUser);
 
   useEffect(() => {
     Promise.all([
       axios.get("/announcements"),
       axios.get("/events"),
-      axios.get(`/members/status/${currentUserId}`),
-      axios.get(`/members/brownie-points/${currentUserId}`)
+      axios.get(`/members/status/${currentUser.id}`),
+      axios.get(`/members/brownie-points/${currentUser.id}`),
     ])
       .then((_responses) => {
         if (_responses[0].status === 200) {
@@ -42,16 +40,16 @@ const MembersDashboardIndexPage = () => {
           }
         }
 
-        if(_responses[3].status === 200) {
-          const {_browniePoints} = _responses[3].data;
+        if (_responses[3].status === 200) {
+          const { _browniePoints } = _responses[3].data;
 
-          setMemberBrowniePoints(_browniePoints)
+          setMemberBrowniePoints(_browniePoints);
         }
 
         setIsDataLoaded(true);
       })
       .catch((err) => console.log(err));
-  }, [setAnnouncements, setEvents, currentUserId]);
+  }, [setAnnouncements, setEvents, currentUser.id]);
 
   return (
     <Layout>
@@ -71,7 +69,9 @@ const MembersDashboardIndexPage = () => {
             </div>
             <div className="bg-charcoal w-full rounded-md p-3 shadow-md">
               <h6 className="text-white font-bold">Brownie Points</h6>
-              <p className="text-white opacity-80 text-sm">{memberBrowniePoints}</p>
+              <p className="text-white opacity-80 text-sm">
+                {memberBrowniePoints}
+              </p>
             </div>
             {/* <div className="bg-charcoal w-full rounded-md p-3 shadow-md">
               <h6 className="text-white font-bold">Warnings</h6>

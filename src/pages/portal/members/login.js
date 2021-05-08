@@ -15,8 +15,8 @@ const MembersLoginPage = () => {
     (actions) => actions.memberLoginForm.setFormData
   );
 
-  const setCurrentUserId = useStoreActions(
-    (actions) => actions.currentUser.setCurrentUserId
+  const setCurrentUser = useStoreActions(
+    (actions) => actions.currentUser.setCurrentUser
   );
   const history = useHistory();
 
@@ -27,22 +27,20 @@ const MembersLoginPage = () => {
       e.preventDefault();
 
       const _response = await axios.post("/auth/login", formData);
-      // check if password and email combination is valid
-      // check if member is active
+
 
       if (_response.status === 200) {
-        // history.push("/members/dashboard");
-        const { _isActive, _token, _memberId } = _response.data;
+        const { _token, _member } = _response.data;
 
-        if (!_isActive) {
-          setErrorMessage(
-            "Your account has not been activated or you have been purged"
-          );
+        console.log(_member.roles);
+
+        if(!_member.roles.some((_role) => _role.name === "ACTIVE")) {
+          setErrorMessage("Your account has not been activated or you have been purged");
           return;
-        } else {
+        }  else {
           localStorage.setItem("token", _token);
-          setCurrentUserId(_memberId);
-          history.push("/members/dashboard");
+          setCurrentUser(_member);
+          history.push("/members/dashboard")
         }
       }
     } catch (err) {

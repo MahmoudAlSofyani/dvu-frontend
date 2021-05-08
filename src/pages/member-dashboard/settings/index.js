@@ -30,45 +30,47 @@ const MemberDashboard_Settings = () => {
     (actions) => actions.settingsFormData.setFormData
   );
 
-  const currentUserId = useStoreState(
-    (state) => state.currentUser.currentUserId
-  );
+  const currentUser = useStoreState((state) => state.currentUser.currentUser);
 
   const handleFormChange = (e) => setFormData(e.target);
 
   const handleSubmit = async () => {
-    
     try {
-      const {carModel, carColor, carYear, plateEmirate, plateCode, plateNumber} = formData;
-      
+      const {
+        carModel,
+        carColor,
+        carYear,
+        plateEmirate,
+        plateCode,
+        plateNumber,
+      } = formData;
+
       const body = {
-        id: currentUserId,
+        id: currentUser.id,
         cars: {
           carModel,
           carColor,
           carYear,
           plateEmirate,
           plateCode,
-          plateNumber
-        }
-      }
+          plateNumber,
+        },
+      };
 
       const _response = await axios.post("/cars/", body);
-      
-      if(_response.status === 200) {
-        setIsDialogOpen(false)
+
+      if (_response.status === 200) {
+        setIsDialogOpen(false);
       }
-
     } catch (err) {
-      console.log(err)
+      console.log(err);
     }
-
   };
 
   useEffect(() => {
     try {
       Promise.all([
-        axios.get(`/members/${currentUserId}`),
+        axios.get(`/members/${currentUser.id}`),
         getCarModels(),
         getCarColors(),
         getPlateEmirates(),
@@ -121,7 +123,7 @@ const MemberDashboard_Settings = () => {
     setCarModels,
     setPlateEmirates,
     setPlateCodes,
-    currentUserId
+    currentUser.id,
   ]);
 
   return (
