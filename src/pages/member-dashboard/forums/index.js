@@ -18,6 +18,7 @@ const MemberDashboard_Forums = () => {
           }
           if (_responses[1].status === 200) {
             setPosts(_responses[1].data);
+            console.log(_responses[1].data);
           }
         }
       );
@@ -64,6 +65,11 @@ const MemberDashboard_Forums = () => {
                 <p className="text-white">{_post.title}</p>
                 <p className="text-red text-sm">
                   {_post.member.firstName} {_post.member.lastName}
+                </p>
+                <p className="text-white text-xs py-2">
+                  {moment(_post.createdAt)
+                    .format("hh:mm a - DD MMM YYYY")
+                    .toUpperCase()}
                 </p>
               </div>
               <div className="w-1/6 flex flex-col self-center bg-red rounded-md shadow-md">
