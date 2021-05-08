@@ -27,7 +27,9 @@ const MemberDashboardMenu = () => {
 
   return (
     <div className="fixed right-0 left-0 bottom-0 flex items-center justify-between p-3 bg-darkGray">
-      <MdForum className="text-red text-3xl" />
+      <Link to="/members/forums">
+        <MdForum className="text-red text-3xl" />
+      </Link>
       <Link to="/members/events">
         <BsCalendar className="text-red text-3xl" />
       </Link>

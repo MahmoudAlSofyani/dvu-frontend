@@ -20,6 +20,7 @@ import AdminTab_Events_Edit from "./pages/member-dashboard/admin-tab/events/edit
 import AdminTab_Members from "./pages/member-dashboard/admin-tab/members";
 import AdminTab_Members_Verify from "./pages/member-dashboard/admin-tab/members/verify";
 import MemberDashboard_BarCode from "./pages/member-dashboard/barcode";
+import MemberDashboard_Forums from "./pages/member-dashboard/forums";
 
 function App() {
   return (
@@ -52,6 +53,11 @@ function App() {
           exact
           path="/members/announcements"
           component={MemberDashboard_Announcements}
+        />
+        <Route
+          exact
+          path="/members/forums"
+          component={MemberDashboard_Forums}
         />
         <Route
           exact
