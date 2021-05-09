@@ -8,14 +8,12 @@ const EventCard = ({ id, date, title, meetingPoint, meetingTime, details }) => {
     message: "",
     isRegistered: false,
   });
-  const currentUserId = useStoreState(
-    (state) => state.currentUser.currentUserId
-  );
+  const currentUser = useStoreState((state) => state.currentUser.currentUser);
 
   useEffect(() => {
     try {
       axios
-        .post("/events/check", { eventId: id, memberId: currentUserId })
+        .post("/events/check", { eventId: id, memberId: currentUser.id })
         .then((_response) => {
           if (_response.status === 200) {
             const { _isRegistered } = _response.data;
@@ -34,7 +32,7 @@ const EventCard = ({ id, date, title, meetingPoint, meetingTime, details }) => {
   const handleEventSignup = async (eventId) => {
     try {
       let _body = {
-        memberId: currentUserId,
+        memberId: currentUser.id,
         eventId,
       };
 

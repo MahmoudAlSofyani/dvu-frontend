@@ -30,9 +30,9 @@ const store = createStore({
     }),
   },
   currentUser: {
-    currentUserId: {},
-    setCurrentUserId: action((state, payload) => {
-      state.currentUserId = payload;
+    currentUser: {},
+    setCurrentUser: action((state, payload) => {
+      state.currentUser = payload;
     }),
   },
   settingsFormData: {

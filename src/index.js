@@ -6,14 +6,17 @@ import { StoreProvider } from "easy-peasy";
 import store from "./store";
 import setUpAxios from "./setUpAxios";
 import axios from "axios";
+import { BrowserRouter as Router } from "react-router-dom";
 
 setUpAxios(axios);
 
 ReactDOM.render(
   <React.StrictMode>
-    <StoreProvider store={store}>
-      <App />
-    </StoreProvider>
+    <Router>
+      <StoreProvider store={store}>
+        <App />
+      </StoreProvider>
+    </Router>
   </React.StrictMode>,
   document.getElementById("root")
 );

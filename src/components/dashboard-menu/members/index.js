@@ -1,25 +1,19 @@
 import React, { useEffect, useState } from "react";
-import {
-  HomeIcon,
-  CalendarIcon,
-  CogIcon,
-  LockClosedIcon,
-  ChatIcon,
-  SpeakerphoneIcon,
-} from "@heroicons/react/outline";
 import { Link } from "react-router-dom";
 import { useStoreState } from "easy-peasy";
 import axios from "axios";
+import { AiOutlineHome, AiOutlineLock, AiOutlineQrcode } from "react-icons/ai";
+import { MdForum, MdAnnouncement } from "react-icons/md";
+import { BsCalendar, BsGear } from "react-icons/bs";
+import { CgProfile } from "react-icons/cg";
 const MemberDashboardMenu = () => {
   const [isAdmin, setIsAdmin] = useState(false);
-  const currentUserId = useStoreState(
-    (state) => state.currentUser.currentUserId
-  );
+  const currentUser = useStoreState((state) => state.currentUser.currentUser);
 
   useEffect(() => {
     try {
       axios
-        .post("/members/role", {id: currentUserId, role: "Admin"})
+        .post("/members/role", { id: currentUser.id, role: "Admin" })
         .then((_response) => {
           if (_response.status === 200) {
             const { _isRoleExist } = _response.data;
@@ -30,26 +24,31 @@ const MemberDashboardMenu = () => {
         })
         .catch((err) => console.log(err));
     } catch (err) {}
-  }, [setIsAdmin]);
+  });
 
   return (
-    <div className="fixed right-0 left-0 bottom-0 flex items-center justify-center space-x-6 p-3 bg-darkGray">
-      <ChatIcon className="text-red w-10" />
-      <Link to="/members/events">
-        <CalendarIcon className="text-red w-10" />
+    <div className="fixed right-0 left-0 bottom-0 flex items-center justify-between p-3 bg-darkGray">
+      <Link to="/members/forums">
+        <MdForum className="text-red text-3xl" />
       </Link>
-      <Link to="/members/dashboard">
-        <HomeIcon className="text-red w-10" />
+      <Link to="/members/events">
+        <BsCalendar className="text-red text-3xl" />
       </Link>
       <Link to="/members/announcements">
-        <SpeakerphoneIcon className="text-red w-10" />
+        <MdAnnouncement className="text-red text-3xl" />
+      </Link>
+      <Link to="/members/dashboard">
+        <AiOutlineHome className="text-red text-3xl" />
       </Link>
       <Link to="/members/settings">
-        <CogIcon className="text-red w-10" />
+        <BsGear className="text-red text-3xl" />
+      </Link>
+      <Link to="/members/profile">
+        <CgProfile className="text-red text-3xl" />
       </Link>
       {isAdmin ? (
         <Link to="/members/admin">
-          <LockClosedIcon className="text-red w-10" />
+          <AiOutlineLock className="text-red text-3xl" />
         </Link>
       ) : null}
     </div>

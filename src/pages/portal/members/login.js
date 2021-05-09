@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Layout from "../../../components/layout";
 import { Link } from "react-router-dom";
 import CustomButton from "../../../components/custom-button";
@@ -15,8 +15,8 @@ const MembersLoginPage = () => {
     (actions) => actions.memberLoginForm.setFormData
   );
 
-  const setCurrentUserId = useStoreActions(
-    (actions) => actions.currentUser.setCurrentUserId
+  const setCurrentUser = useStoreActions(
+    (actions) => actions.currentUser.setCurrentUser
   );
   const history = useHistory();
 
@@ -27,21 +27,18 @@ const MembersLoginPage = () => {
       e.preventDefault();
 
       const _response = await axios.post("/auth/login", formData);
-      // check if password and email combination is valid
-      // check if member is active
 
       if (_response.status === 200) {
-        // history.push("/members/dashboard");
-        const { _isActive, _token, _memberId } = _response.data;
+        const { _token, _member } = _response.data;
 
-        if (!_isActive) {
+        if (!_member.roles.some((_role) => _role.name === "ACTIVE")) {
           setErrorMessage(
             "Your account has not been activated or you have been purged"
           );
           return;
         } else {
           localStorage.setItem("token", _token);
-          setCurrentUserId(_memberId);
+          setCurrentUser(_member);
           history.push("/members/dashboard");
         }
       }
@@ -49,6 +46,22 @@ const MembersLoginPage = () => {
       setErrorMessage(err.response.data.err);
     }
   };
+
+  useEffect(() => {
+    try {
+      const token = localStorage.getItem("token");
+      if (token) {
+        axios.get("/auth/verify-token").then((_response) => {
+          if (_response.status === 200) {
+            setCurrentUser(_response.data._member);
+            history.push("/members/dashboard");
+          }
+        });
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  }, [setCurrentUser]);
 
   return (
     <Layout>
@@ -62,12 +75,14 @@ const MembersLoginPage = () => {
             type="email"
             name="emailAddress"
             handleInputChange={(e) => handleFormChange(e)}
+            style={2}
           />
           <InputField
             placeholder="Password"
             name="password"
             handleInputChange={(e) => handleFormChange(e)}
             type="password"
+            style={2}
           />
           <CustomButton
             extraClasses="mt-10"

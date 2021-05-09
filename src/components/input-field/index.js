@@ -8,21 +8,36 @@ const InputField = ({
   disabled = false,
   type,
   value,
-  defaultValue
+  defaultValue,
+  style = 1,
 }) => {
   return (
     <>
-      <input
-        className="bg-transparent focus:outline-none border-b-2 w-full border-red text-white rounded-none"
-        placeholder={required ? placeholder + " *" : placeholder}
-        onChange={handleInputChange}
-        name={name}
-        required={required}
-        type={type}
-        disabled={disabled}
-        value={value}
-        defaultValue={defaultValue}
-      />
+      {style === 1 ? (
+        <input
+          className="bg-transparent focus:outline-none border-b-2 w-full border-red text-white rounded-none"
+          placeholder={required ? placeholder + " *" : placeholder}
+          onChange={handleInputChange}
+          name={name}
+          required={required}
+          type={type}
+          disabled={disabled}
+          value={value}
+          defaultValue={defaultValue}
+        />
+      ) : style === 2 ? (
+        <input
+          className="bg-charcoal focus:outline-none  w-full text-white p-2 rounded-md"
+          placeholder={required ? placeholder + " *" : placeholder}
+          onChange={handleInputChange}
+          name={name}
+          required={required}
+          type={type}
+          disabled={disabled}
+          value={value}
+          defaultValue={defaultValue}
+        />
+      ) : null}
     </>
   );
 };
