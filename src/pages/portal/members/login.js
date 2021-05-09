@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Layout from "../../../components/layout";
 import { Link } from "react-router-dom";
 import CustomButton from "../../../components/custom-button";
@@ -28,25 +28,40 @@ const MembersLoginPage = () => {
 
       const _response = await axios.post("/auth/login", formData);
 
-
       if (_response.status === 200) {
         const { _token, _member } = _response.data;
 
-        console.log(_member.roles);
-
-        if(!_member.roles.some((_role) => _role.name === "ACTIVE")) {
-          setErrorMessage("Your account has not been activated or you have been purged");
+        if (!_member.roles.some((_role) => _role.name === "ACTIVE")) {
+          setErrorMessage(
+            "Your account has not been activated or you have been purged"
+          );
           return;
-        }  else {
+        } else {
           localStorage.setItem("token", _token);
           setCurrentUser(_member);
-          history.push("/members/dashboard")
+          history.push("/members/dashboard");
         }
       }
     } catch (err) {
       setErrorMessage(err.response.data.err);
     }
   };
+
+  useEffect(() => {
+    try {
+      const token = localStorage.getItem("token");
+      if (token) {
+        axios.get("/auth/verify-token").then((_response) => {
+          if (_response.status === 200) {
+            setCurrentUser(_response.data._member);
+            history.push("/members/dashboard");
+          }
+        });
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  }, [setCurrentUser]);
 
   return (
     <Layout>
@@ -60,12 +75,14 @@ const MembersLoginPage = () => {
             type="email"
             name="emailAddress"
             handleInputChange={(e) => handleFormChange(e)}
+            style={2}
           />
           <InputField
             placeholder="Password"
             name="password"
             handleInputChange={(e) => handleFormChange(e)}
             type="password"
+            style={2}
           />
           <CustomButton
             extraClasses="mt-10"

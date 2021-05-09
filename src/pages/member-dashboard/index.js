@@ -5,6 +5,7 @@ import { useHistory } from "react-router-dom";
 import axios from "axios";
 import { useStoreState } from "easy-peasy";
 import moment from "moment";
+import SectionHeader from "../../components/section-header";
 const MembersDashboardIndexPage = () => {
   const [isDataLoaded, setIsDataLoaded] = useState(false);
   const [announcements, setAnnouncements] = useState([]);
@@ -53,10 +54,8 @@ const MembersDashboardIndexPage = () => {
 
   return (
     <Layout>
-      <div className="container flex flex-col items-center space-y-6 bg-darkGray p-5  rounded-lg mx-auto max-w-md text-center">
-        <h6 className="text-white uppercase font-bold tracking-widest text-xl">
-          Dashboard
-        </h6>
+      <div className="container flex flex-col  space-y-6 bg-darkGray p-5  rounded-lg mx-auto max-w-md text-center">
+        <SectionHeader heading="Dashboard" />
         {isDataLoaded ? (
           <>
             <div className="bg-charcoal w-full rounded-md p-3 shadow-md">

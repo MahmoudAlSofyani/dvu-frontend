@@ -13,6 +13,7 @@ import {
   getPlateCodes,
   getPlateEmirates,
 } from "../../../helpers/api-callers";
+import SectionHeader from "../../../components/section-header";
 
 const MemberDashboard_Settings = () => {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
@@ -128,14 +129,12 @@ const MemberDashboard_Settings = () => {
 
   return (
     <Layout>
-      <div className="container flex flex-col items-center space-y-6 bg-darkGray p-5 rounded-lg mx-auto max-w-md ">
-        <h6 className="text-white uppercase font-bold tracking-widest text-xl">
-          Settings
-        </h6>
+      <div className="container flex flex-col space-y-6 bg-darkGray p-5 rounded-lg mx-auto max-w-md ">
+        <SectionHeader heading="Settings" />
         <p className="text-white">Personal Information</p>
         <div className="flex flex-row">
           <img
-            className="rounded-full w-3/4 mx-auto"
+            className="rounded-full w-3/5 mx-auto"
             src="https://picsum.photos/200"
             alt="Profile"
           />
@@ -147,11 +146,13 @@ const MemberDashboard_Settings = () => {
             type="text"
             placeholder={currentMember.firstName}
             disabled
+            style={2}
           />
         </div>
         <div className="flex flex-col space-y-3 w-full">
           <label className="text-md text-white">Last Name</label>
           <InputField
+          style={2}
             name="lastName"
             type="text"
             placeholder={currentMember.lastName}
@@ -161,6 +162,7 @@ const MemberDashboard_Settings = () => {
         <div className="flex flex-col space-y-3 w-full">
           <label className="text-md text-white">Mobile Number</label>
           <InputField
+          style={2}
             name="mobileNumber"
             type="tel"
             placeholder={currentMember.mobileNumber}
@@ -171,6 +173,7 @@ const MemberDashboard_Settings = () => {
           <InputField
             name="whatsappNumber"
             type="tel"
+            style={2}
             placeholder={
               !currentMember.whatsAppNumber ||
               currentMember.whatsAppNumber === "null"
@@ -182,6 +185,7 @@ const MemberDashboard_Settings = () => {
         <div className="flex flex-col space-y-3 w-full">
           <label className="text-md text-white">Email</label>
           <InputField
+          style={2}
             name="firstName"
             type="email"
             placeholder={currentMember.emailAddress}
@@ -190,6 +194,7 @@ const MemberDashboard_Settings = () => {
         <div className="flex flex-col space-y-3 w-full">
           <label className="text-md text-white">Instagram</label>
           <InputField
+          style={2}
             name="instagramName"
             type="text"
             placeholder={
@@ -200,7 +205,7 @@ const MemberDashboard_Settings = () => {
             }
           />
         </div>
-        <div className="w-1/2 py-5">
+        <div className="w-1/2 py-5 mx-auto">
           <hr className="text-white border-dotted w-full opacity-20 rounded" />
         </div>
         <p className="text-white">Your rides</p>
@@ -224,17 +229,18 @@ const MemberDashboard_Settings = () => {
           </div>
         ))}
 
-        <div>
+        <div className="mx-auto">
           <PlusCircleIcon
             onClick={() => setIsDialogOpen(true)}
             className="text-red w-10"
           />
         </div>
         {isDialogOpen && isDataLoaded ? (
-          <div className=" text-white bg-charcoal p-5 rounded-md leading-9 shadow-md space-y-9">
+          <div className=" text-white border-2 border-red p-5 rounded-md leading-9 shadow-md space-y-9">
             <DropdownField
               options={carModels}
               placeholder="Car Model"
+              style={2}
               name="carModel"
               handleInputChange={handleFormChange}
             />
@@ -242,11 +248,15 @@ const MemberDashboard_Settings = () => {
               options={carColors}
               placeholder="Car Color"
               name="carColor"
+              style={2}
+
               handleInputChange={handleFormChange}
             />
             <DropdownField
               options={_yearsArray}
               placeholder="Car Year"
+              style={2}
+
               name="carYear"
               handleInputChange={handleFormChange}
             />
@@ -254,12 +264,16 @@ const MemberDashboard_Settings = () => {
               options={plateEmirates}
               placeholder="Plate Emirate"
               name="plateEmirate"
+              style={2}
+
               handleInputChange={handleFormChange}
             />
             <DropdownField
               options={plateCodes.filter(
                 (_plateCode) => _plateCode.emirate === formData.plateEmirate
               )}
+              style={2}
+
               placeholder="Plate Code"
               name="plateCode"
               handleInputChange={handleFormChange}
@@ -268,6 +282,8 @@ const MemberDashboard_Settings = () => {
             <InputField
               placeholder="Plate Number"
               name="plateNumber"
+              style={2}
+
               handleInputChange={handleFormChange}
             />
             <CustomButton label="Save" handleOnClick={handleSubmit} />

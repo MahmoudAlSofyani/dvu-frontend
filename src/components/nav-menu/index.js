@@ -21,24 +21,24 @@ const NavMenu = () => {
       to: "/sponsors",
       mobile: false,
     },
-    {
-      type: "a",
-      text: "Gallery",
-      to: "/gallery",
-      mobile: false,
-    },
-    {
-      type: "a",
-      text: "Media Team",
-      to: "/media-team",
-      mobile: false,
-    },
-    {
-      type: "a",
-      text: "Contact Us",
-      to: "/contact-us",
-      mobile: false,
-    },
+    // {
+    //   type: "a",
+    //   text: "Gallery",
+    //   to: "/gallery",
+    //   mobile: false,
+    // },
+    // {
+    //   type: "a",
+    //   text: "Media Team",
+    //   to: "/media-team",
+    //   mobile: false,
+    // },
+    // {
+    //   type: "a",
+    //   text: "Contact Us",
+    //   to: "/contact-us",
+    //   mobile: false,
+    // },
     {
       type: "button",
       text: "Portal",

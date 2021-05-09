@@ -4,6 +4,7 @@ import Layout from "../../../components/layout";
 import axios from "axios";
 import moment from "moment";
 import AnnouncementCard from "../../../components/announcement-card";
+import SectionHeader from "../../../components/section-header";
 const MemberDashboard_Announcements = () => {
   const [announcements, setAnnouncements] = useState([]);
   const [isDataLoaded, setIsDataLoaded] = useState(false);
@@ -26,23 +27,23 @@ const MemberDashboard_Announcements = () => {
 
   return (
     <Layout>
-      <div className="container flex flex-col items-center space-y-6 bg-darkGray p-5 rounded-lg mx-auto max-w-md ">
-        <h6 className="text-white uppercase font-bold tracking-widest text-xl">
-          Announcements
-        </h6>
-        {isDataLoaded
-          ? announcements.map((_announcement, index) =>
-              !_announcement.isEnded ? (
-                <AnnouncementCard
-                  key={index}
-                  id={_announcement.id}
-                  date={moment(_announcement.createdAt).format("DD MMM")}
-                  title={_announcement.title}
-                  details={_announcement.details}
-                />
-              ) : null
-            )
-          : null}
+      <div className="container flex flex-col space-y-6 bg-darkGray p-5 rounded-lg mx-auto max-w-md ">
+        <SectionHeader heading="Announcements" />
+        {isDataLoaded && announcements.length > 0 ? (
+          announcements.map((_announcement, index) =>
+            !_announcement.isEnded ? (
+              <AnnouncementCard
+                key={index}
+                id={_announcement.id}
+                date={moment(_announcement.createdAt).format("DD MMM")}
+                title={_announcement.title}
+                details={_announcement.details}
+              />
+            ) : null
+          )
+        ) : (
+          <p className="text-white opacity-50">No Announcements...</p>
+        )}
       </div>
       <div className="p-10 ">
         <MemberDashboardMenu />

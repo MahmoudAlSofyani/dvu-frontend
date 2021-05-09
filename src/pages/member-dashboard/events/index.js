@@ -4,6 +4,7 @@ import Layout from "../../../components/layout";
 import EventCard from "../../../components/event-card";
 import axios from "axios";
 import moment from "moment";
+import SectionHeader from "../../../components/section-header";
 const MemberDashboard_Events = () => {
   const [events, setEvents] = useState([]);
   const [isDataLoaded, setIsDataLoaded] = useState(false);
@@ -26,26 +27,26 @@ const MemberDashboard_Events = () => {
 
   return (
     <Layout>
-      <div className="container flex flex-col items-center space-y-6 bg-darkGray p-5 rounded-lg mx-auto max-w-md ">
-        <h6 className="text-white uppercase font-bold tracking-widest text-xl">
-          Events
-        </h6>
+      <div className="container flex flex-col space-y-6 bg-darkGray p-5 rounded-lg mx-auto max-w-md ">
+        <SectionHeader heading="Events" />
         <div className="w-full flex flex-col space-y-5">
-          {isDataLoaded
-            ? events.map((_event, index) =>
-                !_event.isEnded ? (
-                  <EventCard
-                    key={index}
-                    id={_event.id}
-                    date={moment(_event.date).format("DD MMM")}
-                    title={_event.name}
-                    meetingPoint={_event.meetingPoint}
-                    meetingTime={_event.meetingTime}
-                    details={_event.details}
-                  />
-                ) : null
-              )
-            : null}
+          {isDataLoaded && events.length > 0 ? (
+            events.map((_event, index) =>
+              !_event.isEnded ? (
+                <EventCard
+                  key={index}
+                  id={_event.id}
+                  date={moment(_event.date).format("DD MMM")}
+                  title={_event.name}
+                  meetingPoint={_event.meetingPoint}
+                  meetingTime={_event.meetingTime}
+                  details={_event.details}
+                />
+              ) : null
+            )
+          ) : (
+            <p className="text-white opacity-50 text-center">No Events...</p>
+          )}
         </div>
       </div>
       <div className="p-10 ">

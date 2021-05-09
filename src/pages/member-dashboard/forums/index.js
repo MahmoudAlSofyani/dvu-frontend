@@ -5,37 +5,43 @@ import EventCard from "../../../components/event-card";
 import axios from "axios";
 import moment from "moment";
 import SearchBar from "../../../components/search-bar";
+import SectionHeader from "../../../components/section-header";
+import { useHistory } from "react-router-dom";
 const MemberDashboard_Forums = () => {
-  const [categories, setCategories] = useState([]);
   const [posts, setPosts] = useState([]);
-  const [activeCategoryIndex, setActiveCategoryIndex] = useState(0);
+  const history = useHistory();
   useEffect(() => {
     try {
-      Promise.all([axios.get("/categories"), axios.get("/posts")]).then(
-        (_responses) => {
-          if (_responses[0].status === 200) {
-            setCategories(_responses[0].data);
-          }
-          if (_responses[1].status === 200) {
-            setPosts(_responses[1].data);
-            console.log(_responses[1].data);
-          }
+      Promise.all([axios.get("/posts")]).then((_responses) => {
+        if (_responses[0].status === 200) {
+          setPosts(_responses[0].data);
         }
-      );
+      });
     } catch (err) {
       console.log(err);
     }
-  }, [setCategories]);
+  }, [setPosts]);
+
+  const handleGoToPost = (id) => {
+    console.log(id);
+
+    history.push({
+      pathname: "/members/forums/view",
+      state: { id },
+    });
+  };
 
   return (
     <Layout>
-      <div className="container flex flex-col items-center space-y-6 bg-darkGray p-5 rounded-lg mx-auto max-w-md ">
-        <h6 className="text-white uppercase font-bold tracking-widest text-xl">
-          Forums
-        </h6>
+      <div className="container flex flex-col  space-y-6 bg-darkGray p-5 rounded-lg mx-auto max-w-md ">
+        <SectionHeader
+          heading="Forums"
+          buttonLink="/members/forums/add"
+          buttonLabel="New"
+        />
         <div className="w-full flex flex-col space-y-5">
           <SearchBar />
-          <div className="flex flex-row space-x-3 overflow-x-auto">
+          {/* <div className="flex flex-row space-x-3 overflow-x-auto">
             {categories.map((_category, index) =>
               index === activeCategoryIndex ? (
                 <button
@@ -55,11 +61,12 @@ const MemberDashboard_Forums = () => {
                 </button>
               )
             )}
-          </div>
+          </div> */}
           {posts.map((_post, index) => (
             <div
               key={index}
               className="bg-charcoal rounded-md p-4 flex flex-row justify-between shadow-md "
+              onClick={() => handleGoToPost(_post.id)}
             >
               <div className="w-full">
                 <p className="text-white">{_post.title}</p>

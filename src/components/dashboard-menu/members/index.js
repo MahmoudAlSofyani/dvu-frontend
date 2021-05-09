@@ -5,6 +5,7 @@ import axios from "axios";
 import { AiOutlineHome, AiOutlineLock, AiOutlineQrcode } from "react-icons/ai";
 import { MdForum, MdAnnouncement } from "react-icons/md";
 import { BsCalendar, BsGear } from "react-icons/bs";
+import { CgProfile } from "react-icons/cg";
 const MemberDashboardMenu = () => {
   const [isAdmin, setIsAdmin] = useState(false);
   const currentUser = useStoreState((state) => state.currentUser.currentUser);
@@ -23,7 +24,7 @@ const MemberDashboardMenu = () => {
         })
         .catch((err) => console.log(err));
     } catch (err) {}
-  }, [setIsAdmin]);
+  });
 
   return (
     <div className="fixed right-0 left-0 bottom-0 flex items-center justify-between p-3 bg-darkGray">
@@ -42,8 +43,8 @@ const MemberDashboardMenu = () => {
       <Link to="/members/settings">
         <BsGear className="text-red text-3xl" />
       </Link>
-      <Link to="/members/barcode">
-        <AiOutlineQrcode className="text-red text-3xl" />
+      <Link to="/members/profile">
+        <CgProfile className="text-red text-3xl" />
       </Link>
       {isAdmin ? (
         <Link to="/members/admin">
