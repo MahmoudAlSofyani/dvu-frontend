@@ -44,8 +44,8 @@ const MemberDashboard_Profile = () => {
         <QrCode
           className="self-center"
           size={150}
-          bgColor="transparent"
-          fgColor="white"
+          bgColor="white"
+          fgColor="black"
           value={currentUser.id}
           onClick={() => console.log("barcode clicked")}
         />
