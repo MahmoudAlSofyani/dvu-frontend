@@ -41,14 +41,16 @@ const MemberDashboard_Profile = () => {
           buttonLabel="Logout"
           handleButtonOnClick={handleLogout}
         />
-        <QrCode
-          className="self-center"
-          size={150}
-          bgColor="white"
-          fgColor="black"
-          value={currentUser.id}
-          onClick={() => console.log("barcode clicked")}
-        />
+        <div className="self-center bg-white p-2">
+          <QrCode
+            className="self-center"
+            size={150}
+            bgColor="white"
+            fgColor="black"
+            value={currentUser.id}
+            onClick={() => console.log("barcode clicked")}
+          />
+        </div>
         <div className="border-red border-2 rounded p-5 flex flex-col space-y-3 w-full">
           <div className="mb-2">
             {currentUser.roles.some(
