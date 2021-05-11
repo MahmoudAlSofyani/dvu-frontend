@@ -70,7 +70,7 @@ const EventCard = ({ id, date, title, meetingPoint, meetingTime, details }) => {
         <p className="text-red uppercase font-bold">Event Details</p>
         <p className="text-white">
           {" "}
-          <div dangerouslySetInnerHTML={{ __html: `${details}` }} />
+          <p dangerouslySetInnerHTML={{ __html: `${details}` }} />
         </p>
       </div>
       <div className="w-full">
