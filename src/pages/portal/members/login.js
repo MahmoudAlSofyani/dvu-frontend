@@ -85,10 +85,10 @@ const MembersLoginPage = () => {
             styleType={2}
           />
           <CustomButton
-            extraClasses="mt-10"
             label="Login"
             link="/members/dashboard"
             handleOnClick={handleSubmit}
+            extraClasses="w-full mt-10"
           />
           {errorMessages ? (
             <p className="text-center text-sm text-red font-bold">

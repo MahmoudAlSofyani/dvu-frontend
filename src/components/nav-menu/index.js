@@ -78,6 +78,7 @@ const NavMenu = () => {
               handleOnClick={toggleMenu}
               label={_item.text}
               link={_item.to}
+              extraClasses="w-full"
             />
           ) : null
         )}

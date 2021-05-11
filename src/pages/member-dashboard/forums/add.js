@@ -42,9 +42,12 @@ const MemberDashboard_Forums_Add = () => {
   return (
     <Layout>
       <div className="container flex flex-col space-y-6 bg-darkGray p-5 rounded-lg mx-auto max-w-md">
-        <SectionHeader heading="Forums" backLink="/members/forums" />
+        <SectionHeader
+          heading="Forums"
+          backLink="/members/forums"
+          subHeading="Post your Question"
+        />
         <div className="w-full flex flex-col space-y-5">
-          <h6 className="text-white uppercase">Post Your Question</h6>
           <InputField
             placeholder="Title or Subject"
             styleType={2}

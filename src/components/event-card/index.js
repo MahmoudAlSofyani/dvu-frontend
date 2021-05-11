@@ -27,7 +27,7 @@ const EventCard = ({ id, date, title, meetingPoint, meetingTime, details }) => {
     } catch (err) {
       console.log(err);
     }
-  }, [setStatus, id, currentUser.id, status]);
+  }, []);
 
   const handleEventSignup = async (eventId) => {
     try {
@@ -78,11 +78,15 @@ const EventCard = ({ id, date, title, meetingPoint, meetingTime, details }) => {
           <CustomButton
             handleOnClick={() => handleEventSignup(id)}
             label="I'm In!"
+            style={2}
+            extraClasses="w-full"
           />
         ) : (
           <CustomButton
             disabled
             label="You have already registered for this event"
+            styleType={2}
+            extraClasses="w-full"
           />
         )}
       </div>

@@ -13,8 +13,16 @@ const PortalPage = () => {
           Portal
         </h6>
         <div className="flex flex-col space-y-6 w-full">
-          <CustomButton link="/members/login" label="Members" />
-          <CustomButton link="/sponsors/login" label="Sponsors" />
+          <CustomButton
+            link="/members/login"
+            label="Members"
+            extraClasses="w-full"
+          />
+          <CustomButton
+            link="/sponsors/login"
+            label="Sponsors"
+            extraClasses="w-full"
+          />
         </div>
       </div>
     </Layout>

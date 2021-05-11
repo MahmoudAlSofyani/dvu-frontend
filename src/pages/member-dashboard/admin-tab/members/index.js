@@ -87,8 +87,13 @@ const AdminTab_Members = () => {
             label="Verify Members"
             link="/admin/members/verify"
             styleType={2}
+            extraClasses="w-full"
           />
-          <CustomButton label="Brownie Points" styleType={2} />
+          <CustomButton
+            label="Brownie Points"
+            styleType={2}
+            extraClasses="w-full"
+          />
         </div>
         <InputField
           placeholder="Search for member"

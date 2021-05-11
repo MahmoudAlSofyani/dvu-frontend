@@ -22,7 +22,6 @@ const MemberDashboard_Forums = () => {
   }, [setPosts]);
 
   const handleGoToPost = (id) => {
-    console.log(id);
 
     history.push({
       pathname: "/members/forums/view",

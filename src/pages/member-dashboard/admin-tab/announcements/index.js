@@ -5,6 +5,7 @@ import axios from "axios";
 import moment from "moment";
 import { useHistory } from "react-router-dom";
 import SectionHeader from "../../../../components/section-header";
+import { Fragment } from "react";
 const AdminTab_Announcements = () => {
   const [announcements, setAnnouncements] = useState([]);
   const history = useHistory();
@@ -31,16 +32,19 @@ const AdminTab_Announcements = () => {
   return (
     <Layout>
       <div className="container flex flex-col space-y-6 bg-darkGray p-5 rounded-lg mx-auto max-w-md ">
-        <SectionHeader heading="Admin" buttonLabel="Add" buttonLink="/admin/announcements/add" />
-        <p className="text-white">Announcements</p>
+        <SectionHeader
+          heading="Admin"
+          buttonLabel="Add"
+          buttonLink="/admin/announcements/add"
+          subHeading="Announcements"
+        />
         <div className="bg-charcoal w-full rounded-md p-3 shadow-md">
           <div className="flex flex-col space-y-2 text-center">
             {announcements.length > 0 ? (
               announcements.map((_announcement, index) => (
-                <>
+                <Fragment key={index}>
                   <p
                     onClick={() => handleEditAnnouncement(_announcement.id)}
-                    key={index}
                     className="text-white opacity-80 text-sm py-2 cursor-pointer"
                   >
                     <span className="text-red font-bold">
@@ -53,7 +57,7 @@ const AdminTab_Announcements = () => {
                   {index + 1 < announcements.length ? (
                     <hr className="text-white  w-1/2 opacity-20 rounded mx-auto" />
                   ) : null}
-                </>
+                </Fragment>
               ))
             ) : (
               <p className="text-white">No announcements..</p>

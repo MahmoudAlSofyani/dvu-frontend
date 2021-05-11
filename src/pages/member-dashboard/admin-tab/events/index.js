@@ -39,8 +39,8 @@ const AdminTab_Events = () => {
           heading="Admin"
           buttonLink="/admin/events/add"
           buttonLabel="Add"
+          subHeading="Events"
         />
-        <p className="text-white">Events</p>
         <div className="bg-charcoal w-full rounded-md p-3 shadow-md">
           <div className="flex flex-col space-y-2 text-center">
             {isDataLoaded && events.length > 0 ? (
@@ -69,6 +69,7 @@ const AdminTab_Events = () => {
           label="Attendance"
           styleType={2}
           link="/admin/events/attendance"
+          extraClasses="w-full"
         />
       </div>
       <div className="p-10 ">

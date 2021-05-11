@@ -39,8 +39,11 @@ const AdminTab_Announcements_Add = () => {
   return (
     <Layout>
       <div className="container flex flex-col  space-y-6 bg-darkGray p-5 rounded-lg mx-auto max-w-md h-screen">
-        <SectionHeader heading="Admin" backLink="/admin/announcements" />
-        <p className="text-white">Add Announcement</p>
+        <SectionHeader
+          heading="Admin"
+          backLink="/admin/announcements"
+          subHeading="Add Announcement"
+        />
         <InputField
           placeholder="Title"
           name="title"

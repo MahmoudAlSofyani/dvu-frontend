@@ -82,8 +82,7 @@ const AdminTab_Events_Edit = () => {
   return (
     <Layout>
       <div className="container flex flex-col space-y-6 bg-darkGray p-5 rounded-lg mx-auto max-w-md h-screen">
-        <SectionHeader heading="Admin" backLink="/admin/events" />
-        <p className="text-white">Edit Event</p>
+        <SectionHeader heading="Admin" backLink="/admin/events" subHeading="Edit Event" />
         {isDataLoaded ? (
           <>
             <InputField

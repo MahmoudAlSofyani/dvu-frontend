@@ -193,6 +193,7 @@ const MemberDashboard_Settings = () => {
             styleType={2}
             label="Save"
             handleOnClick={handleUpdateUser}
+            extraClasses="w-full"
           />
           {isSavingUserDone ? (
             <p className="text-green text-center my-5">Saved!</p>
@@ -290,6 +291,7 @@ const MemberDashboard_Settings = () => {
               styleType={2}
               label="Save"
               handleOnClick={handleAddNewCar}
+              extraClasses="w-full"
             />
           </div>
         ) : null}

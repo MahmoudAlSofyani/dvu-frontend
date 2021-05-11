@@ -55,8 +55,7 @@ const AdminTab_Events_Add = () => {
   return (
     <Layout>
       <div className="container flex flex-col space-y-6 bg-darkGray p-5 rounded-lg mx-auto max-w-md h-screen">
-        <SectionHeader heading="Admin" backLink="/admin/events" />
-        <p className="text-white">Add Event</p>
+        <SectionHeader heading="Admin" backLink="/admin/events" subHeading="Add Event" />
         <InputField
           placeholder="Name"
           name="name"

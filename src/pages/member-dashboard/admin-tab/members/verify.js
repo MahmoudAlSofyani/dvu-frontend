@@ -62,8 +62,11 @@ const AdminTab_Members_Verify = () => {
   return (
     <Layout>
       <div className="container flex flex-col space-y-6 bg-darkGray p-5 rounded-lg mx-auto max-w-md ">
-        <SectionHeader heading="Members" backLink="/admin/members" />
-        <p className="text-white">Verify Members</p>
+        <SectionHeader
+          heading="Members"
+          backLink="/admin/members"
+          subHeading="Verify Members"
+        />
         <div className="text-center text-white bg-charcoal rounded-md leading-9 shadow-md w-full">
           <p className="font-bold">Pending</p>
           <p>{pendingCount}</p>
