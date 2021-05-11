@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Layout from "../../../../components/layout";
 import MemberDashboardMenu from "../../../../components/dashboard-menu/members";
-import CustomButton from "../../../../components/custom-button";
 import axios from "axios";
 import moment from "moment";
 import { useHistory } from "react-router-dom";

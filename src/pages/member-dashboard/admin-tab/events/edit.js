@@ -77,7 +77,7 @@ const AdminTab_Events_Edit = () => {
         }
       })
       .catch((err) => console.log(err));
-  }, [setFormData]);
+  }, [setFormData, eventId]);
 
   return (
     <Layout>
@@ -90,7 +90,7 @@ const AdminTab_Events_Edit = () => {
               placeholder="Name"
               defaultValue={formData.name}
               name="name"
-              style={2}
+              styleType={2}
               required
               type="text"
               handleInputChange={handleFormChange}
@@ -108,7 +108,7 @@ const AdminTab_Events_Edit = () => {
               defaultValue={formData.meetingPoint}
               required
               type="text"
-              style={2}
+              styleType={2}
               handleInputChange={handleFormChange}
             />
             <CustomTimePicker
@@ -122,7 +122,11 @@ const AdminTab_Events_Edit = () => {
                 value={formData.details}
               />
             </div>
-            <CustomButton label="Edit" handleOnClick={handleOnClick} style={2}/>
+            <CustomButton
+              label="Edit"
+              handleOnClick={handleOnClick}
+              styleType={2}
+            />
           </>
         ) : null}
       </div>

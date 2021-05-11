@@ -66,7 +66,7 @@ const MembersSignUpPageCarDetails = () => {
             placeholder="Car Model"
             required
             handleInputChange={handleFormChange}
-            style={2}
+            styleType={2}
           />
           <DropdownField
             name="carColor"
@@ -74,7 +74,7 @@ const MembersSignUpPageCarDetails = () => {
             placeholder="Car Color"
             required
             handleInputChange={handleFormChange}
-            style={2}
+            styleType={2}
           />
           <DropdownField
             name="carYear"
@@ -82,7 +82,7 @@ const MembersSignUpPageCarDetails = () => {
             placeholder="Car Year"
             required
             handleInputChange={handleFormChange}
-            style={2}
+            styleType={2}
           />
           <DropdownField
             name="plateEmirate"
@@ -90,14 +90,14 @@ const MembersSignUpPageCarDetails = () => {
             placeholder="Plate Emirate"
             required
             handleInputChange={handleFormChange}
-            style={2}
+            styleType={2}
           />
           <DropdownField
             options={plateCodes.filter(
               (_plateCode) => _plateCode.emirate === formData.plateEmirate
             )}
             required
-            style={2}
+            styleType={2}
             placeholder="Plate Code"
             name="plateCode"
             handleInputChange={handleFormChange}
@@ -108,14 +108,14 @@ const MembersSignUpPageCarDetails = () => {
               placeholder="Plate Number"
               name="plateNumber"
               required
-              style={2}
+              styleType={2}
               handleInputChange={handleFormChange}
             />
             <InputField
               placeholder="Vin Number"
               name="vinNumber"
               required
-              style={2}
+              styleType={2}
               handleInputChange={handleFormChange}
             />
           </div>

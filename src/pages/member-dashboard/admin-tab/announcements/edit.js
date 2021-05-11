@@ -56,7 +56,7 @@ const AdminTab_Announcements_Edit = () => {
         setIsDataLoaded(true);
       }
     });
-  }, [setFormData]);
+  }, [setFormData, announcementId]);
 
   return (
     <Layout>
@@ -69,7 +69,7 @@ const AdminTab_Announcements_Edit = () => {
               placeholder="Title"
               name="title"
               required
-              style={2}
+              styleType={2}
               type="text"
               handleInputChange={handleFormChange}
               defaultValue={formData.title}
@@ -80,7 +80,11 @@ const AdminTab_Announcements_Edit = () => {
                 value={formData.details}
               />
             </div>
-            <CustomButton label="Edit" handleOnClick={handleOnClick} style={2} />
+            <CustomButton
+              label="Edit"
+              handleOnClick={handleOnClick}
+              styleType={2}
+            />
           </>
         ) : null}
       </div>

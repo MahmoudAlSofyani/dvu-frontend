@@ -2,14 +2,7 @@ import React, { useState, useEffect } from "react";
 import MemberDashboardMenu from "../../../../components/dashboard-menu/members";
 import Layout from "../../../../components/layout";
 import axios from "axios";
-import moment from "moment";
-import AnnouncementCard from "../../../../components/announcement-card";
 import CustomButton from "../../../../components/custom-button";
-import {
-  UserIcon,
-  AtSymbolIcon,
-  DeviceMobileIcon,
-} from "@heroicons/react/outline";
 import { MdPersonOutline } from "react-icons/md";
 import {
   AiOutlineMail,

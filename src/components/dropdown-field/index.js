@@ -7,11 +7,11 @@ const DropdownField = ({
   handleInputChange,
   name,
   disabled = false,
-  style = 1,
+  styleType = 1,
 }) => {
   return (
     <>
-      {style === 1 ? (
+      {styleType === 1 ? (
         <div className="flex flex-col mb-6">
           <label htmlFor={name} className="text-white opacity-50 mb-1">
             {placeholder} {required ? <span>*</span> : null}
@@ -32,7 +32,7 @@ const DropdownField = ({
             ))}
           </select>
         </div>
-      ) : style === 2 ? (
+      ) : styleType === 2 ? (
         <div className="flex flex-col mb-6 ">
           <label htmlFor={name} className="text-white opacity-50 mb-1">
             {placeholder} {required ? <span>*</span> : null}

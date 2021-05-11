@@ -1,5 +1,4 @@
-import Layout from "./components/layout";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { Route, Switch } from "react-router-dom";
 import PortalPage from "./pages/portal";
 import MembersLoginPage from "./pages/portal/members/login";
 import "./index.css";

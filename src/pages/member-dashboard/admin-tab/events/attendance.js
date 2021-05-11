@@ -74,7 +74,7 @@ const AdminTab_Events_Attendance = () => {
           <DropdownField
             placeholder="Select Event"
             options={events}
-            style={2}
+            styleType={2}
             handleInputChange={handleSelectEvent}
           />
         ) : null}

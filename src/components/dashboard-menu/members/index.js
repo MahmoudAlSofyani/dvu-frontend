@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { NavLink, useLocation } from "react-router-dom";
-import { useStoreActions, useStoreState } from "easy-peasy";
+import { useStoreState } from "easy-peasy";
 import axios from "axios";
-import { AiOutlineHome, AiOutlineLock, AiOutlineQrcode } from "react-icons/ai";
+import { AiOutlineHome, AiOutlineLock} from "react-icons/ai";
 import { MdForum, MdAnnouncement } from "react-icons/md";
 import { BsCalendar, BsGear } from "react-icons/bs";
 import { CgProfile } from "react-icons/cg";
@@ -28,7 +28,7 @@ const MemberDashboardMenu = () => {
     } catch (err) {
       console.log(err);
     }
-  }, [setIsAdmin]);
+  }, [setIsAdmin, currentUser.id]);
 
   return (
     <div className="fixed right-0 left-0 bottom-0 flex items-center justify-between p-3 bg-darkGray">

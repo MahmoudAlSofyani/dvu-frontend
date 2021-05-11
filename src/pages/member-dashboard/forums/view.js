@@ -3,7 +3,6 @@ import Layout from "../../../components/layout";
 import SectionHeader from "../../../components/section-header";
 import { useLocation } from "react-router-dom";
 import axios from "axios";
-import { AiOutlineSearch } from "react-icons/ai";
 import MemberDashboardMenu from "../../../components/dashboard-menu/members";
 import InputField from "../../../components/input-field";
 import { FiSend } from "react-icons/fi";
@@ -23,7 +22,7 @@ const MemberDashboard_Forums_View = () => {
     } catch (err) {
       console.log(err);
     }
-  }, [setCurrentPost]);
+  });
 
   const fetchPost = async () => {
     try {
@@ -103,7 +102,7 @@ const MemberDashboard_Forums_View = () => {
               ))}
               <div className="relative shadow-md">
                 <InputField
-                  style={2}
+                  styleType={2}
                   placeholder="Post reply..."
                   handleInputChange={handleFormChange}
                   name="comment"

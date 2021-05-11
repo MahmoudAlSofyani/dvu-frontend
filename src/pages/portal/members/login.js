@@ -45,7 +45,7 @@ const MembersLoginPage = () => {
     } catch (err) {
       setErrorMessage(err.response.data.err);
     }
-  }; 
+  };
 
   useEffect(() => {
     try {
@@ -61,7 +61,7 @@ const MembersLoginPage = () => {
     } catch (err) {
       console.log(err);
     }
-  }, [setCurrentUser]);
+  }, [setCurrentUser, history]);
 
   return (
     <Layout>
@@ -75,14 +75,14 @@ const MembersLoginPage = () => {
             type="email"
             name="emailAddress"
             handleInputChange={(e) => handleFormChange(e)}
-            style={2}
+            styleType={2}
           />
           <InputField
             placeholder="Password"
             name="password"
             handleInputChange={(e) => handleFormChange(e)}
             type="password"
-            style={2}
+            styleType={2}
           />
           <CustomButton
             extraClasses="mt-10"

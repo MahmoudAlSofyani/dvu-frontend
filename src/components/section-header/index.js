@@ -1,7 +1,6 @@
 import React from "react";
 import { BiChevronLeft } from "react-icons/bi";
 import { Link } from "react-router-dom";
-import CustomButton from "../custom-button";
 
 const SectionHeader = ({
   heading,

@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import MemberDashboardMenu from "../../../components/dashboard-menu/members";
 import Layout from "../../../components/layout";
-import EventCard from "../../../components/event-card";
 import axios from "axios";
 import moment from "moment";
 import SearchBar from "../../../components/search-bar";

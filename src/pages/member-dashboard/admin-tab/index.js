@@ -1,11 +1,9 @@
 import axios from "axios";
-import { useStoreState } from "easy-peasy";
 import React, { useEffect, useState } from "react";
 import CustomButton from "../../../components/custom-button";
 import MemberDashboardMenu from "../../../components/dashboard-menu/members";
 import Layout from "../../../components/layout";
 import SectionHeader from "../../../components/section-header";
-import { useHistory } from "react-router-dom";
 
 const MemberDashboard_Admin = () => {
   const [memberCount, setMemberCount] = useState(0);

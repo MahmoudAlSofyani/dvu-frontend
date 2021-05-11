@@ -23,8 +23,7 @@ const MembersSignUpPagePersonalDetails = () => {
           required
           type="text"
           handleInputChange={handleChange}
-          style={2}
-
+          styleType={2}
         />
         <InputField
           name="lastName"
@@ -32,8 +31,7 @@ const MembersSignUpPagePersonalDetails = () => {
           required
           type="text"
           handleInputChange={handleChange}
-          style={2}
-
+          styleType={2}
         />
       </div>
       <div className="lg:grid lg:grid-cols-2 lg:gap-8 lg:space-y-0  space-y-8">
@@ -43,8 +41,7 @@ const MembersSignUpPagePersonalDetails = () => {
           required
           type="email"
           handleInputChange={handleChange}
-          style={2}
-
+          styleType={2}
         />
         <InputField
           name="confirmEmail"
@@ -52,8 +49,7 @@ const MembersSignUpPagePersonalDetails = () => {
           required
           type="email"
           handleInputChange={handleChange}
-          style={2}
-
+          styleType={2}
         />
       </div>
       <div className="lg:grid lg:grid-cols-2 lg:gap-8 lg:space-y-0  space-y-8">
@@ -62,8 +58,7 @@ const MembersSignUpPagePersonalDetails = () => {
           placeholder="Mobile Number"
           required
           type="tel"
-          style={2}
-
+          styleType={2}
           handleInputChange={handleChange}
         />
         <InputField
@@ -71,8 +66,7 @@ const MembersSignUpPagePersonalDetails = () => {
           placeholder="WhatsApp Number"
           type="tel"
           handleInputChange={handleChange}
-          style={2}
-
+          styleType={2}
         />
       </div>
       <div className="lg:grid lg:grid-cols-2 lg:gap-8 lg:space-y-0  space-y-8">
@@ -81,8 +75,7 @@ const MembersSignUpPagePersonalDetails = () => {
           placeholder="Instagram"
           type="text"
           handleInputChange={handleChange}
-          style={2}
-
+          styleType={2}
         />
       </div>
       <p className="text-white">

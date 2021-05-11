@@ -60,7 +60,7 @@ const AdminTab_Events_Add = () => {
         <InputField
           placeholder="Name"
           name="name"
-          style={2}
+          styleType={2}
           required
           type="text"
           handleInputChange={handleFormChange}
@@ -74,7 +74,7 @@ const AdminTab_Events_Add = () => {
         <InputField
           placeholder="Meeting Point"
           name="meetingPoint"
-          style={2}
+          styleType={2}
           required
           type="text"
           handleInputChange={handleFormChange}
@@ -89,7 +89,7 @@ const AdminTab_Events_Add = () => {
             handleOnChange={(e, editor) => handleEditorChange(e, editor)}
           />
         </div>
-        <CustomButton label="Add" handleOnClick={handleOnClick} style={2} />
+        <CustomButton label="Add" handleOnClick={handleOnClick} styleType={2} />
       </div>
       <div className="p-10 ">
         <MemberDashboardMenu />

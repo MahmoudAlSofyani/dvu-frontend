@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, Fragment } from "react";
 import Layout from "../../../../components/layout";
 import MemberDashboardMenu from "../../../../components/dashboard-menu/members";
 import CustomButton from "../../../../components/custom-button";
@@ -45,10 +45,9 @@ const AdminTab_Events = () => {
           <div className="flex flex-col space-y-2 text-center">
             {isDataLoaded && events.length > 0 ? (
               events.map((_event, index) => (
-                <>
+                <Fragment key={index}>
                   <p
                     onClick={() => handleEditEvent(_event.id)}
-                    key={index}
                     className="text-white opacity-80 text-sm py-2 cursor-pointer"
                   >
                     <span className="text-red font-bold">
@@ -59,7 +58,7 @@ const AdminTab_Events = () => {
                   {index + 1 < events.length ? (
                     <hr className="text-white  w-1/2 opacity-20 rounded mx-auto" />
                   ) : null}
-                </>
+                </Fragment>
               ))
             ) : (
               <p className="text-white">No Events</p>
@@ -68,7 +67,7 @@ const AdminTab_Events = () => {
         </div>
         <CustomButton
           label="Attendance"
-          style={2}
+          styleType={2}
           link="/admin/events/attendance"
         />
       </div>
