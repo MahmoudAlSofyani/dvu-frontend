@@ -6,6 +6,7 @@ import InputField from "../../../../components/input-field";
 import CustomButton from "../../../../components/custom-button";
 import CustomEditor from "../../../../components/custom-editor";
 import axios from "axios";
+import SectionHeader from "../../../../components/section-header";
 
 const AdminTab_Announcements_Add = () => {
   const [formData, setFormData] = useState({});
@@ -37,15 +38,14 @@ const AdminTab_Announcements_Add = () => {
 
   return (
     <Layout>
-      <div className="container flex flex-col items-center space-y-6 bg-darkGray p-5 rounded-lg mx-auto max-w-md h-screen">
-        <h6 className="text-white uppercase font-bold tracking-widest text-xl">
-          Admin
-        </h6>
+      <div className="container flex flex-col  space-y-6 bg-darkGray p-5 rounded-lg mx-auto max-w-md h-screen">
+        <SectionHeader heading="Admin" backLink="/admin/announcements" />
         <p className="text-white">Add Announcement</p>
         <InputField
           placeholder="Title"
           name="title"
           required
+          style={2}
           type="text"
           handleInputChange={handleFormChange}
         />
@@ -54,7 +54,7 @@ const AdminTab_Announcements_Add = () => {
             handleOnChange={(e, editor) => handleEditorChange(e, editor)}
           />
         </div>
-        <CustomButton label="Add" handleOnClick={handleOnClick} />
+        <CustomButton label="Add" handleOnClick={handleOnClick} style={2} />
       </div>
       <div className="p-10 ">
         <MemberDashboardMenu />

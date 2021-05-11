@@ -8,124 +8,106 @@ import CustomButton from "../../../components/custom-button";
 import axios from "axios";
 import { useStoreActions, useStoreState } from "easy-peasy";
 import {
+  addNewCar,
   getCarColors,
   getCarModels,
   getPlateCodes,
   getPlateEmirates,
+  updateUser,
 } from "../../../helpers/api-callers";
 import SectionHeader from "../../../components/section-header";
+import { generateYearArray } from "../../../helpers/common";
 
 const MemberDashboard_Settings = () => {
+  const currentUser = useStoreState((state) => state.currentUser.currentUser);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
-  const [_yearsArray, _setYearsArray] = useState([]);
-  const [currentMember, setCurrentMember] = useState({});
-  const [memberCars, setMemberCars] = useState([]);
+  const [carYears, setCarYears] = useState([]);
+  const [memberData, setMemberData] = useState(currentUser);
   const [carModels, setCarModels] = useState([]);
   const [carColors, setCarColors] = useState([]);
   const [plateEmirates, setPlateEmirates] = useState([]);
   const [plateCodes, setPlateCodes] = useState([]);
   const [isDataLoaded, setIsDataLoaded] = useState(false);
+  const [isSavingUserDone, setIsSavingUserDone] = useState(false);
+  const [isSavingCarDone, setIsSavingCarDone] = useState(false);
 
   const formData = useStoreState((state) => state.settingsFormData.formData);
   const setFormData = useStoreActions(
     (actions) => actions.settingsFormData.setFormData
   );
-
-  const currentUser = useStoreState((state) => state.currentUser.currentUser);
+  const setCurrentUser = useStoreActions(
+    (actions) => actions.currentUser.setCurrentUser
+  );
 
   const handleFormChange = (e) => setFormData(e.target);
 
-  const handleSubmit = async () => {
+  useEffect(() => {
     try {
-      const {
-        carModel,
-        carColor,
-        carYear,
-        plateEmirate,
-        plateCode,
-        plateNumber,
-      } = formData;
+      Promise.all([
+        getCarModels(),
+        getCarColors(),
+        generateYearArray(),
+        getPlateEmirates(),
+        getPlateCodes(),
+      ])
+        .then((_responses) => {
+          if (_responses[0]) setCarModels(_responses[0]);
+          if (_responses[1]) setCarColors(_responses[1]);
+          if (_responses[2]) setCarYears(_responses[2]);
+          if (_responses[3]) setPlateEmirates(_responses[3]);
+          if (_responses[4]) setPlateCodes(_responses[4]);
 
-      const body = {
-        id: currentUser.id,
-        cars: {
-          carModel,
-          carColor,
-          carYear,
-          plateEmirate,
-          plateCode,
-          plateNumber,
-        },
-      };
+          setIsDataLoaded(true);
+        })
+        .catch((err) => console.log(err));
+    } catch (err) {
+      console.log(err);
+    }
+  }, [
+    setCarModels,
+    setCarColors,
+    setCarYears,
+    setPlateEmirates,
+    setPlateCodes,
+  ]);
 
-      const _response = await axios.post("/cars/", body);
+  const handleAddNewCar = async () => {
+    try {
+      let _updatedCars = await addNewCar(formData, memberData.id);
 
-      if (_response.status === 200) {
-        setIsDialogOpen(false);
-      }
+      setMemberData({
+        ...memberData,
+        cars: _updatedCars,
+      });
+
+      setCurrentUser({ ...currentUser, cars: _updatedCars });
+      setIsDialogOpen(false);
+      setIsSavingCarDone(true);
+      setTimeout(() => {
+        setIsSavingCarDone(false);
+      }, 3000);
     } catch (err) {
       console.log(err);
     }
   };
 
-  useEffect(() => {
+  const handleUpdateUser = async () => {
     try {
-      Promise.all([
-        axios.get(`/members/${currentUser.id}`),
-        getCarModels(),
-        getCarColors(),
-        getPlateEmirates(),
-        getPlateCodes(),
-      ]).then((_responses) => {
-        if (_responses[0].status === 200) {
-          const { cars } = _responses[0].data;
-          setCurrentMember(_responses[0].data);
+      let _updatedUser = await updateUser(memberData.id, formData);
 
-          let _cars = [];
-
-          cars.forEach((_car) => {
-            _cars.push({
-              carModel: _car.carModel,
-              carColor: _car.carColor,
-              carYear: _car.carYear,
-              plateCode: _car.plateCode,
-              plateNumber: _car.plateNumber,
-              plateEmirate: _car.plateEmirate,
-              vinNumber: _car.vinNumber,
-            });
-          });
-
-          setMemberCars(_cars);
-        }
-
-        if (_responses[1]) setCarModels(_responses[1]);
-        if (_responses[2]) setCarColors(_responses[2]);
-        if (_responses[3]) setPlateEmirates(_responses[3]);
-        if (_responses[4]) setPlateCodes(_responses[4]);
+      setMemberData({
+        ...memberData,
+        ..._updatedUser,
       });
-
-      const currentYear = new Date().getFullYear();
-      let _tempYearsArray = [];
-
-      for (let i = currentYear; i > 1936; i--) {
-        _tempYearsArray.push({
-          label: i,
-          value: i,
-        });
-      }
-      _setYearsArray(_tempYearsArray);
-
-      setIsDataLoaded(true);
-    } catch (err) {}
-  }, [
-    _setYearsArray,
-    setCurrentMember,
-    setMemberCars,
-    setCarModels,
-    setPlateEmirates,
-    setPlateCodes,
-    currentUser.id,
-  ]);
+      setCurrentUser({ ...currentUser, ..._updatedUser });
+      setIsSavingUserDone(true);
+      setTimeout(() => {
+        setIsSavingUserDone(false);
+      }, 3000);
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   return (
     <Layout>
@@ -139,77 +121,89 @@ const MemberDashboard_Settings = () => {
             alt="Profile"
           />
         </div>
-        <div className="flex flex-col space-y-3 w-full">
+        <div className="flex flex-col space-y-3 w-full shadow-md">
           <label className="text-md text-white">First Name</label>
           <InputField
             name="firstName"
             type="text"
-            placeholder={currentMember.firstName}
+            placeholder={memberData.firstName}
             disabled
             style={2}
           />
         </div>
-        <div className="flex flex-col space-y-3 w-full">
+        <div className="flex flex-col space-y-3 w-full shadow-md">
           <label className="text-md text-white">Last Name</label>
           <InputField
-          style={2}
+            style={2}
             name="lastName"
             type="text"
-            placeholder={currentMember.lastName}
+            placeholder={memberData.lastName}
             disabled
           />
         </div>
-        <div className="flex flex-col space-y-3 w-full">
+        <div className="flex flex-col space-y-3 w-full shadow-md">
           <label className="text-md text-white">Mobile Number</label>
           <InputField
-          style={2}
+            style={2}
             name="mobileNumber"
             type="tel"
-            placeholder={currentMember.mobileNumber}
+            handleInputChange={handleFormChange}
+            placeholder={memberData.mobileNumber}
           />
         </div>
-        <div className="flex flex-col space-y-3 w-full">
+        <div className="flex flex-col space-y-3 w-full shadow-md">
           <label className="text-md text-white">WhatsApp Number</label>
           <InputField
-            name="whatsappNumber"
+            name="whatsAppNumber"
             type="tel"
             style={2}
+            handleInputChange={handleFormChange}
             placeholder={
-              !currentMember.whatsAppNumber ||
-              currentMember.whatsAppNumber === "null"
+              !memberData.whatsAppNumber || memberData.whatsAppNumber === "null"
                 ? ""
-                : currentMember.whatsAppNumber
+                : memberData.whatsAppNumber
             }
           />
         </div>
-        <div className="flex flex-col space-y-3 w-full">
+        <div className="flex flex-col space-y-3 w-full shadow-md">
           <label className="text-md text-white">Email</label>
           <InputField
-          style={2}
-            name="firstName"
+            style={2}
+            name="emailAddress"
             type="email"
-            placeholder={currentMember.emailAddress}
+            handleInputChange={handleFormChange}
+            placeholder={memberData.emailAddress}
           />
         </div>
-        <div className="flex flex-col space-y-3 w-full">
+        <div className="flex flex-col space-y-3 w-full shadow-md">
           <label className="text-md text-white">Instagram</label>
           <InputField
-          style={2}
+            style={2}
             name="instagramName"
             type="text"
+            handleInputChange={handleFormChange}
             placeholder={
-              !currentMember.instagramName ||
-              currentMember.instagramName === "null"
+              !memberData.instagramName || memberData.instagramName === "null"
                 ? ""
-                : currentMember.instagramName
+                : memberData.instagramName
             }
           />
         </div>
+        <div>
+          <CustomButton
+            style={2}
+            label="Save"
+            handleOnClick={handleUpdateUser}
+          />
+          {isSavingUserDone ? (
+            <p className="text-green text-center my-5">Saved!</p>
+          ) : null}
+        </div>
         <div className="w-1/2 py-5 mx-auto">
-          <hr className="text-white border-dotted w-full opacity-20 rounded" />
+          <hr className="text-white border-dotted w-full opacity-20 rounded " />
         </div>
         <p className="text-white">Your rides</p>
-        {memberCars.map((_car, index) => (
+        {memberData.cars.map((_car, index) => (
           <div
             key={index}
             className="text-center text-white bg-charcoal p-5 rounded-md leading-9 shadow-md w-full"
@@ -221,27 +215,27 @@ const MemberDashboard_Settings = () => {
             <p>
               {_car.plateEmirate} {_car.plateCode} {_car.plateNumber}{" "}
             </p>
-            <p>
-              {!_car.vinNumber || _car.vinNumber === "null"
-                ? ""
-                : _car.vinNumber}
-            </p>
+            <p>{_car.vinNumber}</p>
           </div>
         ))}
 
         <div className="mx-auto">
           <PlusCircleIcon
-            onClick={() => setIsDialogOpen(true)}
+            onClick={() => setIsDialogOpen(!isDialogOpen)}
             className="text-red w-10"
           />
+          {isSavingCarDone ? (
+            <p className="text-green text-center my-5">Saved!</p>
+          ) : null}
         </div>
         {isDialogOpen && isDataLoaded ? (
-          <div className=" text-white border-2 border-red p-5 rounded-md leading-9 shadow-md space-y-9">
+          <div className=" text-white p-5 rounded-md leading-9 space-y-9">
             <DropdownField
               options={carModels}
               placeholder="Car Model"
               style={2}
               name="carModel"
+              required
               handleInputChange={handleFormChange}
             />
             <DropdownField
@@ -249,15 +243,15 @@ const MemberDashboard_Settings = () => {
               placeholder="Car Color"
               name="carColor"
               style={2}
-
+              required
               handleInputChange={handleFormChange}
             />
             <DropdownField
-              options={_yearsArray}
+              options={carYears}
               placeholder="Car Year"
               style={2}
-
               name="carYear"
+              required
               handleInputChange={handleFormChange}
             />
             <DropdownField
@@ -265,15 +259,15 @@ const MemberDashboard_Settings = () => {
               placeholder="Plate Emirate"
               name="plateEmirate"
               style={2}
-
+              required
               handleInputChange={handleFormChange}
             />
             <DropdownField
               options={plateCodes.filter(
                 (_plateCode) => _plateCode.emirate === formData.plateEmirate
               )}
+              required
               style={2}
-
               placeholder="Plate Code"
               name="plateCode"
               handleInputChange={handleFormChange}
@@ -283,10 +277,21 @@ const MemberDashboard_Settings = () => {
               placeholder="Plate Number"
               name="plateNumber"
               style={2}
-
+              required
               handleInputChange={handleFormChange}
             />
-            <CustomButton label="Save" handleOnClick={handleSubmit} />
+            <InputField
+              placeholder="Vin Number"
+              name="vinNumber"
+              style={2}
+              required
+              handleInputChange={handleFormChange}
+            />
+            <CustomButton
+              style={2}
+              label="Save"
+              handleOnClick={handleAddNewCar}
+            />
           </div>
         ) : null}
       </div>

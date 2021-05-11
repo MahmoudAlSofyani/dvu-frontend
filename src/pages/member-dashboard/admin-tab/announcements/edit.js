@@ -6,6 +6,7 @@ import InputField from "../../../../components/input-field";
 import CustomButton from "../../../../components/custom-button";
 import CustomEditor from "../../../../components/custom-editor";
 import axios from "axios";
+import SectionHeader from "../../../../components/section-header";
 const AdminTab_Announcements_Edit = () => {
   const [formData, setFormData] = useState({});
   const [isDataLoaded, setIsDataLoaded] = useState(false);
@@ -59,10 +60,8 @@ const AdminTab_Announcements_Edit = () => {
 
   return (
     <Layout>
-      <div className="container flex flex-col items-center space-y-6 bg-darkGray p-5 rounded-lg mx-auto max-w-md h-screen">
-        <h6 className="text-white uppercase font-bold tracking-widest text-xl">
-          Admin
-        </h6>
+      <div className="container flex flex-col space-y-6 bg-darkGray p-5 rounded-lg mx-auto max-w-md h-screen">
+        <SectionHeader heading="Admin" backLink="/admin/announcements" />
         <p className="text-white">Edit Announcement</p>
         {isDataLoaded ? (
           <>
@@ -70,6 +69,7 @@ const AdminTab_Announcements_Edit = () => {
               placeholder="Title"
               name="title"
               required
+              style={2}
               type="text"
               handleInputChange={handleFormChange}
               defaultValue={formData.title}
@@ -80,7 +80,7 @@ const AdminTab_Announcements_Edit = () => {
                 value={formData.details}
               />
             </div>
-            <CustomButton label="Edit" handleOnClick={handleOnClick} />
+            <CustomButton label="Edit" handleOnClick={handleOnClick} style={2} />
           </>
         ) : null}
       </div>

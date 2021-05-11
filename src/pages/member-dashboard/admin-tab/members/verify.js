@@ -17,6 +17,7 @@ import {
   AiOutlineWhatsApp,
   AiOutlineCar,
 } from "react-icons/ai";
+import SectionHeader from "../../../../components/section-header";
 const AdminTab_Members_Verify = () => {
   const [pendingCount, setPendingCount] = useState(0);
   const [pendingMembers, setPendingMembers] = useState([]);
@@ -67,10 +68,8 @@ const AdminTab_Members_Verify = () => {
 
   return (
     <Layout>
-      <div className="container flex flex-col items-center space-y-6 bg-darkGray p-5 rounded-lg mx-auto max-w-md ">
-        <h6 className="text-white uppercase font-bold tracking-widest text-xl">
-          Members
-        </h6>
+      <div className="container flex flex-col space-y-6 bg-darkGray p-5 rounded-lg mx-auto max-w-md ">
+        <SectionHeader heading="Members" backLink="/admin/members" />
         <p className="text-white">Verify Members</p>
         <div className="text-center text-white bg-charcoal rounded-md leading-9 shadow-md w-full">
           <p className="font-bold">Pending</p>

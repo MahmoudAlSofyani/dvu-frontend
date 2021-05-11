@@ -5,6 +5,7 @@ import CustomButton from "../../../../components/custom-button";
 import axios from "axios";
 import moment from "moment";
 import { useHistory } from "react-router-dom";
+import SectionHeader from "../../../../components/section-header";
 const AdminTab_Announcements = () => {
   const [announcements, setAnnouncements] = useState([]);
   const history = useHistory();
@@ -30,10 +31,8 @@ const AdminTab_Announcements = () => {
 
   return (
     <Layout>
-      <div className="container flex flex-col items-center space-y-6 bg-darkGray p-5 rounded-lg mx-auto max-w-md ">
-        <h6 className="text-white uppercase font-bold tracking-widest text-xl">
-          Admin
-        </h6>
+      <div className="container flex flex-col space-y-6 bg-darkGray p-5 rounded-lg mx-auto max-w-md ">
+        <SectionHeader heading="Admin" buttonLabel="Add" buttonLink="/admin/announcements/add" />
         <p className="text-white">Announcements</p>
         <div className="bg-charcoal w-full rounded-md p-3 shadow-md">
           <div className="flex flex-col space-y-2 text-center">
@@ -61,12 +60,6 @@ const AdminTab_Announcements = () => {
               <p className="text-white">No announcements..</p>
             )}
           </div>
-        </div>
-        <div className="space-y-4">
-          <CustomButton
-            label="Add new announcement"
-            link="/admin/announcements/add"
-          />
         </div>
       </div>
       <div className="p-10 ">

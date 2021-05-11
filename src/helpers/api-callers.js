@@ -92,3 +92,104 @@ export const getPlateCodes = async () => {
     console.log(err);
   }
 };
+
+export const addNewCar = async (formData, id) => {
+  try {
+    const {
+      carModel,
+      carColor,
+      carYear,
+      plateEmirate,
+      plateCode,
+      plateNumber,
+      vinNumber,
+    } = formData;
+
+    const body = {
+      id,
+      cars: {
+        carModel,
+        carColor,
+        carYear,
+        plateEmirate,
+        plateCode,
+        plateNumber,
+        vinNumber,
+      },
+    };
+
+    const _response = await axios.post("/cars/", body);
+
+    if (_response.status === 200) {
+      return _response.data;
+    }
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+export const getCurrentUsersCars = async (id) => {
+  try {
+    const _response = await axios.get(`/members/${id}`);
+
+    if (_response.status === 200) {
+      const { cars } = _response;
+
+      let _cars = [];
+
+      cars.forEach((_car) => {
+        _cars.push({
+          carModel: _car.carModel,
+          carColor: _car.carColor,
+          carYear: _car.carYear,
+          plateCode: _car.plateCode,
+          plateNumber: _car.plateNumber,
+          plateEmirate: _car.plateEmirate,
+          vinNumber: _car.vinNumber,
+        });
+      });
+
+      return _cars;
+    }
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+export const updateUser = async (id, formData) => {
+  try {
+    const { mobileNumber, whatsAppNumber, emailAddress, instagramName } =
+      formData;
+
+    let body = {
+      id,
+      mobileNumber,
+      whatsAppNumber,
+      emailAddress,
+      instagramName,
+    };
+
+    const _response = await axios.patch("/members/", body);
+
+    if (_response.status === 200) {
+      const { data } = _response;
+      return data;
+    }
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+export const getAllEvents = async () => {
+  try {
+    const _response = await axios.get("/events");
+
+    if (_response.status === 200) {
+      const { data } = _response;
+
+      return data;
+    }
+  } catch (err) {
+    console.log(err);
+  }
+};

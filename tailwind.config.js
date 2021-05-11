@@ -17,13 +17,7 @@ module.exports = {
     },
     extend: {
       fontFamily: {
-        sans: [
-          "Montserrat",
-          "ITCAvantGardeStdBk, ITCAvantGardeStdMd, ITCAvantGardeStdBold",
-          "NCAA Illinois Fighting Illini",
-          "NCAA Illinois Fighting IlliniBold",
-          ...defaultTheme.fontFamily.sans,
-        ],
+        sans: ["Montserrat", ...defaultTheme.fontFamily.sans],
       },
     },
   },

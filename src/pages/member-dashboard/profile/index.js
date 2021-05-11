@@ -5,7 +5,6 @@ import axios from "axios";
 import moment from "moment";
 import AnnouncementCard from "../../../components/announcement-card";
 import QrCode from "qrcode.react";
-import QrReader from "react-qr-reader";
 import { useStoreState } from "easy-peasy";
 import {
   UserIcon,

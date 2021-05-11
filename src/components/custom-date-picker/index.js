@@ -5,11 +5,11 @@ import "react-datepicker/dist/react-datepicker.css";
 const CustomDatePicker = ({ selected, handleDateChange, placeHolder, id }) => {
   return (
     <DatePicker
-      className="bg-transparent border-red border-t-0 border-r-0 border-l-0 text-white border-2 w-full"
+      className="bg-charcoal border-none p-2 rounded-md shadow-md text-white border-2 w-full"
       selected={selected}
       onChange={(date) => handleDateChange(date)}
       dateFormat={["dd-MM-yyyy"]}
-      placeholderText={placeHolder}
+      placeholderText={placeHolder + " *"}
       minDate={new Date()}
       wrapperClassName="w-full"
       id={id}

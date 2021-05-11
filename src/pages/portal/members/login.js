@@ -45,7 +45,7 @@ const MembersLoginPage = () => {
     } catch (err) {
       setErrorMessage(err.response.data.err);
     }
-  };
+  }; 
 
   useEffect(() => {
     try {
