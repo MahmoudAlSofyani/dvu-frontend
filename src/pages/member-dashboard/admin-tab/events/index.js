@@ -5,6 +5,7 @@ import CustomButton from "../../../../components/custom-button";
 import { useHistory } from "react-router-dom";
 import axios from "axios";
 import moment from "moment";
+import SectionHeader from "../../../../components/section-header";
 const AdminTab_Events = () => {
   const history = useHistory();
   const [events, setEvents] = useState([]);
@@ -27,16 +28,18 @@ const AdminTab_Events = () => {
   const handleEditEvent = (eventId) => {
     history.push({
       pathname: "/admin/events/edit",
-      state: {eventId}
-    })
+      state: { eventId },
+    });
   };
 
   return (
     <Layout>
-      <div className="container flex flex-col items-center space-y-6 bg-darkGray p-5 rounded-lg mx-auto max-w-md ">
-        <h6 className="text-white uppercase font-bold tracking-widest text-xl">
-          Admin
-        </h6>
+      <div className="container flex flex-col space-y-6 bg-darkGray p-5 rounded-lg mx-auto max-w-md ">
+        <SectionHeader
+          heading="Admin"
+          buttonLink="/admin/events/add"
+          buttonLabel="Add"
+        />
         <p className="text-white">Events</p>
         <div className="bg-charcoal w-full rounded-md p-3 shadow-md">
           <div className="flex flex-col space-y-2 text-center">
@@ -63,9 +66,11 @@ const AdminTab_Events = () => {
             )}
           </div>
         </div>
-        <div className="space-y-4">
-          <CustomButton label="Add new event" link="/admin/events/add" />
-        </div>
+        <CustomButton
+          label="Attendance"
+          style={2}
+          link="/admin/events/attendance"
+        />
       </div>
       <div className="p-10 ">
         <MemberDashboardMenu />

@@ -8,6 +8,7 @@ import CustomEditor from "../../../../components/custom-editor";
 import CustomDatePicker from "../../../../components/custom-date-picker";
 import CustomTimePicker from "../../../../components/custom-time-picker";
 import axios from "axios";
+import SectionHeader from "../../../../components/section-header";
 
 const AdminTab_Events_Add = () => {
   const [formData, setFormData] = useState({});
@@ -30,7 +31,6 @@ const AdminTab_Events_Add = () => {
   };
 
   const handleOnClick = async () => {
-
     const _response = await axios.post("/events", formData);
 
     if (_response.status === 200) {
@@ -54,14 +54,13 @@ const AdminTab_Events_Add = () => {
 
   return (
     <Layout>
-      <div className="container flex flex-col items-center space-y-6 bg-darkGray p-5 rounded-lg mx-auto max-w-md h-screen">
-        <h6 className="text-white uppercase font-bold tracking-widest text-xl">
-          Admin
-        </h6>
+      <div className="container flex flex-col space-y-6 bg-darkGray p-5 rounded-lg mx-auto max-w-md h-screen">
+        <SectionHeader heading="Admin" backLink="/admin/events" />
         <p className="text-white">Add Event</p>
         <InputField
           placeholder="Name"
           name="name"
+          style={2}
           required
           type="text"
           handleInputChange={handleFormChange}
@@ -75,6 +74,7 @@ const AdminTab_Events_Add = () => {
         <InputField
           placeholder="Meeting Point"
           name="meetingPoint"
+          style={2}
           required
           type="text"
           handleInputChange={handleFormChange}
@@ -89,7 +89,7 @@ const AdminTab_Events_Add = () => {
             handleOnChange={(e, editor) => handleEditorChange(e, editor)}
           />
         </div>
-        <CustomButton label="Add" handleOnClick={handleOnClick} />
+        <CustomButton label="Add" handleOnClick={handleOnClick} style={2} />
       </div>
       <div className="p-10 ">
         <MemberDashboardMenu />

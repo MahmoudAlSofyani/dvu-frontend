@@ -56,6 +56,7 @@ const MembersDashboardIndexPage = () => {
     <Layout>
       <div className="container flex flex-col  space-y-6 bg-darkGray p-5  rounded-lg mx-auto max-w-md text-center">
         <SectionHeader heading="Dashboard" />
+
         {isDataLoaded ? (
           <>
             <div className="bg-charcoal w-full rounded-md p-3 shadow-md">

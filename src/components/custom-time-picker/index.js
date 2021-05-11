@@ -5,7 +5,7 @@ import "react-datepicker/dist/react-datepicker.css";
 const CustomTimePicker = ({ selected, handleTimeChange, placeHolder }) => {
   return (
     <DatePicker
-      className="bg-transparent border-red border-t-0 border-r-0 border-l-0 text-white border-2 w-full"
+      className="bg-charcoal border-none p-2 rounded-md shadow-md text-white border-2 w-full"
       selected={selected}
       onChange={(date) => handleTimeChange(date)}
       showTimeSelect
@@ -13,7 +13,7 @@ const CustomTimePicker = ({ selected, handleTimeChange, placeHolder }) => {
       timeIntervals={15}
       timeCaption="Time"
       dateFormat="h:mm aa"
-      placeholderText={placeHolder}
+      placeholderText={placeHolder + " *"}
       wrapperClassName="w-full"
       required
     />

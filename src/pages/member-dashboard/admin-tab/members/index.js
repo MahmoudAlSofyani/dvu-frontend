@@ -15,6 +15,7 @@ import {
   AiOutlineCar,
 } from "react-icons/ai";
 import { BiChevronRight, BiBadge } from "react-icons/bi";
+import SectionHeader from "../../../../components/section-header";
 const AdminTab_Members = () => {
   const [searchResults, setSearchResults] = useState([]);
   const [currentOpened, setCurrentOpened] = useState();
@@ -83,18 +84,17 @@ const AdminTab_Members = () => {
 
   return (
     <Layout>
-      <div className="container flex flex-col items-center space-y-6 bg-darkGray p-5 rounded-lg mx-auto max-w-md ">
-        <h6 className="text-white uppercase font-bold tracking-widest text-xl">
-          Members
-        </h6>
+      <div className="container flex flex-col space-y-6 bg-darkGray p-5 rounded-lg mx-auto max-w-md ">
+        <SectionHeader heading="Members" />
         <div className="w-full space-y-5">
-          <CustomButton label="Verify Members" link="/admin/members/verify" />
-          <CustomButton label="Brownie Points" />
+          <CustomButton label="Verify Members" link="/admin/members/verify" style={2} />
+          <CustomButton label="Brownie Points" style={2} />
         </div>
         <InputField
           placeholder="Search for member"
           name="searchQuery"
           handleInputChange={(e) => handleSearch(e.target.value)}
+          style={2}
         />
         <div className="w-full space-y-5">
           <p className="text-white text-center">Search Results</p>

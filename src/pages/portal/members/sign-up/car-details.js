@@ -53,14 +53,13 @@ const MembersSignUpPageCarDetails = () => {
       .catch((err) => console.log(err));
   }, [setCarColors, setCarModels, setPlateCodes, setPlateEmirates]);
 
-
   const handleFormChange = (e) => setFormData(e.target);
 
   return (
     <>
       <h6 className="text-white text-sm uppercase">Car Details</h6>
       <div>
-        <div className="lg:grid lg:grid-cols-2 lg:gap-8 lg:space-y-0  flex flex-col ">
+        <div className="  flex flex-col">
           <DropdownField
             name="carModel"
             options={carModels}
@@ -68,7 +67,6 @@ const MembersSignUpPageCarDetails = () => {
             required
             handleInputChange={handleFormChange}
             style={2}
-
           />
           <DropdownField
             name="carColor"
@@ -77,10 +75,7 @@ const MembersSignUpPageCarDetails = () => {
             required
             handleInputChange={handleFormChange}
             style={2}
-
           />
-        </div>
-        <div className="lg:grid lg:grid-cols-2 lg:gap-8 lg:space-y-0  flex flex-col ">
           <DropdownField
             name="carYear"
             options={_yearsArray}
@@ -88,7 +83,6 @@ const MembersSignUpPageCarDetails = () => {
             required
             handleInputChange={handleFormChange}
             style={2}
-
           />
           <DropdownField
             name="plateEmirate"
@@ -97,29 +91,34 @@ const MembersSignUpPageCarDetails = () => {
             required
             handleInputChange={handleFormChange}
             style={2}
-
           />
-        </div>
-        <div className="lg:grid lg:grid-cols-2 lg:gap-8 lg:space-y-0  flex flex-col space-y-4 ">
           <DropdownField
             options={plateCodes.filter(
               (_plateCode) => _plateCode.emirate === formData.plateEmirate
             )}
+            required
             style={2}
-
             placeholder="Plate Code"
             name="plateCode"
             handleInputChange={handleFormChange}
             disabled={!formData.plateEmirate ? true : false}
           />
-          <InputField
-            placeholder="Plate Number"
-            name="plateNumber"
-            required
-            style={2}
-
-            handleInputChange={handleFormChange}
-          />
+          <div className="space-y-7">
+            <InputField
+              placeholder="Plate Number"
+              name="plateNumber"
+              required
+              style={2}
+              handleInputChange={handleFormChange}
+            />
+            <InputField
+              placeholder="Vin Number"
+              name="vinNumber"
+              required
+              style={2}
+              handleInputChange={handleFormChange}
+            />
+          </div>
         </div>
       </div>
       <p className="text-white">

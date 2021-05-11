@@ -2,39 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-/* @font-face {
-  font-family: "AvantGardeBk";
-  src: local("ITCAvantGardeStdBk"),
-    url(./fonts/ITCAvantGardeStdBk.otf) format("otf");
-}
-
-@font-face {
-  font-family: "AvantGardeMd";
-  src: local("ITCAvantGardeStdMd"),
-    url(./fonts/ITCAvantGardeStdMd.otf) format("otf");
-}
-
-@font-face {
-  font-family: "AvantGardeBold";
-  src: local("ITCAvantGardeStdBold"),
-    url(./fonts/ITCAvantGardeStdBold.otf) format("otf");
-}
-
-@font-face {
-  font-family: "NCAAReg";
-  src: local("NCAA Illinois Fighting Illini"),
-    url(./fonts/NCAA_Illinois_Fighting_Illini.otf) format("otf");
-}
-
-@font-face {
-  font-family: "NCAABold";
-  src: local("NCAA Illinois Fighting IlliniBold"),
-    url(./fonts/NCAA_Illinois_Fighting_IlliniBold.otf) format("otf");
-} */
-.ck-editor__editable {
-  min-height: 100px;
-}
-
 @layer base {
   ol {
     list-style: decimal;
@@ -49,3 +16,22 @@
     margin: 10px;
   }
 }
+.ck-editor__editable {
+  min-height: 100px;
+}
+.bgImage {
+  background: linear-gradient(0deg, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
+    url(./assets/images/mainbg.jpg);
+  background-size: cover;
+  background-position: center;
+}
+/* .ck .ck-editor__main {
+  background-color: black;
+} */
+
+/* ck-blurred ck ck-content ck-editor__editable ck-rounded-corners ck-editor__editable_inline */
+
+/* .ck.ck-editor__main > .ck-editor__editable {
+	background: blue !important;
+	border-radius: 0;
+} */

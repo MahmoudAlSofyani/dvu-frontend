@@ -9,6 +9,7 @@ import CustomDatePicker from "../../../../components/custom-date-picker";
 import CustomTimePicker from "../../../../components/custom-time-picker";
 import axios from "axios";
 import moment from "moment";
+import SectionHeader from "../../../../components/section-header";
 
 const AdminTab_Events_Edit = () => {
   const [formData, setFormData] = useState({});
@@ -80,17 +81,16 @@ const AdminTab_Events_Edit = () => {
 
   return (
     <Layout>
-      <div className="container flex flex-col items-center space-y-6 bg-darkGray p-5 rounded-lg mx-auto max-w-md h-screen">
-        <h6 className="text-white uppercase font-bold tracking-widest text-xl">
-          Admin
-        </h6>
-        <p className="text-white">Add Event</p>
+      <div className="container flex flex-col space-y-6 bg-darkGray p-5 rounded-lg mx-auto max-w-md h-screen">
+        <SectionHeader heading="Admin" backLink="/admin/events" />
+        <p className="text-white">Edit Event</p>
         {isDataLoaded ? (
           <>
             <InputField
               placeholder="Name"
               defaultValue={formData.name}
               name="name"
+              style={2}
               required
               type="text"
               handleInputChange={handleFormChange}
@@ -108,6 +108,7 @@ const AdminTab_Events_Edit = () => {
               defaultValue={formData.meetingPoint}
               required
               type="text"
+              style={2}
               handleInputChange={handleFormChange}
             />
             <CustomTimePicker
@@ -121,7 +122,7 @@ const AdminTab_Events_Edit = () => {
                 value={formData.details}
               />
             </div>
-            <CustomButton label="Edit" handleOnClick={handleOnClick} />
+            <CustomButton label="Edit" handleOnClick={handleOnClick} style={2}/>
           </>
         ) : null}
       </div>

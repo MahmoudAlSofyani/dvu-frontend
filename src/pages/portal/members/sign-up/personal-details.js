@@ -69,7 +69,6 @@ const MembersSignUpPagePersonalDetails = () => {
         <InputField
           name="whatsappNumber"
           placeholder="WhatsApp Number"
-          required
           type="tel"
           handleInputChange={handleChange}
           style={2}

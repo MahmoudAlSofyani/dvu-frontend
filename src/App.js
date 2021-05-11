@@ -27,6 +27,8 @@ import { useStoreActions } from "easy-peasy";
 import { useEffect } from "react";
 import axios from "axios";
 import MemberDashboard_Profile from "./pages/member-dashboard/profile";
+import AdminTab_Events_Attendance from "./pages/member-dashboard/admin-tab/events/attendance";
+import HomePage from "./pages/homepage";
 
 function App() {
   const setCurrentUser = useStoreActions(
@@ -50,9 +52,7 @@ function App() {
   });
   return (
     <Switch>
-      <Route exact path="/">
-        <Layout />
-      </Route>
+      <Route exact path="/" component={HomePage} />
       <Route exact path="/portal" component={PortalPage} />
       <Route exact path="/members/login" component={MembersLoginPage} />
       <Route exact path="/members/sign-up" component={MembersSignUpPage} />
@@ -110,6 +110,11 @@ function App() {
       <Route exact path="/admin/events" component={AdminTab_Events} />
       <Route exact path="/admin/events/add" component={AdminTab_Events_Add} />
       <Route exact path="/admin/events/edit" component={AdminTab_Events_Edit} />
+      <Route
+        exact
+        path="/admin/events/attendance"
+        component={AdminTab_Events_Attendance}
+      />
       <Route exact path="/admin/members" component={AdminTab_Members} />
       <Route
         exact

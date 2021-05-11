@@ -27,7 +27,7 @@ const InputField = ({
         />
       ) : style === 2 ? (
         <input
-          className="bg-charcoal focus:outline-none  w-full text-white p-2 rounded-md"
+          className="bg-charcoal focus:outline-none  w-full text-white p-2 rounded-md shadow-md"
           placeholder={required ? placeholder + " *" : placeholder}
           onChange={handleInputChange}
           name={name}
