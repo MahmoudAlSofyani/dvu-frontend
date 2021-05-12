@@ -28,6 +28,7 @@ import axios from "axios";
 import MemberDashboard_Profile from "./pages/member-dashboard/profile";
 import AdminTab_Events_Attendance from "./pages/member-dashboard/admin-tab/events/attendance";
 import HomePage from "./pages/homepage";
+import MemberDashboard_Advertisements from "./pages/member-dashboard/advertisements";
 
 function App() {
   const setCurrentUser = useStoreActions(
@@ -73,6 +74,11 @@ function App() {
         exact
         path="/members/announcements"
         component={MemberDashboard_Announcements}
+      />
+      <Route
+        exact
+        path="/members/advertisements"
+        component={MemberDashboard_Advertisements}
       />
       <Route exact path="/members/forums" component={MemberDashboard_Forums} />
       <Route

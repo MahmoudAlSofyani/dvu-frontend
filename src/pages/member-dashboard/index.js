@@ -10,6 +10,7 @@ import { Fragment } from "react";
 const MembersDashboardIndexPage = () => {
   const [isDataLoaded, setIsDataLoaded] = useState(false);
   const [announcements, setAnnouncements] = useState([]);
+  const [advertisements, setAdvertisements] = useState([]);
   const [memberStatus, setMemberStatus] = useState(false);
   const [memberBrowniePoints, setMemberBrowniePoints] = useState(0);
   const [events, setEvents] = useState([]);
@@ -23,6 +24,7 @@ const MembersDashboardIndexPage = () => {
       axios.get("/events"),
       axios.get(`/members/status/${currentUser.id}`),
       axios.get(`/members/brownie-points/${currentUser.id}`),
+      axios.get("/advertisements/false"),
     ])
       .then((_responses) => {
         if (_responses[0].status === 200) {
@@ -46,6 +48,11 @@ const MembersDashboardIndexPage = () => {
           const { _browniePoints } = _responses[3].data;
 
           setMemberBrowniePoints(_browniePoints);
+        }
+
+        if (_responses[4].status === 200) {
+          console.log(_responses[4].data);
+          setAdvertisements(_responses[4].data);
         }
 
         setIsDataLoaded(true);

@@ -38,6 +38,10 @@ const MembersLoginPage = () => {
           return;
         } else {
           localStorage.setItem("token", _token);
+
+          if (_member.roles.some((_role) => _role.name === "ADMIN")) {
+            localStorage.setItem("isAdmin", true);
+          }
           setCurrentUser(_member);
           history.push("/members/dashboard");
         }
