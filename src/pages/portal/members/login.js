@@ -69,7 +69,7 @@ const MembersLoginPage = () => {
 
   return (
     <Layout>
-      <div className="container flex flex-col items-center space-y-6 bg-darkGray p-5 w-4/5 rounded-lg mx-auto max-w-md ">
+      <div className="container flex flex-col items-center space-y-6 bg-darkGray p-5 rounded-lg mx-auto max-w-md ">
         <h6 className="text-white uppercase font-bold tracking-widest text-xl">
           Members Login
         </h6>
@@ -101,15 +101,15 @@ const MembersLoginPage = () => {
             </p>
           ) : null}
           <p className="text-white">
-            Forgot your password? Click{" "}
+            Forgot your password?
             <Link className="hover:underline" to="/reset-password">
-              here
+              <span className="ml-1 text-red font-bold">Click here</span>
             </Link>
           </p>
           <p className="text-white">
             Not a member yet?{" "}
             <Link className="hover:underline" to="/members/sign-up">
-              Click here
+              <span className="ml-1 text-red font-bold">Click here</span>
             </Link>
           </p>
         </form>
