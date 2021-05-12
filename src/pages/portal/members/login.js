@@ -6,7 +6,7 @@ import InputField from "../../../components/input-field";
 import { useStoreState, useStoreActions } from "easy-peasy";
 import axios from "axios";
 import { useHistory } from "react-router-dom";
-import signUpValidator from "../../../validators/signup-validator";
+import loginValidator from "../../../validators/login-validator";
 
 const MembersLoginPage = () => {
   const [errorMessages, setErrorMessage] = useState("");
@@ -34,7 +34,7 @@ const MembersLoginPage = () => {
     try {
       e.preventDefault();
 
-      signUpValidator
+      loginValidator
         .validate(formData, { abortEarly: false })
         .then(async () => {
           const _response = await axios.post("/auth/login", formData);

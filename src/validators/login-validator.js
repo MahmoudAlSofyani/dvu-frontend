@@ -1,6 +1,6 @@
 import * as yup from "yup";
 
-const signUpValidator = yup.object().shape({
+const loginValidator = yup.object().shape({
   password: yup.string().required("Password is required"),
   emailAddress: yup
     .string()
@@ -8,4 +8,4 @@ const signUpValidator = yup.object().shape({
     .required("Email is required"),
 });
 
-export default signUpValidator;
+export default loginValidator;
