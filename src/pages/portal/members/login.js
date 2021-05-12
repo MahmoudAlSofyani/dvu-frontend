@@ -6,7 +6,7 @@ import InputField from "../../../components/input-field";
 import { useStoreState, useStoreActions } from "easy-peasy";
 import axios from "axios";
 import { useHistory } from "react-router-dom";
-import signUpValidator from "../../../validators/singup-validator";
+import signUpValidator from "../../../validators/signup-validator";
 
 const MembersLoginPage = () => {
   const [errorMessages, setErrorMessage] = useState("");
