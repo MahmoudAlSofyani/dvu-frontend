@@ -44,3 +44,15 @@ export let carDetails = yup.object().shape({
     .matches(/^WVW[a-zA-z0-9]{13,14}/gm, "Please enter a valid vin number")
     .required("VIN number is required"),
 });
+
+export let accountDetails = yup.object().shape({
+  password: yup
+    .string()
+    .min(8, "Password is too short")
+    .max(20, "Password is too long")
+    .required("Password is required"),
+  confirmPassword: yup
+    .string()
+    .oneOf([yup.ref("password"), null], "Passwords do not match")
+    .required("Please re enter your password"),
+});
