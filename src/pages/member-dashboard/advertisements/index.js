@@ -32,7 +32,7 @@ const MemberDashboard_Advertisements = () => {
   return (
     <Layout>
       <div className="container flex flex-col space-y-6 bg-darkGray p-5 rounded-lg mx-auto max-w-md ">
-        <SectionHeader heading="Advertisements" />
+        <SectionHeader heading="Advertisements" buttonLabel="Add" buttonLink="/members/advertisements/add" />
         {isDataLoaded && advertisements.length > 0 ? (
           advertisements.map((_advertisement, index) => (
             <AdvertisementCard

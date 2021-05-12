@@ -11,6 +11,7 @@ const InputField = ({
   defaultValue,
   styleType = 1,
   errorMessage,
+  accept="*"
 }) => {
   return (
     <>
@@ -26,6 +27,7 @@ const InputField = ({
             disabled={disabled}
             value={value}
             defaultValue={defaultValue}
+            accept={accept}
           />
           {errorMessage ? (
             <p className="text-red text-sm">{errorMessage}</p>
@@ -43,6 +45,7 @@ const InputField = ({
             disabled={disabled}
             value={value}
             defaultValue={defaultValue}
+            accept={accept}
           />
           {errorMessage ? (
             <p className="text-red text-sm">{errorMessage}</p>

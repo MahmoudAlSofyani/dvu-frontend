@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import { FiPhone } from "react-icons/fi";
 import { AiOutlineWhatsApp } from "react-icons/ai";
 import { MdDone } from "react-icons/md";
@@ -17,8 +17,7 @@ const AdvertisementCard = ({
   currentUserId,
   id,
 }) => {
-
-    const [isSold, setIsSold] = useState(sold);
+  const [isSold, setIsSold] = useState(sold);
 
   const handleMarkAsSold = async () => {
     try {
@@ -61,13 +60,10 @@ const AdvertisementCard = ({
           <span className="text-red font-bold uppercase mr-2">Title </span>
           {title}
         </p>
-
-        <p>
-          <span className="text-red font-bold uppercase mr-2">
-            Description{" "}
-          </span>
-          {description}
-        </p>
+        <div>
+          <p className="text-red font-bold uppercase mr-2">Description</p>
+          <p dangerouslySetInnerHTML={{ __html: `${description}` }} />
+        </div>
       </div>
       <div className="space-y-2">
         <p className="text-red font-bold uppercase">Contact Details</p>

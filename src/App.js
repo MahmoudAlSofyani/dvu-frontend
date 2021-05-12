@@ -29,6 +29,7 @@ import MemberDashboard_Profile from "./pages/member-dashboard/profile";
 import AdminTab_Events_Attendance from "./pages/member-dashboard/admin-tab/events/attendance";
 import HomePage from "./pages/homepage";
 import MemberDashboard_Advertisements from "./pages/member-dashboard/advertisements";
+import MemberDashboard_Advertisements_Add from "./pages/member-dashboard/advertisements/add";
 
 function App() {
   const setCurrentUser = useStoreActions(
@@ -79,6 +80,11 @@ function App() {
         exact
         path="/members/advertisements"
         component={MemberDashboard_Advertisements}
+      />
+      <Route
+        exact
+        path="/members/advertisements/add"
+        component={MemberDashboard_Advertisements_Add}
       />
       <Route exact path="/members/forums" component={MemberDashboard_Forums} />
       <Route

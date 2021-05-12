@@ -6,7 +6,7 @@ import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 
-const CustomEditor = ({ handleOnChange, value }) => {
+const CustomEditor = ({ handleOnChange, value, placeholder }) => {
   // const [editorState, setEditorState] = useState(EditorState.createEmpty());
   const editorConfig = {
     toolbar: {
@@ -24,7 +24,12 @@ const CustomEditor = ({ handleOnChange, value }) => {
   ClassicEditor.defaultConfig = editorConfig;
 
   return (
-    <CKEditor editor={ClassicEditor} onChange={handleOnChange} data={value} />
+    <CKEditor
+      editor={ClassicEditor}
+      onChange={handleOnChange}
+      data={value}
+      config={{ placeholder }}
+    />
   );
 
   // const handleEditorChange = (editorState) => {
