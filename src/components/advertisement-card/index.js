@@ -19,6 +19,9 @@ const AdvertisementCard = ({
   adminView,
   handleApprove,
   handleReject,
+  verified,
+  showDeleteButton,
+  handleDelete,
 }) => {
   const [isSold, setIsSold] = useState(sold);
 
@@ -38,6 +41,8 @@ const AdvertisementCard = ({
       console.log(err);
     }
   };
+
+ 
 
   return (
     <div className="bg-charcoal p-3 rounded-md text-white space-y-4">
@@ -97,6 +102,14 @@ const AdvertisementCard = ({
             handleOnClick={handleApprove}
           />
         </div>
+      ) : null}
+      {showDeleteButton ? (
+        <CustomButton
+          label="Delete"
+          styleType={2}
+          extraClasses="w-full"
+          handleOnClick={handleDelete}
+        />
       ) : null}
     </div>
   );

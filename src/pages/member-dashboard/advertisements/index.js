@@ -21,6 +21,7 @@ const MemberDashboard_Advertisements = () => {
           if (_response.status === 200) {
             setAdvertisements(_response.data);
             setIsDataLoaded(true);
+            console.log(_response.data);
           }
         })
         .catch((err) => console.log(err));
@@ -29,14 +30,30 @@ const MemberDashboard_Advertisements = () => {
     }
   }, [setAdvertisements]);
 
+  const handleDelete = async (id) => {
+    try {
+      const _response = await axios.delete(`/advertisements/${id}`);
+      if (_response) {
+        setIsDataLoaded(false);
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   return (
     <Layout>
       <div className="container flex flex-col space-y-6 bg-darkGray p-5 rounded-lg mx-auto max-w-md ">
-        <SectionHeader heading="Advertisements" buttonLabel="Add" buttonLink="/members/advertisements/add" />
+        <SectionHeader
+          heading="Advertisements"
+          buttonLabel="Add"
+          buttonLink="/members/advertisements/add"
+        />
         {isDataLoaded && advertisements.length > 0 ? (
           advertisements.map((_advertisement, index) => (
             <AdvertisementCard
-            id={_advertisement.id}
+              key={index}
+              id={_advertisement.id}
               sold={_advertisement.sold}
               price={_advertisement.price}
               imageId={_advertisement.image.id}
@@ -46,6 +63,9 @@ const MemberDashboard_Advertisements = () => {
               mobileNumber={_advertisement.member.mobileNumber}
               whatsAppNumber={_advertisement.member.whatsAppNumber}
               currentUserId={currentUser.id}
+              verified={_advertisement.verified}
+              showDeleteButton={localStorage.getItem("isAdmin")}
+              handleDelete={() => handleDelete(_advertisement.id)}
             />
           ))
         ) : (
