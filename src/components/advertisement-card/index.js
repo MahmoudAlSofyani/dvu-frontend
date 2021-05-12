@@ -16,6 +16,9 @@ const AdvertisementCard = ({
   whatsAppNumber,
   currentUserId,
   id,
+  adminView,
+  handleApprove,
+  handleReject,
 }) => {
   const [isSold, setIsSold] = useState(sold);
 
@@ -39,7 +42,7 @@ const AdvertisementCard = ({
   return (
     <div className="bg-charcoal p-3 rounded-md text-white space-y-4">
       <div className="flex flex-row justify-between">
-        {currentUserId === member.id && !isSold ? (
+        {currentUserId === member.id && !isSold && !adminView ? (
           <CustomButton
             styleType={2}
             label="Mark as Sold"
@@ -80,6 +83,21 @@ const AdvertisementCard = ({
           <p>{whatsAppNumber ? whatsAppNumber : mobileNumber}</p>
         </div>
       </div>
+      {adminView ? (
+        <div className="flex justify-between space-x-6 py-5">
+          <CustomButton
+            label="Reject"
+            styleType={2}
+            extraClasses="w-full"
+            handleOnClick={handleReject}
+          />
+          <CustomButton
+            label="Approve"
+            extraClasses="bg-green border-none w-full hover:bg-green"
+            handleOnClick={handleApprove}
+          />
+        </div>
+      ) : null}
     </div>
   );
 };

@@ -30,6 +30,7 @@ import AdminTab_Events_Attendance from "./pages/member-dashboard/admin-tab/event
 import HomePage from "./pages/homepage";
 import MemberDashboard_Advertisements from "./pages/member-dashboard/advertisements";
 import MemberDashboard_Advertisements_Add from "./pages/member-dashboard/advertisements/add";
+import AdminTab_Advertisements from "./pages/member-dashboard/admin-tab/advertisements";
 
 function App() {
   const setCurrentUser = useStoreActions(
@@ -131,6 +132,11 @@ function App() {
         exact
         path="/admin/members/verify"
         component={AdminTab_Members_Verify}
+      />
+      <Route
+        exact
+        path="/admin/advertisements"
+        component={AdminTab_Advertisements}
       />
     </Switch>
   );

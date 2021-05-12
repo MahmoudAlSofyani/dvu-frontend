@@ -62,6 +62,12 @@ const MemberDashboard_Admin = () => {
             extraClasses="w-full"
             styleType={2}
           />
+          <CustomButton
+            label="Advertisements"
+            link="/admin/advertisements"
+            extraClasses="w-full"
+            styleType={2}
+          />
         </div>
       </div>
       <div className="p-10 ">
