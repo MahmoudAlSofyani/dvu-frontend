@@ -18,6 +18,7 @@ const AdminTab_Events = () => {
         .then((_response) => {
           if (_response.status === 200) {
             setEvents(_response.data);
+            console.log(_response.data);
             setIsDataLoaded(true);
           }
         })
@@ -46,15 +47,18 @@ const AdminTab_Events = () => {
             {isDataLoaded && events.length > 0 ? (
               events.map((_event, index) => (
                 <Fragment key={index}>
-                  <p
+                  <div
                     onClick={() => handleEditEvent(_event.id)}
-                    className="text-white opacity-80 text-sm py-2 cursor-pointer"
+                    className="flex flex-row text-white opacity-80 text-sm py-2 cursor-pointer"
                   >
-                    <span className="text-red font-bold">
+                    <p className="text-red font-bold">
                       {moment(_event.date).format("DD MMM").toUpperCase()}
-                    </span>{" "}
-                    {_event.name}
-                  </p>
+                    </p>
+                    <p className="ml-2">{_event.name}</p>
+                    <p className="bg-red rounded-md py-1 px-3 ml-auto">
+                      {_event.members.length}
+                    </p>
+                  </div>
                   {index + 1 < events.length ? (
                     <hr className="text-white  w-1/2 opacity-20 rounded mx-auto" />
                   ) : null}
