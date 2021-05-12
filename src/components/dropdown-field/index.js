@@ -8,11 +8,12 @@ const DropdownField = ({
   name,
   disabled = false,
   styleType = 1,
+  errorMessage,
 }) => {
   return (
     <>
       {styleType === 1 ? (
-        <div className="flex flex-col mb-6">
+        <div className="flex flex-col">
           <label htmlFor={name} className="text-white opacity-50 mb-1">
             {placeholder} {required ? <span>*</span> : null}
           </label>
@@ -33,7 +34,7 @@ const DropdownField = ({
           </select>
         </div>
       ) : styleType === 2 ? (
-        <div className="flex flex-col mb-6 ">
+        <div className="flex flex-col ">
           <label htmlFor={name} className="text-white opacity-50 mb-1">
             {placeholder} {required ? <span>*</span> : null}
           </label>
@@ -52,6 +53,9 @@ const DropdownField = ({
               </option>
             ))}
           </select>
+          {errorMessage ? (
+            <p className="text-red text-sm">{errorMessage}</p>
+          ) : null}
         </div>
       ) : null}
     </>

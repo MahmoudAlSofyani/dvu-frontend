@@ -2,7 +2,7 @@ import { useStoreActions, useStoreState } from "easy-peasy";
 import React, { useState } from "react";
 import CustomButton from "../../../../components/custom-button";
 import InputField from "../../../../components/input-field";
-import signupValidator from "../../../../validators/signup-validator";
+import { personalDetails } from "../../../../validators/signup-validator";
 
 const MembersSignUpPagePersonalDetails = () => {
   const [validationErrors, setValidationErrors] = useState({});
@@ -25,7 +25,7 @@ const MembersSignUpPagePersonalDetails = () => {
 
   const validateForm = () => {
     try {
-      signupValidator
+      personalDetails
         .validate(formData, { abortEarly: false })
         .then(() => {
           setStepNumber(2);
