@@ -59,6 +59,7 @@ const MembersSignUpPagePersonalDetails = () => {
             type="text"
             handleInputChange={handleChange}
             styleType={2}
+            defaultValue={formData.firstName}
           />
           {validationErrors.firstName ? (
             <p className="text-red text-sm">{validationErrors.firstName}</p>
@@ -72,6 +73,7 @@ const MembersSignUpPagePersonalDetails = () => {
             type="text"
             handleInputChange={handleChange}
             styleType={2}
+            defaultValue={formData.lastName}
           />
           {validationErrors.lastName ? (
             <p className="text-red text-sm">{validationErrors.lastName}</p>
@@ -87,6 +89,7 @@ const MembersSignUpPagePersonalDetails = () => {
             type="email"
             handleInputChange={handleChange}
             styleType={2}
+            defaultValue={formData.emailAddress}
           />
           {validationErrors.emailAddress ? (
             <p className="text-red text-sm">{validationErrors.emailAddress}</p>
@@ -100,6 +103,7 @@ const MembersSignUpPagePersonalDetails = () => {
             type="email"
             handleInputChange={handleChange}
             styleType={2}
+            defaultValue={formData.confirmEmail}
           />
           {validationErrors.confirmEmail ? (
             <p className="text-red text-sm">{validationErrors.confirmEmail}</p>
@@ -115,6 +119,7 @@ const MembersSignUpPagePersonalDetails = () => {
             type="tel"
             styleType={2}
             handleInputChange={handleChange}
+            defaultValue={formData.mobileNumber}
           />
           {validationErrors.mobileNumber ? (
             <p className="text-red text-sm">{validationErrors.mobileNumber}</p>
@@ -127,6 +132,7 @@ const MembersSignUpPagePersonalDetails = () => {
             type="tel"
             handleInputChange={handleChange}
             styleType={2}
+            defaultValue={formData.whatsAppNumber}
           />
           {validationErrors.whatsAppNumber ? (
             <p className="text-red text-sm">
@@ -143,6 +149,7 @@ const MembersSignUpPagePersonalDetails = () => {
             type="text"
             handleInputChange={handleChange}
             styleType={2}
+            defaultValue={formData.instagramName}
           />
           {validationErrors.instagramName ? (
             <p className="text-red text-sm">{validationErrors.instagramName}</p>

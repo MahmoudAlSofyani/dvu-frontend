@@ -9,6 +9,7 @@ const DropdownField = ({
   disabled = false,
   styleType = 1,
   errorMessage,
+  defaultValue = "",
 }) => {
   return (
     <>
@@ -23,7 +24,7 @@ const DropdownField = ({
             required={required}
             onChange={handleInputChange}
             name={name}
-            defaultValue=""
+            defaultValue={defaultValue}
           >
             <option value="" disabled></option>
             {options.map((_option, index) => (
@@ -44,7 +45,7 @@ const DropdownField = ({
             required={required}
             onChange={handleInputChange}
             name={name}
-            defaultValue=""
+            defaultValue={defaultValue}
           >
             <option value="" disabled></option>
             {options.map((_option, index) => (

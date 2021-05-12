@@ -1,5 +1,5 @@
 import { useStoreActions, useStoreState } from "easy-peasy";
-import React, {useState} from "react";
+import React, { useState } from "react";
 import CustomButton from "../../../../components/custom-button";
 import InputField from "../../../../components/input-field";
 import axios from "axios";
@@ -28,7 +28,6 @@ const MembersSignUpPageAccountDetails = () => {
     }
   };
 
-  
   const validateForm = () => {
     try {
       accountDetails
@@ -52,7 +51,6 @@ const MembersSignUpPageAccountDetails = () => {
     }
   };
 
-
   return (
     <>
       <SectionHeader heading="Register" subHeading="Account Details" />
@@ -64,6 +62,7 @@ const MembersSignUpPageAccountDetails = () => {
         type="password"
         handleInputChange={handleFormChange}
         errorMessage={validationErrors.password}
+        defaultValue={formData.password}
       />
       <InputField
         name="confirmPassword"
@@ -73,13 +72,23 @@ const MembersSignUpPageAccountDetails = () => {
         type="password"
         handleInputChange={handleFormChange}
         errorMessage={validationErrors.confirmPassword}
+        defaultValue={formData.confirmPassword}
       />
       <p className="text-white">
         <span className="text-red">*</span> Required
       </p>
       <div className="flex space-x-6">
-        <CustomButton handleOnClick={() => setStepNumber(2)} label="Back" extraClasses="w-full" />
-        <CustomButton handleOnClick={validateForm} label="Submit" extraClasses="w-full" styleType={2} />
+        <CustomButton
+          handleOnClick={() => setStepNumber(2)}
+          label="Back"
+          extraClasses="w-full"
+        />
+        <CustomButton
+          handleOnClick={validateForm}
+          label="Submit"
+          extraClasses="w-full"
+          styleType={2}
+        />
       </div>
     </>
   );

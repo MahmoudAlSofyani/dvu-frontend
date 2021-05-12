@@ -100,6 +100,7 @@ const MembersSignUpPageCarDetails = () => {
             handleInputChange={handleFormChange}
             styleType={2}
             errorMessage={validationErrors.carModel}
+            defaultValue={formData.carModel}
           />
           <DropdownField
             name="carColor"
@@ -109,6 +110,7 @@ const MembersSignUpPageCarDetails = () => {
             handleInputChange={handleFormChange}
             styleType={2}
             errorMessage={validationErrors.carColor}
+            defaultValue={formData.carColor}
           />
           <DropdownField
             name="carYear"
@@ -118,6 +120,7 @@ const MembersSignUpPageCarDetails = () => {
             handleInputChange={handleFormChange}
             styleType={2}
             errorMessage={validationErrors.carYear}
+            defaultValue={formData.carYear}
           />
           <DropdownField
             name="plateEmirate"
@@ -127,6 +130,7 @@ const MembersSignUpPageCarDetails = () => {
             handleInputChange={handleFormChange}
             styleType={2}
             errorMessage={validationErrors.plateEmirate}
+            defaultValue={formData.plateEmirate}
           />
           <DropdownField
             options={plateCodes.filter(
@@ -139,6 +143,7 @@ const MembersSignUpPageCarDetails = () => {
             handleInputChange={handleFormChange}
             disabled={!formData.plateEmirate ? true : false}
             errorMessage={validationErrors.plateCode}
+            defaultValue={formData.plateCode}
           />
           <InputField
             placeholder="Plate Number"
@@ -147,6 +152,7 @@ const MembersSignUpPageCarDetails = () => {
             styleType={2}
             handleInputChange={handleFormChange}
             errorMessage={validationErrors.plateNumber}
+            defaultValue={formData.plateNumber}
           />
           <InputField
             placeholder="Vin Number"
@@ -155,6 +161,7 @@ const MembersSignUpPageCarDetails = () => {
             styleType={2}
             handleInputChange={handleFormChange}
             errorMessage={validationErrors.vinNumber}
+            defaultValue={formData.vinNumber}
           />
         </div>
       </div>
