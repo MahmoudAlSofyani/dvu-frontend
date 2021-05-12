@@ -7,12 +7,13 @@ import InputField from "../../../components/input-field";
 import Layout from "../../../components/layout";
 import SectionHeader from "../../../components/section-header";
 import { addAdvertisement } from "../../../validators/advertisements-validator";
+import { useHistory } from "react-router-dom";
 
 const MemberDashboard_Advertisements_Add = () => {
   const currentUser = useStoreState((state) => state.currentUser.currentUser);
   const [formData, setFormData] = useState({});
-  const [file, setFile] = useState();
   const [validationErrors, setValidationErrors] = useState({});
+  const history = useHistory()
 
   const handleFormChange = (e) => {
     const { value, name } = e.target;
@@ -76,7 +77,7 @@ const MemberDashboard_Advertisements_Add = () => {
             },
           });
           if (_response.status === 200) {
-            console.log(_response.data);
+            history.push("/members/advertisements");
           }
         })
         .catch((err) => {

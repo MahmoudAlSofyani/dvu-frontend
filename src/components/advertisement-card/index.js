@@ -52,10 +52,10 @@ const AdvertisementCard = ({
         ) : null}
         <p className="text-red font-bold">{isSold ? "SOLD" : "AED " + price}</p>
       </div>
-      <div className="py-7 mx-auto">
+      <div className="py-2 mx-auto">
         <img
           src={`${process.env.REACT_APP_API_URL}/utility/file/${imageId}`}
-          className="w-3/5 mx-auto"
+          className="w-full mx-auto"
         />
       </div>
       <div className="space-y-2">
