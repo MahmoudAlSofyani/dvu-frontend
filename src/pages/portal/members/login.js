@@ -6,9 +6,11 @@ import InputField from "../../../components/input-field";
 import { useStoreState, useStoreActions } from "easy-peasy";
 import axios from "axios";
 import { useHistory } from "react-router-dom";
+import signUpValidator from "../../../validators/singup-validator";
 
 const MembersLoginPage = () => {
   const [errorMessages, setErrorMessage] = useState("");
+  const [validationErrors, setValidationErrors] = useState({});
 
   const formData = useStoreState((state) => state.memberLoginForm.formData);
   const setFormData = useStoreActions(
@@ -20,33 +22,57 @@ const MembersLoginPage = () => {
   );
   const history = useHistory();
 
-  const handleFormChange = (e) => setFormData(e.target);
+  const handleFormChange = (e) => {
+    setFormData(e.target);
+    setValidationErrors({
+      ...validationErrors,
+      [e.target.name]: null,
+    });
+  };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     try {
       e.preventDefault();
 
-      const _response = await axios.post("/auth/login", formData);
+      signUpValidator
+        .validate(formData, { abortEarly: false })
+        .then(async () => {
+          const _response = await axios.post("/auth/login", formData);
 
-      if (_response.status === 200) {
-        const { _token, _member } = _response.data;
+          if (_response.status === 200) {
+            const { _token, _member } = _response.data;
 
-        if (!_member.roles.some((_role) => _role.name === "ACTIVE")) {
-          setErrorMessage(
-            "Your account has not been activated or you have been purged"
-          );
-          return;
-        } else {
-          localStorage.setItem("token", _token);
+            if (!_member.roles.some((_role) => _role.name === "ACTIVE")) {
+              setErrorMessage(
+                "Your account has not been activated or you have been purged"
+              );
+              return;
+            } else {
+              localStorage.setItem("token", _token);
 
-          if (_member.roles.some((_role) => _role.name === "ADMIN")) {
-            localStorage.setItem("isAdmin", true);
+              if (_member.roles.some((_role) => _role.name === "ADMIN")) {
+                localStorage.setItem("isAdmin", true);
+              }
+              setCurrentUser(_member);
+              history.push("/members/dashboard");
+            }
+          } else if (_response.status === 401) {
           }
-          setCurrentUser(_member);
-          history.push("/members/dashboard");
-        }
-      }
+        })
+        .catch((err) => {
+          if (err && err.inner) {
+            let _validationErrors = {};
+            err.inner.forEach((e) => {
+              _validationErrors[e.path] = e.message;
+            });
+
+            setValidationErrors(_validationErrors);
+          } else if (err.response) {
+            setErrorMessage(err.response.data.err);
+          }
+        });
     } catch (err) {
+      console.log("here");
       setErrorMessage(err.response.data.err);
     }
   };
@@ -74,32 +100,46 @@ const MembersLoginPage = () => {
           Members Login
         </h6>
         <form className="space-y-10">
-          <InputField
-            placeholder="Email"
-            type="email"
-            name="emailAddress"
-            handleInputChange={(e) => handleFormChange(e)}
-            styleType={2}
-          />
-          <InputField
-            placeholder="Password"
-            name="password"
-            handleInputChange={(e) => handleFormChange(e)}
-            type="password"
-            styleType={2}
-          />
-          <CustomButton
-            label="Login"
-            link="/members/dashboard"
-            handleOnClick={handleSubmit}
-            extraClasses="w-full mt-10"
-          />
+          <div>
+            <InputField
+              placeholder="Email Address"
+              type="email"
+              name="emailAddress"
+              handleInputChange={(e) => handleFormChange(e)}
+              styleType={2}
+              required
+            />
+            {validationErrors.emailAddress ? (
+              <p className="text-red text-sm">
+                {validationErrors.emailAddress}
+              </p>
+            ) : null}
+          </div>
+          <div>
+            <InputField
+              placeholder="Password"
+              name="password"
+              handleInputChange={(e) => handleFormChange(e)}
+              type="password"
+              styleType={2}
+              required
+            />
+            {validationErrors.password ? (
+              <p className="text-red text-sm">{validationErrors.password}</p>
+            ) : null}
+          </div>
           {errorMessages ? (
             <p className="text-center text-sm text-red font-bold">
               ERROR !{" "}
               <span className="font-normal text-white">{errorMessages}</span>
             </p>
           ) : null}
+          <CustomButton
+            label="Login"
+            link="/members/dashboard"
+            handleOnClick={handleSubmit}
+            extraClasses="w-full mt-10"
+          />
           <p className="text-white">
             Forgot your password?
             <Link className="hover:underline" to="/reset-password">
