@@ -142,13 +142,13 @@ const MembersLoginPage = () => {
           />
           <p className="text-white">
             Forgot your password?
-            <Link className="hover:underline" to="/reset-password">
+            <Link to="/reset-password">
               <span className="ml-1 text-red font-bold">Click here</span>
             </Link>
           </p>
           <p className="text-white">
             Not a member yet?{" "}
-            <Link className="hover:underline" to="/members/sign-up">
+            <Link to="/members/sign-up">
               <span className="ml-1 text-red font-bold">Click here</span>
             </Link>
           </p>
