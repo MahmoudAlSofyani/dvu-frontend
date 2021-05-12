@@ -1,5 +1,4 @@
-import Layout from "./components/layout";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { Route, Switch } from "react-router-dom";
 import PortalPage from "./pages/portal";
 import MembersLoginPage from "./pages/portal/members/login";
 import "./index.css";
@@ -29,6 +28,7 @@ import axios from "axios";
 import MemberDashboard_Profile from "./pages/member-dashboard/profile";
 import AdminTab_Events_Attendance from "./pages/member-dashboard/admin-tab/events/attendance";
 import HomePage from "./pages/homepage";
+import MemberDashboard_Advertisements from "./pages/member-dashboard/advertisements";
 
 function App() {
   const setCurrentUser = useStoreActions(
@@ -74,6 +74,11 @@ function App() {
         exact
         path="/members/announcements"
         component={MemberDashboard_Announcements}
+      />
+      <Route
+        exact
+        path="/members/advertisements"
+        component={MemberDashboard_Advertisements}
       />
       <Route exact path="/members/forums" component={MemberDashboard_Forums} />
       <Route

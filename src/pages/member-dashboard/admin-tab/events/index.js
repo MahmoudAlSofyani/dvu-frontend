@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, Fragment } from "react";
 import Layout from "../../../../components/layout";
 import MemberDashboardMenu from "../../../../components/dashboard-menu/members";
 import CustomButton from "../../../../components/custom-button";
@@ -18,6 +18,7 @@ const AdminTab_Events = () => {
         .then((_response) => {
           if (_response.status === 200) {
             setEvents(_response.data);
+            console.log(_response.data);
             setIsDataLoaded(true);
           }
         })
@@ -39,27 +40,29 @@ const AdminTab_Events = () => {
           heading="Admin"
           buttonLink="/admin/events/add"
           buttonLabel="Add"
+          subHeading="Events"
         />
-        <p className="text-white">Events</p>
         <div className="bg-charcoal w-full rounded-md p-3 shadow-md">
           <div className="flex flex-col space-y-2 text-center">
             {isDataLoaded && events.length > 0 ? (
               events.map((_event, index) => (
-                <>
-                  <p
+                <Fragment key={index}>
+                  <div
                     onClick={() => handleEditEvent(_event.id)}
-                    key={index}
-                    className="text-white opacity-80 text-sm py-2 cursor-pointer"
+                    className="flex flex-row text-white opacity-80 text-sm py-2 cursor-pointer"
                   >
-                    <span className="text-red font-bold">
+                    <p className="text-red font-bold">
                       {moment(_event.date).format("DD MMM").toUpperCase()}
-                    </span>{" "}
-                    {_event.name}
-                  </p>
+                    </p>
+                    <p className="ml-2">{_event.name}</p>
+                    <p className="bg-red rounded-md py-1 px-3 ml-auto">
+                      {_event.members.length}
+                    </p>
+                  </div>
                   {index + 1 < events.length ? (
                     <hr className="text-white  w-1/2 opacity-20 rounded mx-auto" />
                   ) : null}
-                </>
+                </Fragment>
               ))
             ) : (
               <p className="text-white">No Events</p>
@@ -68,8 +71,9 @@ const AdminTab_Events = () => {
         </div>
         <CustomButton
           label="Attendance"
-          style={2}
+          styleType={2}
           link="/admin/events/attendance"
+          extraClasses="w-full"
         />
       </div>
       <div className="p-10 ">

@@ -77,20 +77,19 @@ const AdminTab_Events_Edit = () => {
         }
       })
       .catch((err) => console.log(err));
-  }, [setFormData]);
+  }, [setFormData, eventId]);
 
   return (
     <Layout>
       <div className="container flex flex-col space-y-6 bg-darkGray p-5 rounded-lg mx-auto max-w-md h-screen">
-        <SectionHeader heading="Admin" backLink="/admin/events" />
-        <p className="text-white">Edit Event</p>
+        <SectionHeader heading="Admin" backLink="/admin/events" subHeading="Edit Event" />
         {isDataLoaded ? (
           <>
             <InputField
               placeholder="Name"
               defaultValue={formData.name}
               name="name"
-              style={2}
+              styleType={2}
               required
               type="text"
               handleInputChange={handleFormChange}
@@ -108,7 +107,7 @@ const AdminTab_Events_Edit = () => {
               defaultValue={formData.meetingPoint}
               required
               type="text"
-              style={2}
+              styleType={2}
               handleInputChange={handleFormChange}
             />
             <CustomTimePicker
@@ -122,7 +121,11 @@ const AdminTab_Events_Edit = () => {
                 value={formData.details}
               />
             </div>
-            <CustomButton label="Edit" handleOnClick={handleOnClick} style={2}/>
+            <CustomButton
+              label="Edit"
+              handleOnClick={handleOnClick}
+              styleType={2}
+            />
           </>
         ) : null}
       </div>

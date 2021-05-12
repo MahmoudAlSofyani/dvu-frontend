@@ -23,7 +23,7 @@ const MemberDashboard_Events = () => {
     } catch (err) {
       console.log(err);
     }
-  }, [setEvents]);
+  }, []);
 
   return (
     <Layout>

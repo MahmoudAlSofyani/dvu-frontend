@@ -56,20 +56,19 @@ const AdminTab_Announcements_Edit = () => {
         setIsDataLoaded(true);
       }
     });
-  }, [setFormData]);
+  }, [setFormData, announcementId]);
 
   return (
     <Layout>
       <div className="container flex flex-col space-y-6 bg-darkGray p-5 rounded-lg mx-auto max-w-md h-screen">
-        <SectionHeader heading="Admin" backLink="/admin/announcements" />
-        <p className="text-white">Edit Announcement</p>
+        <SectionHeader heading="Admin" backLink="/admin/announcements" subHeading="Edit Announcement" />
         {isDataLoaded ? (
           <>
             <InputField
               placeholder="Title"
               name="title"
               required
-              style={2}
+              styleType={2}
               type="text"
               handleInputChange={handleFormChange}
               defaultValue={formData.title}
@@ -80,7 +79,11 @@ const AdminTab_Announcements_Edit = () => {
                 value={formData.details}
               />
             </div>
-            <CustomButton label="Edit" handleOnClick={handleOnClick} style={2} />
+            <CustomButton
+              label="Edit"
+              handleOnClick={handleOnClick}
+              styleType={2}
+            />
           </>
         ) : null}
       </div>

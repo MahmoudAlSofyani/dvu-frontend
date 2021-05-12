@@ -1,11 +1,9 @@
 import axios from "axios";
-import { useStoreState } from "easy-peasy";
 import React, { useEffect, useState } from "react";
 import CustomButton from "../../../components/custom-button";
 import MemberDashboardMenu from "../../../components/dashboard-menu/members";
 import Layout from "../../../components/layout";
 import SectionHeader from "../../../components/section-header";
-import { useHistory } from "react-router-dom";
 
 const MemberDashboard_Admin = () => {
   const [memberCount, setMemberCount] = useState(0);
@@ -46,9 +44,24 @@ const MemberDashboard_Admin = () => {
           </div>
         </div>
         <div className="flex flex-col space-y-4 w-full">
-          <CustomButton link="/admin/announcements" label="Announcements" />
-          <CustomButton label="Events" link="/admin/events" />
-          <CustomButton label="Members" link="/admin/members" />
+          <CustomButton
+            link="/admin/announcements"
+            label="Announcements"
+            extraClasses="w-full"
+            styleType={2}
+          />
+          <CustomButton
+            label="Events"
+            link="/admin/events"
+            extraClasses="w-full"
+            styleType={2}
+          />
+          <CustomButton
+            label="Members"
+            link="/admin/members"
+            extraClasses="w-full"
+            styleType={2}
+          />
         </div>
       </div>
       <div className="p-10 ">

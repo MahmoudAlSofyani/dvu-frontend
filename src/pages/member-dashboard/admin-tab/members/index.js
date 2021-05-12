@@ -1,13 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import MemberDashboardMenu from "../../../../components/dashboard-menu/members";
 import Layout from "../../../../components/layout";
 import axios from "axios";
-import moment from "moment";
-import AnnouncementCard from "../../../../components/announcement-card";
 import CustomButton from "../../../../components/custom-button";
 import InputField from "../../../../components/input-field";
 import Collapsible from "react-collapsible";
-import { MdPersonOutline } from "react-icons/md";
 import {
   AiOutlineMail,
   AiOutlineMobile,
@@ -81,20 +78,28 @@ const AdminTab_Members = () => {
     }
   };
 
-
   return (
     <Layout>
       <div className="container flex flex-col space-y-6 bg-darkGray p-5 rounded-lg mx-auto max-w-md ">
         <SectionHeader heading="Members" />
         <div className="w-full space-y-5">
-          <CustomButton label="Verify Members" link="/admin/members/verify" style={2} />
-          <CustomButton label="Brownie Points" style={2} />
+          <CustomButton
+            label="Verify Members"
+            link="/admin/members/verify"
+            styleType={2}
+            extraClasses="w-full"
+          />
+          <CustomButton
+            label="Brownie Points"
+            styleType={2}
+            extraClasses="w-full"
+          />
         </div>
         <InputField
           placeholder="Search for member"
           name="searchQuery"
           handleInputChange={(e) => handleSearch(e.target.value)}
-          style={2}
+          styleType={2}
         />
         <div className="w-full space-y-5">
           <p className="text-white text-center">Search Results</p>
@@ -176,8 +181,16 @@ const AdminTab_Members = () => {
                 </div>
                 <div className="flex flex-row space-x-6 p-5">
                   <CustomButton
-                    label={_result.roles.find((_role) => _role.name === "PURGED") ? "UNPURGE" : "PURGE"}
-                    handleOnClick={_result.roles.find((_role) => _role.name === "PURGED") ? () => handleOnUnpurge(_result.id) : () => handleOnPurge(_result.id)}
+                    label={
+                      _result.roles.find((_role) => _role.name === "PURGED")
+                        ? "UNPURGE"
+                        : "PURGE"
+                    }
+                    handleOnClick={
+                      _result.roles.find((_role) => _role.name === "PURGED")
+                        ? () => handleOnUnpurge(_result.id)
+                        : () => handleOnPurge(_result.id)
+                    }
                   />
                   <CustomButton label="EDIT" />
                 </div>

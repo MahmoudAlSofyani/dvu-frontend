@@ -1,16 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import MemberDashboardMenu from "../../../components/dashboard-menu/members";
 import Layout from "../../../components/layout";
-import axios from "axios";
-import moment from "moment";
-import AnnouncementCard from "../../../components/announcement-card";
 import QrCode from "qrcode.react";
 import { useStoreState } from "easy-peasy";
-import {
-  UserIcon,
-  AtSymbolIcon,
-  DeviceMobileIcon,
-} from "@heroicons/react/outline";
 import { MdPersonOutline } from "react-icons/md";
 import {
   AiOutlineMail,
@@ -41,22 +33,27 @@ const MemberDashboard_Profile = () => {
           buttonLabel="Logout"
           handleButtonOnClick={handleLogout}
         />
-        <QrCode
-          className="self-center"
-          size={150}
-          bgColor="white"
-          fgColor="black"
-          value={currentUser.id}
-          onClick={() => console.log("barcode clicked")}
-        />
+        <div className="self-center bg-white p-2">
+          <QrCode
+            className="self-center"
+            size={150}
+            bgColor="white"
+            fgColor="black"
+            value={currentUser.id}
+            onClick={() => console.log("barcode clicked")}
+          />
+        </div>
         <div className="border-red border-2 rounded p-5 flex flex-col space-y-3 w-full">
           <div className="mb-2">
             {currentUser.roles.some(
               (_role) => _role.name === "WOLFSBURG" || _role.name === "ADMIN"
             ) ? (
-              currentUser.roles.map((_role) =>
+              currentUser.roles.map((_role, index) =>
                 _role.name !== "ACTIVE" ? (
-                  <p className="text-red font-bold text-center text-2xl">
+                  <p
+                    key={index}
+                    className="text-red font-bold text-center text-2xl"
+                  >
                     {_role.name}
                   </p>
                 ) : null

@@ -5,7 +5,6 @@ import { PlusCircleIcon } from "@heroicons/react/outline";
 import InputField from "../../../components/input-field";
 import DropdownField from "../../../components/dropdown-field";
 import CustomButton from "../../../components/custom-button";
-import axios from "axios";
 import { useStoreActions, useStoreState } from "easy-peasy";
 import {
   addNewCar,
@@ -128,13 +127,13 @@ const MemberDashboard_Settings = () => {
             type="text"
             placeholder={memberData.firstName}
             disabled
-            style={2}
+            styleType={2}
           />
         </div>
         <div className="flex flex-col space-y-3 w-full shadow-md">
           <label className="text-md text-white">Last Name</label>
           <InputField
-            style={2}
+            styleType={2}
             name="lastName"
             type="text"
             placeholder={memberData.lastName}
@@ -144,7 +143,7 @@ const MemberDashboard_Settings = () => {
         <div className="flex flex-col space-y-3 w-full shadow-md">
           <label className="text-md text-white">Mobile Number</label>
           <InputField
-            style={2}
+            styleType={2}
             name="mobileNumber"
             type="tel"
             handleInputChange={handleFormChange}
@@ -156,7 +155,7 @@ const MemberDashboard_Settings = () => {
           <InputField
             name="whatsAppNumber"
             type="tel"
-            style={2}
+            styleType={2}
             handleInputChange={handleFormChange}
             placeholder={
               !memberData.whatsAppNumber || memberData.whatsAppNumber === "null"
@@ -168,7 +167,7 @@ const MemberDashboard_Settings = () => {
         <div className="flex flex-col space-y-3 w-full shadow-md">
           <label className="text-md text-white">Email</label>
           <InputField
-            style={2}
+            styleType={2}
             name="emailAddress"
             type="email"
             handleInputChange={handleFormChange}
@@ -178,7 +177,7 @@ const MemberDashboard_Settings = () => {
         <div className="flex flex-col space-y-3 w-full shadow-md">
           <label className="text-md text-white">Instagram</label>
           <InputField
-            style={2}
+            styleType={2}
             name="instagramName"
             type="text"
             handleInputChange={handleFormChange}
@@ -191,9 +190,10 @@ const MemberDashboard_Settings = () => {
         </div>
         <div>
           <CustomButton
-            style={2}
+            styleType={2}
             label="Save"
             handleOnClick={handleUpdateUser}
+            extraClasses="w-full"
           />
           {isSavingUserDone ? (
             <p className="text-green text-center my-5">Saved!</p>
@@ -233,7 +233,7 @@ const MemberDashboard_Settings = () => {
             <DropdownField
               options={carModels}
               placeholder="Car Model"
-              style={2}
+              styleType={2}
               name="carModel"
               required
               handleInputChange={handleFormChange}
@@ -242,14 +242,14 @@ const MemberDashboard_Settings = () => {
               options={carColors}
               placeholder="Car Color"
               name="carColor"
-              style={2}
+              styleType={2}
               required
               handleInputChange={handleFormChange}
             />
             <DropdownField
               options={carYears}
               placeholder="Car Year"
-              style={2}
+              styleType={2}
               name="carYear"
               required
               handleInputChange={handleFormChange}
@@ -258,7 +258,7 @@ const MemberDashboard_Settings = () => {
               options={plateEmirates}
               placeholder="Plate Emirate"
               name="plateEmirate"
-              style={2}
+              styleType={2}
               required
               handleInputChange={handleFormChange}
             />
@@ -267,7 +267,7 @@ const MemberDashboard_Settings = () => {
                 (_plateCode) => _plateCode.emirate === formData.plateEmirate
               )}
               required
-              style={2}
+              styleType={2}
               placeholder="Plate Code"
               name="plateCode"
               handleInputChange={handleFormChange}
@@ -276,21 +276,22 @@ const MemberDashboard_Settings = () => {
             <InputField
               placeholder="Plate Number"
               name="plateNumber"
-              style={2}
+              styleType={2}
               required
               handleInputChange={handleFormChange}
             />
             <InputField
               placeholder="Vin Number"
               name="vinNumber"
-              style={2}
+              styleType={2}
               required
               handleInputChange={handleFormChange}
             />
             <CustomButton
-              style={2}
+              styleType={2}
               label="Save"
               handleOnClick={handleAddNewCar}
+              extraClasses="w-full"
             />
           </div>
         ) : null}

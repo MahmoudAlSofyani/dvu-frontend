@@ -31,14 +31,14 @@ const MembersSignUpPageAccountDetails = () => {
       <InputField
         name="password"
         placeholder="Password"
-        style={2}
+        styleType={2}
         required
         type="password"
         handleInputChange={handleFormChange}
       />
       <InputField
         name="confirmPassword"
-        style={2}
+        styleType={2}
         placeholder="Confirm Password"
         required
         type="password"

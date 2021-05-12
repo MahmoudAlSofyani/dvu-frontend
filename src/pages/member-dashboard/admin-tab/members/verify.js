@@ -2,14 +2,7 @@ import React, { useState, useEffect } from "react";
 import MemberDashboardMenu from "../../../../components/dashboard-menu/members";
 import Layout from "../../../../components/layout";
 import axios from "axios";
-import moment from "moment";
-import AnnouncementCard from "../../../../components/announcement-card";
 import CustomButton from "../../../../components/custom-button";
-import {
-  UserIcon,
-  AtSymbolIcon,
-  DeviceMobileIcon,
-} from "@heroicons/react/outline";
 import { MdPersonOutline } from "react-icons/md";
 import {
   AiOutlineMail,
@@ -69,8 +62,11 @@ const AdminTab_Members_Verify = () => {
   return (
     <Layout>
       <div className="container flex flex-col space-y-6 bg-darkGray p-5 rounded-lg mx-auto max-w-md ">
-        <SectionHeader heading="Members" backLink="/admin/members" />
-        <p className="text-white">Verify Members</p>
+        <SectionHeader
+          heading="Members"
+          backLink="/admin/members"
+          subHeading="Verify Members"
+        />
         <div className="text-center text-white bg-charcoal rounded-md leading-9 shadow-md w-full">
           <p className="font-bold">Pending</p>
           <p>{pendingCount}</p>

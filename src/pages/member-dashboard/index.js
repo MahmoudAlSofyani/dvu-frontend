@@ -6,9 +6,11 @@ import axios from "axios";
 import { useStoreState } from "easy-peasy";
 import moment from "moment";
 import SectionHeader from "../../components/section-header";
+import { Fragment } from "react";
 const MembersDashboardIndexPage = () => {
   const [isDataLoaded, setIsDataLoaded] = useState(false);
   const [announcements, setAnnouncements] = useState([]);
+  const [advertisements, setAdvertisements] = useState([]);
   const [memberStatus, setMemberStatus] = useState(false);
   const [memberBrowniePoints, setMemberBrowniePoints] = useState(0);
   const [events, setEvents] = useState([]);
@@ -22,6 +24,7 @@ const MembersDashboardIndexPage = () => {
       axios.get("/events"),
       axios.get(`/members/status/${currentUser.id}`),
       axios.get(`/members/brownie-points/${currentUser.id}`),
+      axios.get("/advertisements/false"),
     ])
       .then((_responses) => {
         if (_responses[0].status === 200) {
@@ -45,6 +48,11 @@ const MembersDashboardIndexPage = () => {
           const { _browniePoints } = _responses[3].data;
 
           setMemberBrowniePoints(_browniePoints);
+        }
+
+        if (_responses[4].status === 200) {
+          console.log(_responses[4].data);
+          setAdvertisements(_responses[4].data);
         }
 
         setIsDataLoaded(true);
@@ -83,10 +91,9 @@ const MembersDashboardIndexPage = () => {
               <div className="flex flex-col space-y-2 text-center">
                 {announcements.length > 0 ? (
                   announcements.map((_announcement, index) => (
-                    <>
+                    <Fragment key={index}>
                       <p
                         onClick={() => history.push("/members/announcements")}
-                        key={index}
                         className="text-white opacity-80 text-sm py-2 cursor-pointer"
                       >
                         <span className="text-red font-bold">
@@ -99,7 +106,7 @@ const MembersDashboardIndexPage = () => {
                       {index + 1 < announcements.length ? (
                         <hr className="text-white  w-1/2 opacity-20 rounded mx-auto" />
                       ) : null}
-                    </>
+                    </Fragment>
                   ))
                 ) : (
                   <p className="text-white">No announcements..</p>
@@ -111,10 +118,9 @@ const MembersDashboardIndexPage = () => {
               <div className="flex flex-col space-y-2">
                 {events.length > 0 ? (
                   events.map((_event, index) => (
-                    <>
+                    <Fragment key={index}>
                       <p
                         onClick={() => history.push("/members/events")}
-                        key={index}
                         className="text-white opacity-80 text-sm py-2 cursor-pointer"
                       >
                         <span className="text-red font-bold">
@@ -125,7 +131,7 @@ const MembersDashboardIndexPage = () => {
                       {index + 1 < events.length ? (
                         <hr className="text-white  w-1/2 opacity-20 rounded mx-auto" />
                       ) : null}
-                    </>
+                    </Fragment>
                   ))
                 ) : (
                   <p>No Events...</p>

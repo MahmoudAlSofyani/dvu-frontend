@@ -39,13 +39,16 @@ const AdminTab_Announcements_Add = () => {
   return (
     <Layout>
       <div className="container flex flex-col  space-y-6 bg-darkGray p-5 rounded-lg mx-auto max-w-md h-screen">
-        <SectionHeader heading="Admin" backLink="/admin/announcements" />
-        <p className="text-white">Add Announcement</p>
+        <SectionHeader
+          heading="Admin"
+          backLink="/admin/announcements"
+          subHeading="Add Announcement"
+        />
         <InputField
           placeholder="Title"
           name="title"
           required
-          style={2}
+          styleType={2}
           type="text"
           handleInputChange={handleFormChange}
         />
@@ -54,7 +57,7 @@ const AdminTab_Announcements_Add = () => {
             handleOnChange={(e, editor) => handleEditorChange(e, editor)}
           />
         </div>
-        <CustomButton label="Add" handleOnClick={handleOnClick} style={2} />
+        <CustomButton label="Add" handleOnClick={handleOnClick} styleType={2} />
       </div>
       <div className="p-10 ">
         <MemberDashboardMenu />
