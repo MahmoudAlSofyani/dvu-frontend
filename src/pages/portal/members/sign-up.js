@@ -13,8 +13,7 @@ const MembersSignUpPage = () => {
 
   return (
     <Layout>
-      <div className="container flex flex-col space-y-9 bg-darkGray p-5 w-4/5 rounded-lg mx-auto max-w-md ">
-        <SectionHeader heading="Register" />
+      <div className="container flex flex-col space-y-9 bg-darkGray p-5 rounded-lg mx-auto max-w-md ">
         {stepNumber === 1 ? (
           <MembersSignUpPagePersonalDetails />
         ) : stepNumber === 2 ? (

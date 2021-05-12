@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import CustomButton from "../../../../components/custom-button";
 import DropdownField from "../../../../components/dropdown-field";
 import InputField from "../../../../components/input-field";
+import SectionHeader from "../../../../components/section-header";
 import {
   getCarColors,
   getCarModels,
@@ -88,7 +89,7 @@ const MembersSignUpPageCarDetails = () => {
 
   return (
     <>
-      <h6 className="text-white text-sm uppercase">Car Details</h6>
+      <SectionHeader heading="Register" subHeading="Car Details" />
       <div>
         <div className="flex flex-col space-y-4">
           <DropdownField
@@ -161,8 +162,17 @@ const MembersSignUpPageCarDetails = () => {
         <span className="text-red">*</span> Required
       </p>
       <div className="flex space-x-6">
-        <CustomButton handleOnClick={() => setStepNumber(1)} label="Back" />
-        <CustomButton handleOnClick={validateForm} label="Next" />
+        <CustomButton
+          handleOnClick={() => setStepNumber(1)}
+          label="Back"
+          extraClasses="w-full"
+        />
+        <CustomButton
+          handleOnClick={validateForm}
+          label="Next"
+          styleType={2}
+          extraClasses="w-full"
+        />
       </div>
     </>
   );

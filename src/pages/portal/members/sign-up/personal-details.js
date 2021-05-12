@@ -2,6 +2,7 @@ import { useStoreActions, useStoreState } from "easy-peasy";
 import React, { useState } from "react";
 import CustomButton from "../../../../components/custom-button";
 import InputField from "../../../../components/input-field";
+import SectionHeader from "../../../../components/section-header";
 import { personalDetails } from "../../../../validators/signup-validator";
 
 const MembersSignUpPagePersonalDetails = () => {
@@ -48,7 +49,7 @@ const MembersSignUpPagePersonalDetails = () => {
 
   return (
     <>
-      <h6 className="text-white text-sm uppercase ">Personal Details</h6>
+      <SectionHeader heading="Register" subHeading="Personal Details" />
       <div className="lg:grid lg:grid-cols-2 lg:gap-8 lg:space-y-0 space-y-8">
         <div>
           <InputField
@@ -151,7 +152,7 @@ const MembersSignUpPagePersonalDetails = () => {
       <p className="text-white">
         <span className="text-red">*</span> Required
       </p>
-      <CustomButton handleOnClick={validateForm} label="Next" />
+      <CustomButton handleOnClick={validateForm} label="Next" styleType={2} />
     </>
   );
 };

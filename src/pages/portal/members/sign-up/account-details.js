@@ -5,6 +5,7 @@ import InputField from "../../../../components/input-field";
 import axios from "axios";
 import { useHistory } from "react-router-dom";
 import { accountDetails } from "../../../../validators/signup-validator";
+import SectionHeader from "../../../../components/section-header";
 
 const MembersSignUpPageAccountDetails = () => {
   const [validationErrors, setValidationErrors] = useState({});
@@ -54,7 +55,7 @@ const MembersSignUpPageAccountDetails = () => {
 
   return (
     <>
-      <h6 className="text-white text-sm uppercase">Account Details</h6>
+      <SectionHeader heading="Register" subHeading="Account Details" />
       <InputField
         name="password"
         placeholder="Password"
@@ -77,8 +78,8 @@ const MembersSignUpPageAccountDetails = () => {
         <span className="text-red">*</span> Required
       </p>
       <div className="flex space-x-6">
-        <CustomButton handleOnClick={() => setStepNumber(2)} label="Back" />
-        <CustomButton handleOnClick={validateForm} label="Submit" />
+        <CustomButton handleOnClick={() => setStepNumber(2)} label="Back" extraClasses="w-full" />
+        <CustomButton handleOnClick={validateForm} label="Submit" extraClasses="w-full" styleType={2} />
       </div>
     </>
   );
