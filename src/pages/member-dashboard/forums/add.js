@@ -7,8 +7,10 @@ import TextArea from "../../../components/text-area";
 import axios from "axios";
 import { useStoreState } from "easy-peasy";
 import { useHistory } from "react-router-dom";
+import { addPost } from "../../../validators/forums-validator";
 const MemberDashboard_Forums_Add = () => {
   const [formData, setFormData] = useState({});
+  const [validationErrors, setValidationErrors] = useState({})
   const history = useHistory();
 
   const currentUser = useStoreState((state) => state.currentUser.currentUser);
@@ -21,19 +23,32 @@ const MemberDashboard_Forums_Add = () => {
 
   const handleAddNewPost = async () => {
     try {
-      const { title, description } = formData;
+      addPost
+        .validate(formData, { abortEarly: false })
+        .then(async () => {
+          const { title, description } = formData;
 
-      let body = {
-        memberId: currentUser.id,
-        title,
-        description,
-      };
+          let body = {
+            memberId: currentUser.id,
+            title,
+            description,
+          };
 
-      const _response = await axios.post("/posts", body);
+          const _response = await axios.post("/posts", body);
 
-      if (_response.status === 200) {
-        history.push("/members/forums");
-      }
+          if (_response.status === 200) {
+            history.push("/members/forums");
+          }
+        })
+        .catch((err) => {
+          if (err && err.inner) {
+            let _validationErrors = {};
+            err.inner.forEach((e) => {
+              _validationErrors[e.path] = e.message;
+            });
+            setValidationErrors(_validationErrors);
+          }
+        });
     } catch (err) {
       console.log(err);
     }
@@ -55,6 +70,7 @@ const MemberDashboard_Forums_Add = () => {
             required
             name="title"
             handleInputChange={handleFormChange}
+            errorMessage={validationErrors.title}
           />
           <TextArea
             rows={5}
@@ -62,6 +78,7 @@ const MemberDashboard_Forums_Add = () => {
             name="description"
             required
             handleInputChange={handleFormChange}
+            errorMessage={validationErrors.description}
           />
           {/* <DropdownField
               handleInputChange={handleFormChange}
