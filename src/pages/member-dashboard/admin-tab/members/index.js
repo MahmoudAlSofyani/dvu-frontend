@@ -26,10 +26,8 @@ const AdminTab_Members = () => {
       const _response = await axios.post("/members/search", {
         searchQuery: value,
       });
-
       if (_response.status === 200) {
         const { data } = _response;
-        console.log(data);
         setSearchResults(data);
       }
     } catch (err) {
