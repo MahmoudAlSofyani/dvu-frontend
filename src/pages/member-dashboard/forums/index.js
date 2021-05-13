@@ -22,11 +22,27 @@ const MemberDashboard_Forums = () => {
   }, [setPosts]);
 
   const handleGoToPost = (id) => {
-
     history.push({
       pathname: "/members/forums/view",
       state: { id },
     });
+  };
+
+  const handleSearch = async (e) => {
+    try {
+      const { value } = e.target;
+
+      const _response = await axios.post("/posts/search", {
+        searchQuery: value,
+      });
+
+      if (_response.status === 200) {
+        const { data } = _response;
+        setPosts(data);
+      }
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   return (
@@ -38,7 +54,7 @@ const MemberDashboard_Forums = () => {
           buttonLabel="New"
         />
         <div className="w-full flex flex-col space-y-5">
-          <SearchBar />
+          <SearchBar handleInputChange={handleSearch} />
           {/* <div className="flex flex-row space-x-3 overflow-x-auto">
             {categories.map((_category, index) =>
               index === activeCategoryIndex ? (
