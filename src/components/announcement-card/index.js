@@ -10,7 +10,7 @@ const AnnouncementCard = ({ id, date, title, details }) => {
       </div>
       <div className="text-left w-full">
         <p className="text-white">
-          <div dangerouslySetInnerHTML={{ __html: `${details}` }} />
+          <span dangerouslySetInnerHTML={{ __html: `${details}` }} />
         </p>
       </div>
     </div>

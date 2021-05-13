@@ -16,6 +16,7 @@
     "qrcode.react": "^1.0.1",
     "rc-collapse": "^3.1.0",
     "react": "^17.0.2",
+    "react-avatar-editor": "^11.1.0",
     "react-collapsible": "^2.8.3",
     "react-datepicker": "^3.8.0",
     "react-dom": "^17.0.2",
@@ -24,7 +25,9 @@
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.3",
     "react-webcam-barcode-scanner": "^0.0.2-rc2",
-    "web-vitals": "^1.1.1"
+    "web-vitals": "^1.1.1",
+    "yup": "^0.32.9",
+    "yup-phone": "^1.2.19"
   },
   "scripts": {
     "start": "craco start",

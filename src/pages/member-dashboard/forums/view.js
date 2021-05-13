@@ -82,9 +82,16 @@ const MemberDashboard_Forums_View = () => {
                   key={index}
                   className="bg-charcoal p-4 rounded-md shadow-md"
                 >
-                  <p className="text-red text-sm">
-                    {_comment.member.firstName} {_comment.member.lastName}
-                  </p>
+                  <div className="w-full h-full flex items-center">
+                    {currentPost.member.profilePicture ? (
+                      <img className="rounded-full w-1/6 h-full"
+                        src={`${process.env.REACT_APP_API_URL}/utility/file/${currentPost.member.profilePicture.id}`}
+                      />
+                    ) : null}
+                    <p className="text-red text-sm">
+                      {_comment.member.firstName} {_comment.member.lastName}
+                    </p>
+                  </div>
                   <p className="text-white mt-2">{_comment.comment}</p>
                   <div className="mt-5">
                     <p className="text-white opacity-50 text-xs">

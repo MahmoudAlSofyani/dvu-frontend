@@ -1,14 +1,24 @@
 import React from "react";
 
-const TextArea = ({ placeholder, rows, required, handleInputChange, name }) => {
+const TextArea = ({
+  placeholder,
+  rows,
+  required,
+  handleInputChange,
+  name,
+  errorMessage,
+}) => {
   return (
-    <textarea
-      className="bg-charcoal rounded-md p-2 text-white"
-      rows={rows}
-      name={name}
-      onChange={handleInputChange}
-      placeholder={required ? placeholder + " *" : placeholder}
-    />
+    <div>
+      <textarea
+        className="bg-charcoal rounded-md p-2 text-white w-full"
+        rows={rows}
+        name={name}
+        onChange={handleInputChange}
+        placeholder={required ? placeholder + " *" : placeholder}
+      />
+      {errorMessage ? <p className="text-red text-sm">{errorMessage}</p> : null}
+    </div>
   );
 };
 

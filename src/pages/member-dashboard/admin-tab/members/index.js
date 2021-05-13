@@ -13,27 +13,22 @@ import {
 } from "react-icons/ai";
 import { BiChevronRight, BiBadge } from "react-icons/bi";
 import SectionHeader from "../../../../components/section-header";
+import SearchBar from "../../../../components/search-bar";
 const AdminTab_Members = () => {
   const [searchResults, setSearchResults] = useState([]);
   const [currentOpened, setCurrentOpened] = useState();
   const [searchQuery, setSearchQuery] = useState("");
 
-  const handleSearch = async (query) => {
+  const handleSearch = async (e) => {
     try {
-      setSearchQuery(query);
+      const { value } = e.target;
 
-      if (query.length > 0) {
-        const _response = await axios.post("/members/search", {
-          searchQuery: query,
-        });
-
-        if (_response.status === 200) {
-          const { data } = _response;
-
-          setSearchResults(data);
-        }
-      } else {
-        setSearchResults([]);
+      const _response = await axios.post("/members/search", {
+        searchQuery: value,
+      });
+      if (_response.status === 200) {
+        const { data } = _response;
+        setSearchResults(data);
       }
     } catch (err) {
       console.log(err);
@@ -51,7 +46,6 @@ const AdminTab_Members = () => {
       const _response = await axios.put("/members/update-roles", body);
 
       if (_response.status === 200) {
-        console.log(_response.data);
         handleSearch(searchQuery);
       }
     } catch (err) {
@@ -70,7 +64,6 @@ const AdminTab_Members = () => {
       const _response = await axios.put("/members/update-roles", body);
 
       if (_response.status === 200) {
-        console.log(_response.data);
         handleSearch(searchQuery);
       }
     } catch (err) {
@@ -95,12 +88,8 @@ const AdminTab_Members = () => {
             extraClasses="w-full"
           />
         </div>
-        <InputField
-          placeholder="Search for member"
-          name="searchQuery"
-          handleInputChange={(e) => handleSearch(e.target.value)}
-          styleType={2}
-        />
+
+        <SearchBar handleInputChange={handleSearch} />
         <div className="w-full space-y-5">
           <p className="text-white text-center">Search Results</p>
           {searchResults.length > 0 ? (
@@ -191,8 +180,14 @@ const AdminTab_Members = () => {
                         ? () => handleOnUnpurge(_result.id)
                         : () => handleOnPurge(_result.id)
                     }
+                    styleType={2}
+                    extraClasses="w-full"
                   />
-                  <CustomButton label="EDIT" />
+                  <CustomButton
+                    label="EDIT"
+                    styleType={2}
+                    extraClasses="w-full"
+                  />
                 </div>
               </Collapsible>
             ))

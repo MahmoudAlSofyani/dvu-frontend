@@ -1,14 +1,12 @@
-import React, { useState, useEffect } from "react";
-import MemberDashboardMenu from "../../../components/dashboard-menu/members";
-import Layout from "../../../components/layout";
-import axios from "axios";
-import moment from "moment";
-import AnnouncementCard from "../../../components/announcement-card";
-import SectionHeader from "../../../components/section-header";
-import { FiPhone } from "react-icons/fi";
-import AdvertisementCard from "../../../components/advertisement-card";
 import { useStoreState } from "easy-peasy";
-const MemberDashboard_Advertisements = () => {
+import React, { useEffect, useState } from "react";
+import AdvertisementCard from "../../../../components/advertisement-card";
+import Layout from "../../../../components/layout";
+import SectionHeader from "../../../../components/section-header";
+import axios from "axios";
+import MemberDashboardMenu from "../../../../components/dashboard-menu/members";
+
+const AdminTab_Advertisements = () => {
   const [advertisements, setAdvertisements] = useState([]);
   const [isDataLoaded, setIsDataLoaded] = useState(false);
   const currentUser = useStoreState((state) => state.currentUser.currentUser);
@@ -16,24 +14,45 @@ const MemberDashboard_Advertisements = () => {
   useEffect(() => {
     try {
       axios
-        .get("/advertisements/true")
+        .get("/advertisements/false")
         .then((_response) => {
           if (_response.status === 200) {
             setAdvertisements(_response.data);
             setIsDataLoaded(true);
-            console.log(_response.data);
           }
         })
         .catch((err) => console.log(err));
     } catch (err) {
       console.log(err);
     }
-  }, [setAdvertisements]);
+  }, [setAdvertisements, setIsDataLoaded]);
 
-  const handleDelete = async (id) => {
+  const handleApprove = async (id) => {
     try {
-      const _response = await axios.delete(`/advertisements/${id}`);
-      if (_response) {
+      let body = {
+        id,
+        verified: true,
+      };
+
+      const _response = await axios.put("/advertisements", body);
+
+      if (_response.status === 200) {
+        setIsDataLoaded(false);
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const handleReject = async (id) => {
+    try {
+      let body = {
+        id,
+        verified: false,
+      };
+
+      const _response = await axios.put("/advertisements", body);
+      if (_response.status === 200) {
         setIsDataLoaded(false);
       }
     } catch (err) {
@@ -46,13 +65,11 @@ const MemberDashboard_Advertisements = () => {
       <div className="container flex flex-col space-y-6 bg-darkGray p-5 rounded-lg mx-auto max-w-md ">
         <SectionHeader
           heading="Advertisements"
-          buttonLabel="Add"
-          buttonLink="/members/advertisements/add"
+          subHeading="Verify Advertisements"
         />
         {isDataLoaded && advertisements.length > 0 ? (
           advertisements.map((_advertisement, index) => (
             <AdvertisementCard
-              key={index}
               id={_advertisement.id}
               sold={_advertisement.sold}
               price={_advertisement.price}
@@ -63,13 +80,15 @@ const MemberDashboard_Advertisements = () => {
               mobileNumber={_advertisement.member.mobileNumber}
               whatsAppNumber={_advertisement.member.whatsAppNumber}
               currentUserId={currentUser.id}
-              verified={_advertisement.verified}
-              showDeleteButton={localStorage.getItem("isAdmin")}
-              handleDelete={() => handleDelete(_advertisement.id)}
+              adminView
+              handleApprove={() => handleApprove(_advertisement.id)}
+              handleReject={() => handleReject(_advertisement.id)}
             />
           ))
         ) : (
-          <p className="text-white opacity-50">No advertisements...</p>
+          <p className="text-white opacity-50">
+            No advertisements left to verify...
+          </p>
         )}
       </div>
       <div className="p-10 ">
@@ -79,4 +98,4 @@ const MemberDashboard_Advertisements = () => {
   );
 };
 
-export default MemberDashboard_Advertisements;
+export default AdminTab_Advertisements;

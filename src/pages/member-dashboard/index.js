@@ -51,7 +51,6 @@ const MembersDashboardIndexPage = () => {
         }
 
         if (_responses[4].status === 200) {
-          console.log(_responses[4].data);
           setAdvertisements(_responses[4].data);
         }
 

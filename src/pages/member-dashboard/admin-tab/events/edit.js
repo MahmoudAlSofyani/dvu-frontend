@@ -10,10 +10,12 @@ import CustomTimePicker from "../../../../components/custom-time-picker";
 import axios from "axios";
 import moment from "moment";
 import SectionHeader from "../../../../components/section-header";
+import { editEvent } from "../../../../validators/events-validator";
 
 const AdminTab_Events_Edit = () => {
   const [formData, setFormData] = useState({});
   const [isDataLoaded, setIsDataLoaded] = useState(false);
+  const [validationErrors, setValidationErrors] = useState({});
   const history = useHistory();
   const location = useLocation();
 
@@ -25,6 +27,10 @@ const AdminTab_Events_Edit = () => {
       ...formData,
       details: data,
     });
+    setValidationErrors({
+      ...validationErrors,
+      details: null,
+    });
   };
 
   const handleFormChange = (e) => {
@@ -33,20 +39,38 @@ const AdminTab_Events_Edit = () => {
       ...formData,
       [name || id]: value,
     });
+
+    setValidationErrors({
+      ...formData,
+      [name]: null,
+    });
   };
 
-  const handleOnClick = async () => {
+  const handleSubmit = () => {
     try {
-      let body = {
-        id: eventId,
-        ...formData,
-      };
+      editEvent
+        .validate(formData, { abortEarly: false })
+        .then(async () => {
+          let body = {
+            id: eventId,
+            ...formData,
+          };
 
-      const _response = await axios.patch("/events", body);
+          const _response = await axios.patch("/events", body);
 
-      if (_response.status === 200) {
-        history.push("/admin/events");
-      }
+          if (_response.status === 200) {
+            history.push("/admin/events");
+          }
+        })
+        .catch((err) => {
+          if (err && err.inner) {
+            let _validationErrors = {};
+            err.inner.forEach((e) => {
+              _validationErrors[e.path] = e.message;
+            });
+            setValidationErrors(_validationErrors);
+          }
+        });
     } catch (err) {
       console.log(err);
     }
@@ -57,12 +81,22 @@ const AdminTab_Events_Edit = () => {
       ...formData,
       date: date,
     });
+
+    setValidationErrors({
+      ...validationErrors,
+      date: null,
+    });
   };
 
   const handleTimePicker = (time) => {
     setFormData({
       ...formData,
       meetingTime: time,
+    });
+
+    setValidationErrors({
+      ...validationErrors,
+      meetingTime: null,
     });
   };
 
@@ -82,7 +116,11 @@ const AdminTab_Events_Edit = () => {
   return (
     <Layout>
       <div className="container flex flex-col space-y-6 bg-darkGray p-5 rounded-lg mx-auto max-w-md h-screen">
-        <SectionHeader heading="Admin" backLink="/admin/events" subHeading="Edit Event" />
+        <SectionHeader
+          heading="Admin"
+          backLink="/admin/events"
+          subHeading="Edit Event"
+        />
         {isDataLoaded ? (
           <>
             <InputField
@@ -93,14 +131,19 @@ const AdminTab_Events_Edit = () => {
               required
               type="text"
               handleInputChange={handleFormChange}
+              errorMessage={validationErrors.name}
             />
-            <CustomDatePicker
-              //   selected={formData.date}
-              selected={moment(formData.date).toDate()}
-              handleDateChange={handleDatePicker}
-              placeHolder="Date"
-              id="date"
-            />
+            <div>
+              <CustomDatePicker
+                selected={moment(formData.date).toDate()}
+                handleDateChange={handleDatePicker}
+                placeHolder="Date"
+                id="date"
+              />
+              {validationErrors.date ? (
+                <p className="text-red text-sm">{validationErrors.date}</p>
+              ) : null}
+            </div>
             <InputField
               placeholder="Meeting Point"
               name="meetingPoint"
@@ -109,21 +152,32 @@ const AdminTab_Events_Edit = () => {
               type="text"
               styleType={2}
               handleInputChange={handleFormChange}
+              errorMessage={validationErrors.meetingPoint}
             />
-            <CustomTimePicker
-              placeHolder="Meeting Time"
-              selected={moment(formData.meetingTime).toDate()}
-              handleTimeChange={handleTimePicker}
-            />
+            <div>
+              <CustomTimePicker
+                placeHolder="Meeting Time"
+                selected={moment(formData.meetingTime).toDate()}
+                handleTimeChange={handleTimePicker}
+              />
+              {validationErrors.meetingTime ? (
+                <p className="text-red text-sm">
+                  {validationErrors.meetingTime}
+                </p>
+              ) : null}
+            </div>
             <div className="w-full ckeditor_list">
               <CustomEditor
                 handleOnChange={(e, editor) => handleEditorChange(e, editor)}
                 value={formData.details}
               />
+              {validationErrors.details ? (
+                <p className="text-red text-sm">{validationErrors.details}</p>
+              ) : null}
             </div>
             <CustomButton
               label="Edit"
-              handleOnClick={handleOnClick}
+              handleOnClick={handleSubmit}
               styleType={2}
             />
           </>

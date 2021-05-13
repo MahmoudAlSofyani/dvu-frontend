@@ -45,7 +45,6 @@ const AdminTab_Members_Verify = () => {
       const _response = await axios.put("/members/update-roles", body);
 
       if (_response.status === 200) {
-        console.log(_response.data);
         _pendingMembers = _pendingMembers.filter((_member) => {
           return _member.id !== id;
         });
@@ -93,7 +92,11 @@ const AdminTab_Members_Verify = () => {
               </div>
               <div className="flex flex-row items-center">
                 <AiOutlineWhatsApp className="text-2xl text-red" />
-                <p className="ml-4">{_member.whatsAppNumber}</p>
+                <p className="ml-4">
+                  {_member.whatsAppNumber !== "null"
+                    ? _member.whatsAppNumber
+                    : ""}
+                </p>
               </div>
               <div className="flex flex-row items-center ">
                 <AiOutlineCar className="text-2xl text-red" />
@@ -120,10 +123,13 @@ const AdminTab_Members_Verify = () => {
               <CustomButton
                 label="Reject"
                 handleOnClick={() => handleVerifyMember(_member.id, "reject")}
+                styleType={2}
+                extraClasses="w-full"
               />
               <CustomButton
                 label="Approve"
                 handleOnClick={() => handleVerifyMember(_member.id, "verify")}
+                extraClasses="bg-green border-none w-full"
               />
             </div>
           </div>
