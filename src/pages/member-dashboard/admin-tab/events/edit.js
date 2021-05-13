@@ -27,6 +27,10 @@ const AdminTab_Events_Edit = () => {
       ...formData,
       details: data,
     });
+    setValidationErrors({
+      ...validationErrors,
+      details: null,
+    });
   };
 
   const handleFormChange = (e) => {
@@ -34,6 +38,11 @@ const AdminTab_Events_Edit = () => {
     setFormData({
       ...formData,
       [name || id]: value,
+    });
+
+    setValidationErrors({
+      ...formData,
+      [name]: null,
     });
   };
 
@@ -73,12 +82,22 @@ const AdminTab_Events_Edit = () => {
       ...formData,
       date: date,
     });
+
+    setValidationErrors({
+      ...validationErrors,
+      date: null,
+    });
   };
 
   const handleTimePicker = (time) => {
     setFormData({
       ...formData,
       meetingTime: time,
+    });
+
+    setValidationErrors({
+      ...validationErrors,
+      meetingTime: null,
     });
   };
 
