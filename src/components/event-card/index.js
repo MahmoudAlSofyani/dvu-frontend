@@ -78,7 +78,7 @@ const EventCard = ({ id, date, title, meetingPoint, meetingTime, details }) => {
           <CustomButton
             handleOnClick={() => handleEventSignup(id)}
             label="I'm In!"
-            style={2}
+            styleType={2}
             extraClasses="w-full"
           />
         ) : (
