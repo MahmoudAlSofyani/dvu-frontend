@@ -13,7 +13,7 @@ const MembersSignUpPage = () => {
 
   return (
     <Layout>
-      <div className="container flex flex-col space-y-9 bg-darkGray p-5 rounded-lg mx-auto max-w-md ">
+      <div className="container flex flex-col space-y-9 bg-darkGray p-5 rounded-lg mx-auto max-w-lg ">
         {stepNumber === 1 ? (
           <MembersSignUpPagePersonalDetails />
         ) : stepNumber === 2 ? (
