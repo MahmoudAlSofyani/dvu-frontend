@@ -191,8 +191,14 @@ const AdminTab_Members = () => {
                         ? () => handleOnUnpurge(_result.id)
                         : () => handleOnPurge(_result.id)
                     }
+                    styleType={2}
+                    extraClasses="w-full"
                   />
-                  <CustomButton label="EDIT" />
+                  <CustomButton
+                    label="EDIT"
+                    styleType={2}
+                    extraClasses="w-full"
+                  />
                 </div>
               </Collapsible>
             ))
