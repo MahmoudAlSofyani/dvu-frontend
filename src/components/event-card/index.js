@@ -68,10 +68,10 @@ const EventCard = ({ id, date, title, meetingPoint, meetingTime, details }) => {
       </div>
       <div className="text-left w-full">
         <p className="text-red uppercase font-bold">Event Details</p>
-        <p className="text-white">
-          {" "}
-          <p dangerouslySetInnerHTML={{ __html: `${details}` }} />
-        </p>
+        <p
+          className="text-white"
+          dangerouslySetInnerHTML={{ __html: `${details}` }}
+        />
       </div>
       <div className="w-full">
         {!status.isRegistered ? (
