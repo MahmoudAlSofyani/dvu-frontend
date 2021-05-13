@@ -11,7 +11,9 @@ const HomePage = () => {
           <h2 className="leading-8 text-lg">
             The biggest Volkswagen enthusiast club in the UAE
           </h2>
-          <CustomButton label="About us" />
+          <div>
+            <CustomButton label="About us" link="/about-us" />
+          </div>
         </div>
       </Layout>
     </div>
