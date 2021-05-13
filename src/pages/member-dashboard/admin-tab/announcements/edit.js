@@ -7,8 +7,10 @@ import CustomButton from "../../../../components/custom-button";
 import CustomEditor from "../../../../components/custom-editor";
 import axios from "axios";
 import SectionHeader from "../../../../components/section-header";
+import { editAnnouncement } from "../../../../validators/announcements-validator";
 const AdminTab_Announcements_Edit = () => {
   const [formData, setFormData] = useState({});
+  const [validationErrors, setValidationErrors] = useState({});
   const [isDataLoaded, setIsDataLoaded] = useState(false);
   const history = useHistory();
   const location = useLocation();
@@ -21,6 +23,11 @@ const AdminTab_Announcements_Edit = () => {
       ...formData,
       details: data,
     });
+
+    setValidationErrors({
+      ...validationErrors,
+      details: null,
+    });
   };
 
   const handleFormChange = (e) => {
@@ -29,19 +36,37 @@ const AdminTab_Announcements_Edit = () => {
       ...formData,
       [name || id]: value,
     });
+
+    setValidationErrors({
+      ...validationErrors,
+      [name]: null,
+    });
   };
 
-  const handleOnClick = async () => {
+  const handleSubmit = async () => {
     try {
-      let body = {
-        id: announcementId,
-        ...formData,
-      };
-      const _response = await axios.patch("/announcements", body);
+      editAnnouncement
+        .validate(formData, { abortEarly: false })
+        .then(async () => {
+          let body = {
+            id: announcementId,
+            ...formData,
+          };
+          const _response = await axios.patch("/announcements", body);
 
-      if (_response.status === 200) {
-        history.push("/admin/announcements");
-      }
+          if (_response.status === 200) {
+            history.push("/admin/announcements");
+          }
+        })
+        .catch((err) => {
+          if (err && err.inner) {
+            let _validationErrors = {};
+            err.inner.forEach((e) => {
+              _validationErrors[e.path] = e.message;
+            });
+            setValidationErrors(_validationErrors);
+          }
+        });
     } catch (err) {
       console.log(err);
     }
@@ -61,7 +86,11 @@ const AdminTab_Announcements_Edit = () => {
   return (
     <Layout>
       <div className="container flex flex-col space-y-6 bg-darkGray p-5 rounded-lg mx-auto max-w-md h-screen">
-        <SectionHeader heading="Admin" backLink="/admin/announcements" subHeading="Edit Announcement" />
+        <SectionHeader
+          heading="Admin"
+          backLink="/admin/announcements"
+          subHeading="Edit Announcement"
+        />
         {isDataLoaded ? (
           <>
             <InputField
@@ -72,16 +101,21 @@ const AdminTab_Announcements_Edit = () => {
               type="text"
               handleInputChange={handleFormChange}
               defaultValue={formData.title}
+              errorMessage={validationErrors.title}
             />
             <div className="w-full ckeditor_list">
               <CustomEditor
                 handleOnChange={(e, editor) => handleEditorChange(e, editor)}
                 value={formData.details}
+                placeholder="Announcement Details"
               />
+              {validationErrors.details ? (
+                <p className="text-red text-sm">{validationErrors.details}</p>
+              ) : null}
             </div>
             <CustomButton
               label="Edit"
-              handleOnClick={handleOnClick}
+              handleOnClick={handleSubmit}
               styleType={2}
             />
           </>
