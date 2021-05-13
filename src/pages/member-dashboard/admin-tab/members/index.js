@@ -13,27 +13,24 @@ import {
 } from "react-icons/ai";
 import { BiChevronRight, BiBadge } from "react-icons/bi";
 import SectionHeader from "../../../../components/section-header";
+import SearchBar from "../../../../components/search-bar";
 const AdminTab_Members = () => {
   const [searchResults, setSearchResults] = useState([]);
   const [currentOpened, setCurrentOpened] = useState();
   const [searchQuery, setSearchQuery] = useState("");
 
-  const handleSearch = async (query) => {
+  const handleSearch = async (e) => {
     try {
-      setSearchQuery(query);
+      const { value } = e.target;
 
-      if (query.length > 0) {
-        const _response = await axios.post("/members/search", {
-          searchQuery: query,
-        });
+      const _response = await axios.post("/members/search", {
+        searchQuery: value,
+      });
 
-        if (_response.status === 200) {
-          const { data } = _response;
-
-          setSearchResults(data);
-        }
-      } else {
-        setSearchResults([]);
+      if (_response.status === 200) {
+        const { data } = _response;
+        console.log(data);
+        setSearchResults(data);
       }
     } catch (err) {
       console.log(err);
@@ -93,12 +90,8 @@ const AdminTab_Members = () => {
             extraClasses="w-full"
           />
         </div>
-        <InputField
-          placeholder="Search for member"
-          name="searchQuery"
-          handleInputChange={(e) => handleSearch(e.target.value)}
-          styleType={2}
-        />
+
+        <SearchBar handleInputChange={handleSearch} />
         <div className="w-full space-y-5">
           <p className="text-white text-center">Search Results</p>
           {searchResults.length > 0 ? (
