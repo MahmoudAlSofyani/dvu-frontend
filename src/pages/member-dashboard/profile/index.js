@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import MemberDashboardMenu from "../../../components/dashboard-menu/members";
 import Layout from "../../../components/layout";
 import QrCode from "qrcode.react";
@@ -14,6 +14,7 @@ import SectionHeader from "../../../components/section-header";
 import { useHistory } from "react-router-dom";
 const MemberDashboard_Profile = () => {
   const currentUser = useStoreState((state) => state.currentUser.currentUser);
+  const [isBarcodeZoomedIn, setIsBarcodeZoomedIn] = useState(false);
   const history = useHistory();
 
   const handleLogout = () => {
@@ -33,16 +34,42 @@ const MemberDashboard_Profile = () => {
           buttonLabel="Logout"
           handleButtonOnClick={handleLogout}
         />
-        <div className="self-center bg-white p-2">
-          <QrCode
-            className="self-center"
-            size={150}
-            bgColor="white"
-            fgColor="black"
-            value={currentUser.id}
-            onClick={() => console.log("barcode clicked")}
-          />
-        </div>
+        {isBarcodeZoomedIn ? (
+          <>
+            <div className="self-center bg-white p-2 fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+              <QrCode
+                className="self-center"
+                size={300}
+                bgColor="white"
+                fgColor="black"
+                value={currentUser.id}
+                onClick={() => setIsBarcodeZoomedIn(!isBarcodeZoomedIn)}
+              />
+            </div>
+            <div className="self-center bg-darkGray p-2">
+              <QrCode
+                className="self-center"
+                size={200}
+                bgColor="#2f2f37"
+                fgColor="#2f2f37"
+                value={currentUser.id}
+                onClick={() => setIsBarcodeZoomedIn(!isBarcodeZoomedIn)}
+              />
+            </div>
+          </>
+        ) : (
+          <div className="self-center bg-white p-2">
+            <QrCode
+              className="self-center"
+              size={200}
+              bgColor="white"
+              fgColor="black"
+              value={currentUser.id}
+              onClick={() => setIsBarcodeZoomedIn(!isBarcodeZoomedIn)}
+            />
+          </div>
+        )}
+
         <div className="border-red border-2 rounded p-5 flex flex-col space-y-3 w-full">
           <div className="mb-2">
             {currentUser.roles.some(
