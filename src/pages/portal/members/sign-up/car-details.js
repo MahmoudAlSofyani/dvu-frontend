@@ -78,7 +78,6 @@ const MembersSignUpPageCarDetails = () => {
               _validationErrors[e.path] = e.message;
             });
 
-            // console.log(_validationErrors);
             setValidationErrors(_validationErrors);
           }
         });

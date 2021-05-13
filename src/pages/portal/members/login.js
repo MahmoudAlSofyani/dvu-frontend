@@ -72,7 +72,6 @@ const MembersLoginPage = () => {
           }
         });
     } catch (err) {
-      console.log("here");
       setErrorMessage(err.response.data.err);
     }
   };

@@ -45,7 +45,6 @@ const AdminTab_Members_Verify = () => {
       const _response = await axios.put("/members/update-roles", body);
 
       if (_response.status === 200) {
-        console.log(_response.data);
         _pendingMembers = _pendingMembers.filter((_member) => {
           return _member.id !== id;
         });

@@ -58,7 +58,6 @@ const AdminTab_Events_Attendance = () => {
       const _response = await axios.put("/events/status", body);
 
       if (_response.status === 200) {
-        console.log(_response.data);
       }
     } catch (err) {
       console.log(err);

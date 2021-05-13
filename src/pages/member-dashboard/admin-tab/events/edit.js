@@ -69,7 +69,6 @@ const AdminTab_Events_Edit = () => {
               _validationErrors[e.path] = e.message;
             });
             setValidationErrors(_validationErrors);
-            console.log(_validationErrors);
           }
         });
     } catch (err) {

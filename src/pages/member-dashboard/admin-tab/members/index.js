@@ -51,7 +51,6 @@ const AdminTab_Members = () => {
       const _response = await axios.put("/members/update-roles", body);
 
       if (_response.status === 200) {
-        console.log(_response.data);
         handleSearch(searchQuery);
       }
     } catch (err) {
@@ -70,7 +69,6 @@ const AdminTab_Members = () => {
       const _response = await axios.put("/members/update-roles", body);
 
       if (_response.status === 200) {
-        console.log(_response.data);
         handleSearch(searchQuery);
       }
     } catch (err) {

@@ -33,7 +33,6 @@ const MemberDashboard_Advertisements_Add = () => {
       ...formData,
       imageFile: e.target.files[0],
     });
-    console.log(e.target.files[0]);
     setValidationErrors({
       ...validationErrors,
       imageFile: null,
