@@ -16,6 +16,8 @@ import {
 } from "../../../helpers/api-callers";
 import SectionHeader from "../../../components/section-header";
 import { generateYearArray } from "../../../helpers/common";
+import CustomAvatarEditor from "../../../components/custom-avatar-editor";
+import axios from "axios";
 
 const MemberDashboard_Settings = () => {
   const currentUser = useStoreState((state) => state.currentUser.currentUser);
@@ -29,6 +31,7 @@ const MemberDashboard_Settings = () => {
   const [isDataLoaded, setIsDataLoaded] = useState(false);
   const [isSavingUserDone, setIsSavingUserDone] = useState(false);
   const [isSavingCarDone, setIsSavingCarDone] = useState(false);
+  const [profilePicture, setProfilePicture] = useState({});
 
   const formData = useStoreState((state) => state.settingsFormData.formData);
   const setFormData = useStoreActions(
@@ -108,17 +111,61 @@ const MemberDashboard_Settings = () => {
     }
   };
 
+  const handleFileUpload = async (e) => {
+    try {
+      setProfilePicture(e.target.files[0]);
+      let _formData = new FormData();
+
+      _formData.append("imageFile", e.target.files[0]);
+      _formData.append("id", memberData.id);
+
+      const _response = await axios.put(
+        "/members/update-profile-picture",
+        _formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
+
+      if (_response.status === 200) {
+        let _updatedUser = _response.data;
+        setCurrentUser({ ...currentUser, ..._updatedUser });
+        setMemberData({
+          ...currentUser,
+          ..._updatedUser
+        })
+        setIsDataLoaded(true)
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   return (
     <Layout>
       <div className="container flex flex-col space-y-6 bg-darkGray p-5 rounded-lg mx-auto max-w-md ">
         <SectionHeader heading="Settings" />
         <p className="text-white">Personal Information</p>
         <div className="flex flex-row">
-          <img
-            className="rounded-full w-3/5 mx-auto"
-            src="https://picsum.photos/200"
-            alt="Profile"
-          />
+          <div className="space-y-4 w-full">
+            <CustomAvatarEditor
+              imageFile={
+                memberData.profilePicture
+                  ? `${process.env.REACT_APP_API_URL}/utility/file/${memberData.profilePicture.id}`
+                  : null
+              }
+            />
+            {!profilePicture || !memberData.profilePicture ? (
+              <InputField
+                type="file"
+                styleType={2}
+                placeholder="Change Profile Image"
+                handleInputChange={handleFileUpload}
+              />
+            ) : null}
+          </div>
         </div>
         <div className="flex flex-col space-y-3 w-full shadow-md">
           <label className="text-md text-white">First Name</label>
