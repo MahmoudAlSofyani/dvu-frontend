@@ -42,6 +42,7 @@ const EventCard = ({ id, date, title, meetingPoint, meetingTime, details }) => {
         setStatus({
           ...status,
           message: "You have successfully registered for this event!",
+          isRegistered: true,
         });
       }
     } catch (err) {
