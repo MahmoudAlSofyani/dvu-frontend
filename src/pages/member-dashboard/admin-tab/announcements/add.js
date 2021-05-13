@@ -85,6 +85,7 @@ const AdminTab_Announcements_Add = () => {
         <div className="w-full ckeditor_list">
           <CustomEditor
             handleOnChange={(e, editor) => handleEditorChange(e, editor)}
+            placeholder="Announcement Details"
           />
           {validationErrors.details ? (
             <p className="text-red text-sm">{validationErrors.details}</p>
