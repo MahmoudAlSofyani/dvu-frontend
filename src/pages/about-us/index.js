@@ -14,7 +14,7 @@ const AboutUsPage = () => {
           />
           <p className="text-white opacity-80 leading-7">
             <span className="font-bold italic">Der Volkskreis UAE - </span>{" "}
-            translate to "The People's Circle" from German.
+            translate to "The People's Circle" from the German language.
           </p>
           <p className="text-white opacity-80 leading-7">
             Founded in 2019, we are the leading Volkswagen enthusiast club in
@@ -28,7 +28,7 @@ const AboutUsPage = () => {
         <div className="mx-auto w-full">
           <p className="text-white opacity-80 leading-7">
             With over 200 active members, we are always holding events where
-            people int he <span className="text-red font-bold">#Circle</span>{" "}
+            people in the <span className="text-red font-bold">#Circle</span>{" "}
             can experience their cars.
           </p>
           <p className="text-white opacity-80 leading-7">
