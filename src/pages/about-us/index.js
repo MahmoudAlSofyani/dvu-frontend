@@ -5,7 +5,7 @@ import SectionContainerLayout from "../../components/section-container-layout";
 const AboutUsPage = () => {
   return (
     <Layout>
-      <SectionContainerLayout title="The #Cirlce">
+      <SectionContainerLayout title="The #Circle">
         <div className="mx-auto w-full">
           <img
             className="w-full h-full mx-auto mb-5"
