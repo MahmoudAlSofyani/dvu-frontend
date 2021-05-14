@@ -37,21 +37,21 @@ function App() {
     (actions) => actions.currentUser.setCurrentUser
   );
 
-  useEffect(() => {
-    try {
-      const token = localStorage.getItem("token");
+  // useEffect(() => {
+  //   try {
+  //     const token = localStorage.getItem("token");
 
-      if (token) {
-        axios.get("/auth/verify-token").then((_response) => {
-          if (_response.status === 200) {
-            setCurrentUser(_response.data._member);
-          }
-        });
-      }
-    } catch (err) {
-      console.log(err);
-    }
-  });
+  //     if (token) {
+  //       axios.get("/auth/verify-token").then((_response) => {
+  //         if (_response.status === 200) {
+  //           setCurrentUser(_response.data._member);
+  //         }
+  //       });
+  //     }
+  //   } catch (err) {
+  //     console.log(err);
+  //   }
+  // });
   return (
     <Switch>
       <Route exact path="/" component={HomePage} />
