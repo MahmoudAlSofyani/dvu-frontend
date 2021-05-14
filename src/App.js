@@ -31,6 +31,8 @@ import HomePage from "./pages/homepage";
 import MemberDashboard_Advertisements from "./pages/member-dashboard/advertisements";
 import MemberDashboard_Advertisements_Add from "./pages/member-dashboard/advertisements/add";
 import AdminTab_Advertisements from "./pages/member-dashboard/admin-tab/advertisements";
+import MembersResetPassword from "./pages/portal/members/reset-password";
+import MembersUpdatePassword from "./pages/portal/members/update-password";
 
 function App() {
   const setCurrentUser = useStoreActions(
@@ -58,6 +60,16 @@ function App() {
       <Route exact path="/portal" component={PortalPage} />
       <Route exact path="/members/login" component={MembersLoginPage} />
       <Route exact path="/members/sign-up" component={MembersSignUpPage} />
+      <Route
+        exact
+        path="/members/reset-password"
+        component={MembersResetPassword}
+      />
+      <Route
+        exact
+        path="/members/update-password"
+        component={MembersUpdatePassword}
+      />
       <Route exact path="/sponsors" component={SponsorsPage} />
       <Route exact path="/about-us" component={AboutUsPage} />
       <Route exact path="/sponsors/login" component={SponsorsLoginPage} />
