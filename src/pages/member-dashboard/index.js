@@ -108,7 +108,7 @@ const MembersDashboardIndexPage = () => {
                     </Fragment>
                   ))
                 ) : (
-                  <p className="text-white">No announcements..</p>
+                  <p className="text-white opacity-50">No announcements..</p>
                 )}
               </div>
             </div>
@@ -133,7 +133,7 @@ const MembersDashboardIndexPage = () => {
                     </Fragment>
                   ))
                 ) : (
-                  <p>No Events...</p>
+                  <p className="text-white opacity-50">No Events...</p>
                 )}
               </div>
             </div>
