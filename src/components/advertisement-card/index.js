@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { FiPhone } from "react-icons/fi";
 import { AiOutlineWhatsApp } from "react-icons/ai";
-import { MdDone } from "react-icons/md";
 import CustomButton from "../custom-button";
 import axios from "axios";
 
@@ -61,6 +60,7 @@ const AdvertisementCard = ({
         <img
           src={`${process.env.REACT_APP_API_URL}/utility/file/${imageId}`}
           className="w-full mx-auto"
+          alt="Advertisement"
         />
       </div>
       <div className="space-y-2">

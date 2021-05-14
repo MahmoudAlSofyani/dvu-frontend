@@ -22,9 +22,6 @@ import MemberDashboard_Forums from "./pages/member-dashboard/forums";
 import MemberDashboard_Forums_Add from "./pages/member-dashboard/forums/add";
 import MemberDashboard_Forums_View from "./pages/member-dashboard/forums/view";
 import AboutUsPage from "./pages/about-us";
-import { useStoreActions } from "easy-peasy";
-import { useEffect } from "react";
-import axios from "axios";
 import MemberDashboard_Profile from "./pages/member-dashboard/profile";
 import AdminTab_Events_Attendance from "./pages/member-dashboard/admin-tab/events/attendance";
 import HomePage from "./pages/homepage";
@@ -35,9 +32,7 @@ import MembersResetPassword from "./pages/portal/members/reset-password";
 import MembersUpdatePassword from "./pages/portal/members/update-password";
 
 function App() {
-  const setCurrentUser = useStoreActions(
-    (actions) => actions.currentUser.setCurrentUser
-  );
+
 
   // useEffect(() => {
   //   try {

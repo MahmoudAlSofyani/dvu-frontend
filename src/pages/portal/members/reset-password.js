@@ -7,7 +7,6 @@ import resetPasswordValidator from "../../../validators/members-reset-password-v
 
 const MembersResetPassword = () => {
   const [validationErrors, setValidationErrors] = useState({});
-  const [errorMessage, setErrorMessage] = useState("");
   const [confirmationMessage, setConfirmationMessage] = useState("");
 
   const [formData, setFormData] = useState({});
@@ -47,8 +46,6 @@ const MembersResetPassword = () => {
             });
 
             setValidationErrors(_validationErrors);
-          } else if (err.response) {
-            setErrorMessage(err.response.data.err);
           }
         });
     } catch (err) {

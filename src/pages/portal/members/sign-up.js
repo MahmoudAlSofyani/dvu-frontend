@@ -1,7 +1,6 @@
 import { useStoreState } from "easy-peasy";
 import React from "react";
 import Layout from "../../../components/layout";
-import SectionHeader from "../../../components/section-header";
 import MembersSignUpPageAccountDetails from "./sign-up/account-details";
 import MembersSignUpPageCarDetails from "./sign-up/car-details";
 import MembersSignUpPagePersonalDetails from "./sign-up/personal-details";

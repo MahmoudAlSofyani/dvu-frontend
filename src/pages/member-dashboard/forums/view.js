@@ -84,8 +84,10 @@ const MemberDashboard_Forums_View = () => {
                 >
                   <div className="w-full h-full flex items-center">
                     {currentPost.member.profilePicture ? (
-                      <img className="rounded-full w-1/6 h-full"
+                      <img
+                        className="rounded-full w-1/6 h-full"
                         src={`${process.env.REACT_APP_API_URL}/utility/file/${currentPost.member.profilePicture.id}`}
+                        alt="User"
                       />
                     ) : null}
                     <p className="text-red text-sm">

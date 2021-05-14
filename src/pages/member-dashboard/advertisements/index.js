@@ -2,10 +2,7 @@ import React, { useState, useEffect } from "react";
 import MemberDashboardMenu from "../../../components/dashboard-menu/members";
 import Layout from "../../../components/layout";
 import axios from "axios";
-import moment from "moment";
-import AnnouncementCard from "../../../components/announcement-card";
 import SectionHeader from "../../../components/section-header";
-import { FiPhone } from "react-icons/fi";
 import AdvertisementCard from "../../../components/advertisement-card";
 import { useStoreState } from "easy-peasy";
 const MemberDashboard_Advertisements = () => {
