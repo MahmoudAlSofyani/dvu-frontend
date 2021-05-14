@@ -90,7 +90,7 @@ const MembersSignUpPageCarDetails = () => {
     <>
       <SectionHeader heading="Register" subHeading="Car Details" />
       <div>
-        <div className="flex flex-col space-y-4">
+        <div className="flex flex-col space-y-4 lg:grid lg:grid-cols-2 lg:gap-8 lg:space-y-0">
           <DropdownField
             name="carModel"
             options={carModels}

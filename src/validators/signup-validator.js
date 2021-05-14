@@ -15,14 +15,14 @@ export let personalDetails = yup.object().shape({
   mobileNumber: yup
     .string()
     .matches(
-      /^\+[1-9]{10}/gm,
+      /^\+[1-9][0-9]{10}/gm,
       "Please use the international format eg: +971512345678"
     )
     .required("Mobile number is required"),
   whatsAppNumber: yup
     .string()
     .matches(
-      /^\+[1-9]{10}/gm,
+      /^\+[1-9][0-9]{10}/gm,
       "Please use the international format eg: +971512345678"
     )
     .optional(),

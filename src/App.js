@@ -22,42 +22,49 @@ import MemberDashboard_Forums from "./pages/member-dashboard/forums";
 import MemberDashboard_Forums_Add from "./pages/member-dashboard/forums/add";
 import MemberDashboard_Forums_View from "./pages/member-dashboard/forums/view";
 import AboutUsPage from "./pages/about-us";
-import { useStoreActions } from "easy-peasy";
-import { useEffect } from "react";
-import axios from "axios";
 import MemberDashboard_Profile from "./pages/member-dashboard/profile";
 import AdminTab_Events_Attendance from "./pages/member-dashboard/admin-tab/events/attendance";
 import HomePage from "./pages/homepage";
 import MemberDashboard_Advertisements from "./pages/member-dashboard/advertisements";
 import MemberDashboard_Advertisements_Add from "./pages/member-dashboard/advertisements/add";
 import AdminTab_Advertisements from "./pages/member-dashboard/admin-tab/advertisements";
+import MembersResetPassword from "./pages/portal/members/reset-password";
+import MembersUpdatePassword from "./pages/portal/members/update-password";
 
 function App() {
-  const setCurrentUser = useStoreActions(
-    (actions) => actions.currentUser.setCurrentUser
-  );
 
-  useEffect(() => {
-    try {
-      const token = localStorage.getItem("token");
 
-      if (token) {
-        axios.get("/auth/verify-token").then((_response) => {
-          if (_response.status === 200) {
-            setCurrentUser(_response.data._member);
-          }
-        });
-      }
-    } catch (err) {
-      console.log(err);
-    }
-  });
+  // useEffect(() => {
+  //   try {
+  //     const token = localStorage.getItem("token");
+
+  //     if (token) {
+  //       axios.get("/auth/verify-token").then((_response) => {
+  //         if (_response.status === 200) {
+  //           setCurrentUser(_response.data._member);
+  //         }
+  //       });
+  //     }
+  //   } catch (err) {
+  //     console.log(err);
+  //   }
+  // });
   return (
     <Switch>
       <Route exact path="/" component={HomePage} />
       <Route exact path="/portal" component={PortalPage} />
       <Route exact path="/members/login" component={MembersLoginPage} />
       <Route exact path="/members/sign-up" component={MembersSignUpPage} />
+      <Route
+        exact
+        path="/members/reset-password"
+        component={MembersResetPassword}
+      />
+      <Route
+        exact
+        path="/members/update-password"
+        component={MembersUpdatePassword}
+      />
       <Route exact path="/sponsors" component={SponsorsPage} />
       <Route exact path="/about-us" component={AboutUsPage} />
       <Route exact path="/sponsors/login" component={SponsorsLoginPage} />

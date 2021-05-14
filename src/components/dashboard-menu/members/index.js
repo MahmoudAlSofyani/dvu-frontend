@@ -1,7 +1,5 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { NavLink, useLocation } from "react-router-dom";
-import { useStoreState } from "easy-peasy";
-import axios from "axios";
 import { AiOutlineHome, AiOutlineLock } from "react-icons/ai";
 import { MdForum, MdAnnouncement } from "react-icons/md";
 import { BsCalendar, BsGear } from "react-icons/bs";
@@ -9,7 +7,6 @@ import { CgProfile } from "react-icons/cg";
 import { RiAdvertisementLine } from "react-icons/ri";
 const MemberDashboardMenu = () => {
   const [isAdmin, setIsAdmin] = useState(localStorage.getItem("isAdmin"));
-  const currentUser = useStoreState((state) => state.currentUser.currentUser);
 
   const location = useLocation();
 

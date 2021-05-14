@@ -54,7 +54,16 @@ const MembersLoginPage = () => {
                 localStorage.setItem("isAdmin", true);
               }
               setCurrentUser(_member);
-              history.push("/members/dashboard");
+              if (_member.firstLogin) {
+                history.push({
+                  pathname: "/members/update-password",
+                  state: {
+                    id: _member.id,
+                  },
+                });
+              } else {
+                history.push("/members/dashboard");
+              }
             }
           } else if (_response.status === 401) {
           }
@@ -141,7 +150,7 @@ const MembersLoginPage = () => {
           />
           <p className="text-white">
             Forgot your password?
-            <Link to="/reset-password">
+            <Link to="/members/reset-password">
               <span className="ml-1 text-red font-bold">Click here</span>
             </Link>
           </p>

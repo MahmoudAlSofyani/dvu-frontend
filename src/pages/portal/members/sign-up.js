@@ -1,7 +1,6 @@
 import { useStoreState } from "easy-peasy";
 import React from "react";
 import Layout from "../../../components/layout";
-import SectionHeader from "../../../components/section-header";
 import MembersSignUpPageAccountDetails from "./sign-up/account-details";
 import MembersSignUpPageCarDetails from "./sign-up/car-details";
 import MembersSignUpPagePersonalDetails from "./sign-up/personal-details";
@@ -13,7 +12,7 @@ const MembersSignUpPage = () => {
 
   return (
     <Layout>
-      <div className="container flex flex-col space-y-9 bg-darkGray p-5 rounded-lg mx-auto max-w-md ">
+      <div className="container flex flex-col space-y-9 bg-darkGray p-5 rounded-lg mx-auto max-w-lg ">
         {stepNumber === 1 ? (
           <MembersSignUpPagePersonalDetails />
         ) : stepNumber === 2 ? (
