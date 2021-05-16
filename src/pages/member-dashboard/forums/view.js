@@ -5,6 +5,7 @@ import { useLocation } from "react-router-dom";
 import axios from "axios";
 import MemberDashboardMenu from "../../../components/dashboard-menu/members";
 import InputField from "../../../components/input-field";
+import TextArea from "../../../components/text-area";
 import { FiSend } from "react-icons/fi";
 import moment from "moment";
 import { useStoreState } from "easy-peasy";
@@ -47,6 +48,11 @@ const MemberDashboard_Forums_View = () => {
 
   const handleAddNewComment = async () => {
     try {
+      setFormData({
+        ...formData,
+        comment: "",
+      });
+
       let body = {
         memberId: currentUser.id,
         postId: currentPost.id,
@@ -82,7 +88,7 @@ const MemberDashboard_Forums_View = () => {
                   key={index}
                   className="bg-charcoal p-4 rounded-md shadow-md"
                 >
-                  <div className="w-full h-full flex items-center">
+                  <div className="w-full h-full flex items-center ">
                     {currentPost.member.profilePicture &&
                     _comment.member.id === currentPost.member.id ? (
                       <img
@@ -106,13 +112,14 @@ const MemberDashboard_Forums_View = () => {
                 </div>
               ))}
               <div className="relative shadow-md">
-                <InputField
-                  styleType={2}
+                <TextArea
                   placeholder="Post reply..."
                   handleInputChange={handleFormChange}
                   name="comment"
+                  rows={4}
+                  value={formData.comment}
                 />
-                <span className="absolute right-2 top-1 text-white text-2xl m-1">
+                <span className="absolute right-2 bottom-2 text-white text-2xl m-1 z-50">
                   <FiSend onClick={handleAddNewComment} />
                 </span>
               </div>
