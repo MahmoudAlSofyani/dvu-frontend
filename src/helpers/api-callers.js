@@ -114,7 +114,7 @@ export const addNewCar = async (formData, id) => {
         plateEmirate,
         plateCode,
         plateNumber,
-        vinNumber,
+        vinNumber: vinNumber.toUppercase(),
       },
     };
 
