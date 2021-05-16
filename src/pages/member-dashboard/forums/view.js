@@ -83,7 +83,8 @@ const MemberDashboard_Forums_View = () => {
                   className="bg-charcoal p-4 rounded-md shadow-md"
                 >
                   <div className="w-full h-full flex items-center">
-                    {currentPost.member.profilePicture ? (
+                    {currentPost.member.profilePicture &&
+                    _comment.member.id === currentPost.member.id ? (
                       <img
                         className="rounded-full w-1/6 h-full"
                         src={`${process.env.REACT_APP_API_URL}/utility/file/${currentPost.member.profilePicture.id}`}
