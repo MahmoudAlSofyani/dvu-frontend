@@ -79,7 +79,7 @@ const MemberDashboard_Forums = () => {
           {posts.map((_post, index) => (
             <div
               key={index}
-              className="bg-charcoal rounded-md p-4 flex flex-row justify-between shadow-md "
+              className="bg-charcoal rounded-md p-4 flex flex-row justify-between shadow-md cursor-pointer "
               onClick={() => handleGoToPost(_post.id)}
             >
               <div className="w-full">

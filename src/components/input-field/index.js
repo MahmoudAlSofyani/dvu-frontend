@@ -11,7 +11,7 @@ const InputField = ({
   defaultValue,
   styleType = 1,
   errorMessage,
-  accept="*"
+  accept = "*",
 }) => {
   return (
     <>
