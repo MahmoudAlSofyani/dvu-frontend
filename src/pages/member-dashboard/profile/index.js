@@ -79,14 +79,16 @@ const MemberDashboard_Profile = () => {
                 _role.name !== "ACTIVE" ? (
                   <p
                     key={index}
-                    className="text-red font-bold text-center text-2xl"
+                    className="text-red font-bold text-center text-2xl uppercase"
                   >
                     {_role.name}
                   </p>
                 ) : null
               )
             ) : (
-              <p>Active</p>
+              <p className="text-green font-bold text-center text-2xl uppercase">
+                Active
+              </p>
             )}
           </div>
           <div className="flex flex-row">
