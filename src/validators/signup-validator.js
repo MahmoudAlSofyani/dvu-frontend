@@ -41,7 +41,7 @@ export let carDetails = yup.object().shape({
     .required("Plate number is required"),
   vinNumber: yup
     .string()
-    .matches(/^WVW[a-zA-z0-9]{13,14}/gm, "Please enter a valid vin number")
+    .matches(/^WVW[a-zA-Z0-9]{13,14}/gm, "Please enter a valid vin number")
     .required("VIN number is required"),
 });
 

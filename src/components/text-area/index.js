@@ -7,6 +7,7 @@ const TextArea = ({
   handleInputChange,
   name,
   errorMessage,
+  value,
 }) => {
   return (
     <div>
@@ -16,6 +17,7 @@ const TextArea = ({
         name={name}
         onChange={handleInputChange}
         placeholder={required ? placeholder + " *" : placeholder}
+        value={value}
       />
       {errorMessage ? <p className="text-red text-sm">{errorMessage}</p> : null}
     </div>
