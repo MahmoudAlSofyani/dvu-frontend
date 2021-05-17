@@ -111,7 +111,9 @@ const MemberDashboard_Profile = () => {
         <div className="flex flex-col">
           <div className="flex flex-row space-x-4 text-left mb-3">
             <AiOutlineCar className="text-red text-3xl" />
-            <p className="text-white text-xl">Cars</p>
+            <p className="text-white text-xl">
+              {currentUser.cars.length > 1 ? "Cars" : "Car"}
+            </p>
           </div>
 
           {currentUser.cars.map((_car, index) => (
