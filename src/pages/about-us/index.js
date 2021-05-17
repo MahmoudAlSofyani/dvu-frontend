@@ -33,7 +33,7 @@ const AboutUsPage = () => {
           </p>
           <p className="text-white opacity-80 leading-7">
             To us, we do not care about the destination but the journey in
-            between
+            between.
           </p>
           <p className="text-white opacity-80 leading-7">
             Because it is only during the countless drives we have are where the

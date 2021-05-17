@@ -79,14 +79,16 @@ const MemberDashboard_Profile = () => {
                 _role.name !== "ACTIVE" ? (
                   <p
                     key={index}
-                    className="text-red font-bold text-center text-2xl"
+                    className="text-red font-bold text-center text-2xl uppercase"
                   >
                     {_role.name}
                   </p>
                 ) : null
               )
             ) : (
-              <p>Active</p>
+              <p className="text-green font-bold text-center text-2xl uppercase">
+                Active
+              </p>
             )}
           </div>
           <div className="flex flex-row">
@@ -111,7 +113,9 @@ const MemberDashboard_Profile = () => {
         <div className="flex flex-col">
           <div className="flex flex-row space-x-4 text-left mb-3">
             <AiOutlineCar className="text-red text-3xl" />
-            <p className="text-white text-xl">Cars</p>
+            <p className="text-white text-xl">
+              {currentUser.cars.length > 1 ? "Cars" : "Car"}
+            </p>
           </div>
 
           {currentUser.cars.map((_car, index) => (

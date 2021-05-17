@@ -9,6 +9,7 @@ import TextArea from "../../../components/text-area";
 import { FiSend } from "react-icons/fi";
 import moment from "moment";
 import { useStoreState } from "easy-peasy";
+import { addComment } from "../../../validators/comments-validator";
 
 const MemberDashboard_Forums_View = () => {
   const location = useLocation();
@@ -46,24 +47,28 @@ const MemberDashboard_Forums_View = () => {
     });
   };
 
-  const handleAddNewComment = async () => {
+  const handleAddNewComment = () => {
     try {
-      setFormData({
-        ...formData,
-        comment: "",
-      });
+      addComment
+        .validate(formData, { abortEarly: false })
+        .then(async () => {
+          let body = {
+            memberId: currentUser.id,
+            postId: currentPost.id,
+            comment: formData.comment,
+          };
 
-      let body = {
-        memberId: currentUser.id,
-        postId: currentPost.id,
-        comment: formData.comment,
-      };
+          const _response = await axios.post("/comments", body);
 
-      const _response = await axios.post("/comments", body);
-
-      if (_response.status === 200) {
-        fetchPost();
-      }
+          if (_response.status === 200) {
+            setFormData({
+              ...formData,
+              comment: "",
+            });
+            fetchPost();
+          }
+        })
+        .catch((err) => console.log(err));
     } catch (err) {
       console.log(err);
     }
