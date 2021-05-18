@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import { NavLink, useLocation } from "react-router-dom";
+import { useRouter } from "next/router";
+import Link from "next/link";
 import { AiOutlineHome, AiOutlineLock } from "react-icons/ai";
 import { MdForum, MdAnnouncement } from "react-icons/md";
 import { BsCalendar, BsGear } from "react-icons/bs";
@@ -8,7 +9,7 @@ import { RiAdvertisementLine } from "react-icons/ri";
 const MemberDashboardMenu = () => {
   const [isAdmin, setIsAdmin] = useState(localStorage.getItem("isAdmin"));
 
-  const location = useLocation();
+  const router = useRouter();
 
   // useEffect(() => {
   //   try {
@@ -30,79 +31,79 @@ const MemberDashboardMenu = () => {
 
   return (
     <div className="fixed right-0 left-0 bottom-0 flex items-center justify-between p-3 bg-darkGray">
-      <NavLink to="/members/forums">
+      <Link href="/dashboard/members/forums">
         <MdForum
-          className={` ${
-            location.pathname === "/members/forums"
+          className={`cursor-pointer ${
+            router.pathname === "/dashboard/members/forums"
               ? "text-white text-4xl"
               : "text-red text-3xl"
           }`}
         />
-      </NavLink>
-      <NavLink to="/members/events">
+      </Link>
+      <Link href="/dashboard/members/events">
         <BsCalendar
-          className={` ${
-            location.pathname === "/members/events"
+          className={`cursor-pointer ${
+            router.pathname === "/dashboard/members/events"
               ? "text-white text-4xl"
               : "text-red text-3xl"
           }`}
         />
-      </NavLink>
-      <NavLink to="/members/announcements">
+      </Link>
+      <Link href="/dashboard/members/announcements">
         <MdAnnouncement
-          className={` ${
-            location.pathname === "/members/announcements"
+          className={`cursor-pointer ${
+            router.pathname === "/dashboard/members/announcements"
               ? "text-white text-4xl"
               : "text-red text-3xl"
           }`}
         />
-      </NavLink>
-      <NavLink to="/members/dashboard">
+      </Link>
+      <Link href="/dashboard/members">
         <AiOutlineHome
-          className={` ${
-            location.pathname === "/members/dashboard"
+          className={`cursor-pointer ${
+            router.pathname === "/dashboard/members"
               ? "text-white text-4xl"
               : "text-red text-3xl"
           }`}
         />
-      </NavLink>
-      <NavLink to="/members/settings">
+      </Link>
+      <Link href="/dashboard/members/settings">
         <BsGear
-          className={` ${
-            location.pathname === "/members/settings"
+          className={`cursor-pointer ${
+            router.pathname === "/dashboard/members/settings"
               ? "text-white text-4xl"
               : "text-red text-3xl"
           }`}
         />
-      </NavLink>
-      <NavLink to="/members/profile">
+      </Link>
+      <Link href="/dashboard/members/profile">
         <CgProfile
-          className={` ${
-            location.pathname === "/members/profile"
+          className={`cursor-pointer ${
+            router.pathname === "/dashboard/members/profile"
               ? "text-white text-4xl"
               : "text-red text-3xl"
           }`}
         />
-      </NavLink>
-      <NavLink to="/members/advertisements">
+      </Link>
+      <Link href="/dashboard/members/advertisements">
         <RiAdvertisementLine
-          className={` ${
-            location.pathname === "/members/advertisements"
+          className={`cursor-pointer ${
+            router.pathname === "/dashboard/members/advertisements"
               ? "text-white text-4xl"
               : "text-red text-3xl"
           }`}
         />
-      </NavLink>
+      </Link>
       {isAdmin ? (
-        <NavLink to="/members/admin">
+        <Link href="/dashboard/members/admin">
           <AiOutlineLock
-            className={` ${
-              location.pathname === "/members/admin"
+            className={`cursor-pointer ${
+              router.pathname === "/dashboard/members/admin"
                 ? "text-white text-4xl"
                 : "text-red text-3xl"
             }`}
           />
-        </NavLink>
+        </Link>
       ) : null}
     </div>
   );

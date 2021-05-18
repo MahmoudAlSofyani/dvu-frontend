@@ -2,7 +2,7 @@ import React from "react";
 import AvatarEditor from "react-avatar-editor";
 
 const CustomAvatarEditor = ({
-  imageFile = `${process.env.REACT_APP_API_URL}/utility/file/2452bb0a46371847628aa8b624493012`,
+  imageFile = `${process.env.NEXT_PUBLIC_API_URL}/utility/file/2452bb0a46371847628aa8b624493012`,
   handleImageChange,
 }) => {
   return (

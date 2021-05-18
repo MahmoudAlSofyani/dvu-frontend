@@ -8,12 +8,23 @@
     "start": "next start"
   },
   "dependencies": {
+    "@ckeditor/ckeditor5-build-classic": "^27.1.0",
+    "@ckeditor/ckeditor5-react": "^3.0.2",
     "@heroicons/react": "^1.0.1",
     "axios": "^0.21.1",
     "easy-peasy": "^5.0.3",
+    "moment": "^2.29.1",
     "next": "10.2.0",
+    "qrcode.react": "^1.0.1",
     "react": "17.0.2",
-    "react-dom": "17.0.2"
+    "react-avatar-editor": "^11.1.0",
+    "react-collapsible": "^2.8.3",
+    "react-datepicker": "^3.8.0",
+    "react-dom": "17.0.2",
+    "react-icons": "^4.2.0",
+    "react-webcam-barcode-scanner": "^0.0.2-rc2",
+    "yup": "^0.32.9",
+    "yup-phone": "^1.2.19"
   },
   "devDependencies": {
     "autoprefixer": "^10.2.5",
