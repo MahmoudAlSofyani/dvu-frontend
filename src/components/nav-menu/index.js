@@ -65,7 +65,9 @@ const NavMenu = () => {
         {menuItems.map((_item, index) =>
           _item.type === "a" ? (
             <Link href={_item.to} onClick={toggleMenu} key={index}>
-              <p className="text-white tracking-wide uppercase">{_item.text}</p>
+              <p className="text-white tracking-wide uppercase cursor-pointer">
+                {_item.text}
+              </p>
             </Link>
           ) : _item.type === "button" ? (
             <CustomButton
