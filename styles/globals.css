@@ -3,6 +3,10 @@
 @tailwind utilities;
 
 @layer base {
+  body {
+    background-color: black;
+  }
+
   ol {
     list-style: decimal;
   }
