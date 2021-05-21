@@ -12,6 +12,10 @@ const MemberDashboard_Forums = () => {
   const history = useHistory();
   useEffect(() => {
     try {
+      if (!localStorage.getItem("token")) {
+        history.push("/members/login");
+      }
+
       Promise.all([axios.get("/posts")]).then((_responses) => {
         if (_responses[0].status === 200) {
           setPosts(_responses[0].data);

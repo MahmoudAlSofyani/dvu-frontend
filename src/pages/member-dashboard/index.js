@@ -22,6 +22,10 @@ const MembersDashboardIndexPage = () => {
   );
 
   useEffect(() => {
+    if (!localStorage.getItem("token")) {
+      history.push("/members/login");
+    }
+
     if (Object.keys(currentUser).length === 0) {
       setCurrentUser(JSON.parse(localStorage.getItem("currentUser")));
     }

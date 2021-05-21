@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import CustomButton from "../../../components/custom-button";
 import InputField from "../../../components/input-field";
 import Layout from "../../../components/layout";
@@ -15,6 +15,13 @@ const MemberDashboard_Forums_Add = () => {
   const history = useHistory();
 
   const currentUser = useStoreState((state) => state.currentUser.currentUser);
+
+  useEffect(() => {
+    if (!localStorage.getItem("token")) {
+      history.push("/members/login");
+    }
+  });
+
   const handleFormChange = (e) => {
     setFormData({
       ...formData,

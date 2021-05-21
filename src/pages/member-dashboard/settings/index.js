@@ -19,9 +19,11 @@ import { generateYearArray } from "../../../helpers/common";
 import CustomAvatarEditor from "../../../components/custom-avatar-editor";
 import axios from "axios";
 import Seo from "../../../components/seo";
+import { useHistory } from "react-router-dom";
 
 const MemberDashboard_Settings = () => {
   const currentUser = useStoreState((state) => state.currentUser.currentUser);
+  const history = useHistory();
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [carYears, setCarYears] = useState([]);
   const [memberData, setMemberData] = useState(
@@ -50,6 +52,10 @@ const MemberDashboard_Settings = () => {
 
   useEffect(() => {
     try {
+      if (!localStorage.getItem("token")) {
+        history.push("/members/login");
+      }
+
       if (Object.keys(currentUser).length === 0) {
         setCurrentUser(JSON.parse(localStorage.getItem("currentUser")));
       }

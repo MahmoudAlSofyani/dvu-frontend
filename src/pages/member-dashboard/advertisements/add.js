@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useStoreState } from "easy-peasy";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import CustomButton from "../../../components/custom-button";
 import CustomEditor from "../../../components/custom-editor";
 import InputField from "../../../components/input-field";
@@ -15,6 +15,12 @@ const MemberDashboard_Advertisements_Add = () => {
   const [formData, setFormData] = useState({});
   const [validationErrors, setValidationErrors] = useState({});
   const history = useHistory();
+
+  useEffect(() => {
+    if (!localStorage.getItem("token")) {
+      history.push("/members/login");
+    }
+  });
 
   const handleFormChange = (e) => {
     const { value, name } = e.target;

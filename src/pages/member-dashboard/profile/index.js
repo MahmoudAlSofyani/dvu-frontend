@@ -24,7 +24,7 @@ const MemberDashboard_Profile = () => {
 
   const handleLogout = () => {
     try {
-      localStorage.removeItem("token");
+      localStorage.clear();
       history.push("/members/login");
     } catch (err) {
       console.log(err);
@@ -32,6 +32,10 @@ const MemberDashboard_Profile = () => {
   };
 
   useEffect(() => {
+    if (!localStorage.getItem("token")) {
+      history.push("/members/login");
+    }
+
     if (Object.keys(currentUser).length === 0) {
       setCurrentUser(JSON.parse(localStorage.getItem("currentUser")));
       setIsDataLoaded(true);

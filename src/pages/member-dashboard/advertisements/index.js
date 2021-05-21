@@ -6,19 +6,25 @@ import SectionHeader from "../../../components/section-header";
 import AdvertisementCard from "../../../components/advertisement-card";
 import { useStoreActions, useStoreState } from "easy-peasy";
 import Seo from "../../../components/seo";
+import { useHistory } from "react-router-dom";
 const MemberDashboard_Advertisements = () => {
   const [advertisements, setAdvertisements] = useState([]);
   const [isDataLoaded, setIsDataLoaded] = useState(false);
   const currentUser = useStoreState((state) => state.currentUser.currentUser);
-  const setCurrentUser = useStoreActions((actions) => actions.currentUser.setCurrentUser)
+  const setCurrentUser = useStoreActions(
+    (actions) => actions.currentUser.setCurrentUser
+  );
+  const history = useHistory();
 
   useEffect(() => {
     try {
+      if (!localStorage.getItem("token")) {
+        history.push("/members/login");
+      }
 
       if (Object.keys(currentUser).length === 0) {
         setCurrentUser(JSON.parse(localStorage.getItem("currentUser")));
       }
-
 
       axios
         .get("/advertisements/true")

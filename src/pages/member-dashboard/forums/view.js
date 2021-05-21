@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Layout from "../../../components/layout";
 import SectionHeader from "../../../components/section-header";
-import { useLocation } from "react-router-dom";
+import { useLocation, useHistory } from "react-router-dom";
 import axios from "axios";
 import MemberDashboardMenu from "../../../components/dashboard-menu/members";
 import InputField from "../../../components/input-field";
@@ -14,6 +14,7 @@ import Seo from "../../../components/seo";
 
 const MemberDashboard_Forums_View = () => {
   const location = useLocation();
+  const history = useHistory();
   const [currentPost, setCurrentPost] = useState({});
   const [isDataLoaded, setIsDataLoaded] = useState(false);
   const [formData, setFormData] = useState({});
@@ -24,6 +25,11 @@ const MemberDashboard_Forums_View = () => {
 
   useEffect(() => {
     try {
+      if (!localStorage.getItem("token")) {
+        history.push("/members/login");
+      }
+
+
       if (Object.keys(currentUser).length === 0) {
         setCurrentUser(JSON.parse(localStorage.getItem("currentUser")));
       }

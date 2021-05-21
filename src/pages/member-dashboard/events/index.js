@@ -6,12 +6,17 @@ import axios from "axios";
 import moment from "moment";
 import SectionHeader from "../../../components/section-header";
 import Seo from "../../../components/seo";
+import { useHistory } from "react-router-dom";
 const MemberDashboard_Events = () => {
   const [events, setEvents] = useState([]);
   const [isDataLoaded, setIsDataLoaded] = useState(false);
-
+  const history = useHistory();
   useEffect(() => {
     try {
+      if (!localStorage.getItem("token")) {
+        history.push("/members/login");
+      }
+
       axios
         .get("/events")
         .then((_response) => {
