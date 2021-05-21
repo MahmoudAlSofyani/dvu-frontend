@@ -30,10 +30,10 @@ import MemberDashboard_Advertisements_Add from "./pages/member-dashboard/adverti
 import AdminTab_Advertisements from "./pages/member-dashboard/admin-tab/advertisements";
 import MembersResetPassword from "./pages/portal/members/reset-password";
 import MembersUpdatePassword from "./pages/portal/members/update-password";
+import AdminTab_Sponsors from "./pages/member-dashboard/admin-tab/sponsors";
+import AdminTab_Sponsors_New from "./pages/member-dashboard/admin-tab/sponsors/new";
 
 function App() {
-
-
   // useEffect(() => {
   //   try {
   //     const token = localStorage.getItem("token");
@@ -144,6 +144,12 @@ function App() {
         exact
         path="/admin/advertisements"
         component={AdminTab_Advertisements}
+      />
+      <Route exact path="/admin/sponsors" component={AdminTab_Sponsors} />
+      <Route
+        exact
+        path="/admin/sponsors/new"
+        component={AdminTab_Sponsors_New}
       />
     </Switch>
   );
