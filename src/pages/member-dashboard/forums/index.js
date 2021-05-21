@@ -22,9 +22,11 @@ const MemberDashboard_Forums = () => {
   }, [setPosts]);
 
   const handleGoToPost = (id) => {
+
+    localStorage.setItem("postId", id);
     history.push({
       pathname: "/members/forums/view",
-      state: { id },
+      state: { postId: id },
     });
   };
 

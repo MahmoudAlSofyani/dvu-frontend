@@ -8,7 +8,7 @@ import InputField from "../../../components/input-field";
 import TextArea from "../../../components/text-area";
 import { FiSend } from "react-icons/fi";
 import moment from "moment";
-import { useStoreState } from "easy-peasy";
+import { useStoreActions, useStoreState } from "easy-peasy";
 import { addComment } from "../../../validators/comments-validator";
 
 const MemberDashboard_Forums_View = () => {
@@ -17,9 +17,16 @@ const MemberDashboard_Forums_View = () => {
   const [isDataLoaded, setIsDataLoaded] = useState(false);
   const [formData, setFormData] = useState({});
   const currentUser = useStoreState((state) => state.currentUser.currentUser);
+  const setCurrentUser = useStoreActions(
+    (actions) => actions.currentUser.setCurrentUser
+  );
 
   useEffect(() => {
     try {
+      if (Object.keys(currentUser).length === 0) {
+        setCurrentUser(JSON.parse(localStorage.getItem("currentUser")));
+      }
+
       fetchPost();
     } catch (err) {
       console.log(err);
@@ -28,9 +35,14 @@ const MemberDashboard_Forums_View = () => {
 
   const fetchPost = async () => {
     try {
-      const { id } = location.state;
+      let postId;
+      if (location.state === undefined) {
+        postId = localStorage.getItem("postId");
+      } else {
+        postId = location.state.postId;
+      }
 
-      const _response = await axios.get(`/posts/${id}`);
+      const _response = await axios.get(`/posts/${postId}`);
       if (_response.status === 200) {
         setCurrentPost(_response.data);
         setIsDataLoaded(true);

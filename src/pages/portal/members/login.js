@@ -49,6 +49,7 @@ const MembersLoginPage = () => {
               return;
             } else {
               localStorage.setItem("token", _token);
+              localStorage.setItem("currentUser", JSON.stringify(_member));
 
               if (_member.roles.some((_role) => _role.name === "ADMIN")) {
                 localStorage.setItem("isAdmin", true);

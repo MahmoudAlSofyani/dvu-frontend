@@ -23,7 +23,11 @@ const MemberDashboard_Settings = () => {
   const currentUser = useStoreState((state) => state.currentUser.currentUser);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [carYears, setCarYears] = useState([]);
-  const [memberData, setMemberData] = useState(currentUser);
+  const [memberData, setMemberData] = useState(
+    Object.keys(currentUser).length === 0
+      ? JSON.parse(localStorage.getItem("currentUser"))
+      : currentUser
+  );
   const [carModels, setCarModels] = useState([]);
   const [carColors, setCarColors] = useState([]);
   const [plateEmirates, setPlateEmirates] = useState([]);
@@ -45,6 +49,10 @@ const MemberDashboard_Settings = () => {
 
   useEffect(() => {
     try {
+      if (Object.keys(currentUser).length === 0) {
+        setCurrentUser(JSON.parse(localStorage.getItem("currentUser")));
+      }
+
       Promise.all([
         getCarModels(),
         getCarColors(),
@@ -134,9 +142,9 @@ const MemberDashboard_Settings = () => {
         setCurrentUser({ ...currentUser, ..._updatedUser });
         setMemberData({
           ...currentUser,
-          ..._updatedUser
-        })
-        setIsDataLoaded(true)
+          ..._updatedUser,
+        });
+        setIsDataLoaded(true);
       }
     } catch (err) {
       console.log(err);

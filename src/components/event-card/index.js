@@ -1,4 +1,4 @@
-import { useStoreState } from "easy-peasy";
+import { useStoreActions, useStoreState } from "easy-peasy";
 import React, { useEffect, useState } from "react";
 import CustomButton from "../custom-button";
 import axios from "axios";
@@ -9,9 +9,16 @@ const EventCard = ({ id, date, title, meetingPoint, meetingTime, details }) => {
     isRegistered: false,
   });
   const currentUser = useStoreState((state) => state.currentUser.currentUser);
+  const setCurrentUser = useStoreActions(
+    (actions) => actions.currentUser.setCurrentUser
+  );
 
   useEffect(() => {
     try {
+      if (Object.keys(currentUser).length === 0) {
+        setCurrentUser(JSON.parse(localStorage.getItem("currentUser")));
+      }
+
       axios
         .post("/events/check", { eventId: id, memberId: currentUser.id })
         .then((_response) => {

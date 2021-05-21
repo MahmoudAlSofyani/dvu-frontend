@@ -4,14 +4,21 @@ import Layout from "../../../components/layout";
 import axios from "axios";
 import SectionHeader from "../../../components/section-header";
 import AdvertisementCard from "../../../components/advertisement-card";
-import { useStoreState } from "easy-peasy";
+import { useStoreActions, useStoreState } from "easy-peasy";
 const MemberDashboard_Advertisements = () => {
   const [advertisements, setAdvertisements] = useState([]);
   const [isDataLoaded, setIsDataLoaded] = useState(false);
   const currentUser = useStoreState((state) => state.currentUser.currentUser);
+  const setCurrentUser = useStoreActions((actions) => actions.currentUser.setCurrentUser)
 
   useEffect(() => {
     try {
+
+      if (Object.keys(currentUser).length === 0) {
+        setCurrentUser(JSON.parse(localStorage.getItem("currentUser")));
+      }
+
+
       axios
         .get("/advertisements/true")
         .then((_response) => {
