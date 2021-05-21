@@ -6,6 +6,7 @@ import Layout from "../../../components/layout";
 import { useLocation, useHistory } from "react-router-dom";
 import updatePasswordValidator from "../../../validators/members-update-password-validator";
 import { useStoreActions } from "easy-peasy";
+import Seo from "../../../components/seo";
 const MembersUpdatePassword = () => {
   const [validationErrors, setValidationErrors] = useState({});
   const [errorMessage, setErrorMessage] = useState("");
@@ -79,6 +80,7 @@ const MembersUpdatePassword = () => {
   return (
     <Layout>
       <div className="container flex flex-col items-center space-y-6 bg-darkGray p-5 rounded-lg mx-auto max-w-md ">
+        <Seo title="Update Password" />
         <h6 className="text-white uppercase font-bold tracking-widest text-xl">
           Update your password
         </h6>

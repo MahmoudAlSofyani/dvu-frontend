@@ -18,6 +18,7 @@ import SectionHeader from "../../../components/section-header";
 import { generateYearArray } from "../../../helpers/common";
 import CustomAvatarEditor from "../../../components/custom-avatar-editor";
 import axios from "axios";
+import Seo from "../../../components/seo";
 
 const MemberDashboard_Settings = () => {
   const currentUser = useStoreState((state) => state.currentUser.currentUser);
@@ -154,6 +155,7 @@ const MemberDashboard_Settings = () => {
   return (
     <Layout>
       <div className="container flex flex-col space-y-6 bg-darkGray p-5 rounded-lg mx-auto max-w-md ">
+        <Seo title="Settings" />
         <SectionHeader heading="Settings" />
         <p className="text-white">Personal Information</p>
         <div className="flex flex-row">

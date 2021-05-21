@@ -5,6 +5,7 @@ import axios from "axios";
 import moment from "moment";
 import AnnouncementCard from "../../../components/announcement-card";
 import SectionHeader from "../../../components/section-header";
+import Seo from "../../../components/seo";
 const MemberDashboard_Announcements = () => {
   const [announcements, setAnnouncements] = useState([]);
   const [isDataLoaded, setIsDataLoaded] = useState(false);
@@ -28,6 +29,7 @@ const MemberDashboard_Announcements = () => {
   return (
     <Layout>
       <div className="container flex flex-col space-y-6 bg-darkGray p-5 rounded-lg mx-auto max-w-md ">
+        <Seo title="Announcements" />
         <SectionHeader heading="Announcements" />
         {isDataLoaded && announcements.length > 0 ? (
           announcements.map((_announcement, index) =>

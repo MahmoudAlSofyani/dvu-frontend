@@ -7,6 +7,7 @@ import { useStoreActions, useStoreState } from "easy-peasy";
 import moment from "moment";
 import SectionHeader from "../../components/section-header";
 import { Fragment } from "react";
+import Seo from "../../components/seo";
 const MembersDashboardIndexPage = () => {
   const [isDataLoaded, setIsDataLoaded] = useState(false);
   const [announcements, setAnnouncements] = useState([]);
@@ -62,6 +63,7 @@ const MembersDashboardIndexPage = () => {
   return (
     <Layout>
       <div className="container flex flex-col  space-y-6 bg-darkGray p-5  rounded-lg mx-auto max-w-md text-center">
+        <Seo title="Dashboard" />
         <SectionHeader heading="Dashboard" />
 
         {isDataLoaded ? (

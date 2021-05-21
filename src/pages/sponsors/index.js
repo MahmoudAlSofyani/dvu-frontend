@@ -1,10 +1,12 @@
 import React from "react";
 import Layout from "../../components/layout";
 import SectionContainerLayout from "../../components/section-container-layout";
+import Seo from "../../components/seo";
 
 const SponsorsPage = () => {
   return (
     <Layout>
+      <Seo title="Sponsors" />
       <SectionContainerLayout title="Sponsors">
         <div className="md:space-y-20">
           <div className="mx-auto md:w-1/2 ">

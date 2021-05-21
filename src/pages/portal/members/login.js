@@ -7,6 +7,7 @@ import { useStoreState, useStoreActions } from "easy-peasy";
 import axios from "axios";
 import { useHistory } from "react-router-dom";
 import loginValidator from "../../../validators/login-validator";
+import Seo from "../../../components/seo";
 
 const MembersLoginPage = () => {
   const [errorMessages, setErrorMessage] = useState("");
@@ -105,6 +106,7 @@ const MembersLoginPage = () => {
   return (
     <Layout>
       <div className="container flex flex-col items-center space-y-6 bg-darkGray p-5 rounded-lg mx-auto max-w-md ">
+        <Seo title="Members Login" />
         <h6 className="text-white uppercase font-bold tracking-widest text-xl">
           Members Login
         </h6>

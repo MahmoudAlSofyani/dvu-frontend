@@ -10,6 +10,7 @@ import { FiSend } from "react-icons/fi";
 import moment from "moment";
 import { useStoreActions, useStoreState } from "easy-peasy";
 import { addComment } from "../../../validators/comments-validator";
+import Seo from "../../../components/seo";
 
 const MemberDashboard_Forums_View = () => {
   const location = useLocation();
@@ -93,6 +94,7 @@ const MemberDashboard_Forums_View = () => {
         <div className="w-full flex flex-col space-y-5">
           {isDataLoaded ? (
             <>
+              <Seo title={currentPost.title} />
               <div className="bg-red text-white p-4 rounded-md shadow-md">
                 <p className="font-bold">{currentPost.title}</p>
                 <p className="text-sm">{currentPost.description}</p>

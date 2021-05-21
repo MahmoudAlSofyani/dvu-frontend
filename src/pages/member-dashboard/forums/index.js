@@ -6,6 +6,7 @@ import moment from "moment";
 import SearchBar from "../../../components/search-bar";
 import SectionHeader from "../../../components/section-header";
 import { useHistory } from "react-router-dom";
+import Seo from "../../../components/seo";
 const MemberDashboard_Forums = () => {
   const [posts, setPosts] = useState([]);
   const history = useHistory();
@@ -22,7 +23,6 @@ const MemberDashboard_Forums = () => {
   }, [setPosts]);
 
   const handleGoToPost = (id) => {
-
     localStorage.setItem("postId", id);
     history.push({
       pathname: "/members/forums/view",
@@ -50,6 +50,7 @@ const MemberDashboard_Forums = () => {
   return (
     <Layout>
       <div className="container flex flex-col  space-y-6 bg-darkGray p-5 rounded-lg mx-auto max-w-md ">
+        <Seo title="Forums" />
         <SectionHeader
           heading="Forums"
           buttonLink="/members/forums/add"

@@ -12,6 +12,7 @@ import {
 } from "react-icons/ai";
 import SectionHeader from "../../../components/section-header";
 import { useHistory } from "react-router-dom";
+import Seo from "../../../components/seo";
 const MemberDashboard_Profile = () => {
   const currentUser = useStoreState((state) => state.currentUser.currentUser);
   const setCurrentUser = useStoreActions(
@@ -42,6 +43,7 @@ const MemberDashboard_Profile = () => {
   return (
     <Layout>
       <div className="container flex flex-col space-y-6 bg-darkGray p-5 rounded-lg mx-auto max-w-md ">
+        <Seo title="Profile" />
         <SectionHeader
           heading="Profile"
           buttonLabel="Logout"

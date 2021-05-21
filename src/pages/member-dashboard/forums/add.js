@@ -8,9 +8,10 @@ import axios from "axios";
 import { useStoreState } from "easy-peasy";
 import { useHistory } from "react-router-dom";
 import { addPost } from "../../../validators/forums-validator";
+import Seo from "../../../components/seo";
 const MemberDashboard_Forums_Add = () => {
   const [formData, setFormData] = useState({});
-  const [validationErrors, setValidationErrors] = useState({})
+  const [validationErrors, setValidationErrors] = useState({});
   const history = useHistory();
 
   const currentUser = useStoreState((state) => state.currentUser.currentUser);
@@ -57,6 +58,7 @@ const MemberDashboard_Forums_Add = () => {
   return (
     <Layout>
       <div className="container flex flex-col space-y-6 bg-darkGray p-5 rounded-lg mx-auto max-w-md">
+        <Seo title="Add Post" />
         <SectionHeader
           heading="Forums"
           backLink="/members/forums"
