@@ -3,10 +3,11 @@ import MemberDashboardMenu from "../../components/dashboard-menu/members";
 import Layout from "../../components/layout";
 import { useHistory } from "react-router-dom";
 import axios from "axios";
-import { useStoreState } from "easy-peasy";
+import { useStoreActions, useStoreState } from "easy-peasy";
 import moment from "moment";
 import SectionHeader from "../../components/section-header";
 import { Fragment } from "react";
+import Seo from "../../components/seo";
 const MembersDashboardIndexPage = () => {
   const [isDataLoaded, setIsDataLoaded] = useState(false);
   const [announcements, setAnnouncements] = useState([]);
@@ -16,8 +17,18 @@ const MembersDashboardIndexPage = () => {
   const history = useHistory();
 
   const currentUser = useStoreState((state) => state.currentUser.currentUser);
+  const setCurrentUser = useStoreActions(
+    (actions) => actions.currentUser.setCurrentUser
+  );
 
   useEffect(() => {
+    if (!localStorage.getItem("token")) {
+      history.push("/members/login");
+    }
+
+    if (Object.keys(currentUser).length === 0) {
+      setCurrentUser(JSON.parse(localStorage.getItem("currentUser")));
+    }
     Promise.all([
       axios.get("/announcements"),
       axios.get("/events"),
@@ -56,6 +67,7 @@ const MembersDashboardIndexPage = () => {
   return (
     <Layout>
       <div className="container flex flex-col  space-y-6 bg-darkGray p-5  rounded-lg mx-auto max-w-md text-center">
+        <Seo title="Dashboard" />
         <SectionHeader heading="Dashboard" />
 
         {isDataLoaded ? (

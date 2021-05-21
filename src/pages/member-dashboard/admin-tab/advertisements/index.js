@@ -1,4 +1,4 @@
-import { useStoreState } from "easy-peasy";
+import { useStoreActions, useStoreState } from "easy-peasy";
 import React, { useEffect, useState } from "react";
 import AdvertisementCard from "../../../../components/advertisement-card";
 import Layout from "../../../../components/layout";
@@ -10,9 +10,16 @@ const AdminTab_Advertisements = () => {
   const [advertisements, setAdvertisements] = useState([]);
   const [isDataLoaded, setIsDataLoaded] = useState(false);
   const currentUser = useStoreState((state) => state.currentUser.currentUser);
+  const setCurrentUser = useStoreActions(
+    (actions) => actions.currentUser.setCurrentUser
+  );
 
   useEffect(() => {
     try {
+      if (Object.keys(currentUser).length === 0) {
+        setCurrentUser(JSON.parse(localStorage.getItem("currentUser")));
+      }
+
       axios
         .get("/advertisements/false")
         .then((_response) => {

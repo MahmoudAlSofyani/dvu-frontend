@@ -6,11 +6,16 @@ import moment from "moment";
 import SearchBar from "../../../components/search-bar";
 import SectionHeader from "../../../components/section-header";
 import { useHistory } from "react-router-dom";
+import Seo from "../../../components/seo";
 const MemberDashboard_Forums = () => {
   const [posts, setPosts] = useState([]);
   const history = useHistory();
   useEffect(() => {
     try {
+      if (!localStorage.getItem("token")) {
+        history.push("/members/login");
+      }
+
       Promise.all([axios.get("/posts")]).then((_responses) => {
         if (_responses[0].status === 200) {
           setPosts(_responses[0].data);
@@ -22,9 +27,10 @@ const MemberDashboard_Forums = () => {
   }, [setPosts]);
 
   const handleGoToPost = (id) => {
+    localStorage.setItem("postId", id);
     history.push({
       pathname: "/members/forums/view",
-      state: { id },
+      state: { postId: id },
     });
   };
 
@@ -48,6 +54,7 @@ const MemberDashboard_Forums = () => {
   return (
     <Layout>
       <div className="container flex flex-col  space-y-6 bg-darkGray p-5 rounded-lg mx-auto max-w-md ">
+        <Seo title="Forums" />
         <SectionHeader
           heading="Forums"
           buttonLink="/members/forums/add"

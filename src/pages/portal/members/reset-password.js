@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import CustomButton from "../../../components/custom-button";
 import InputField from "../../../components/input-field";
 import Layout from "../../../components/layout";
+import Seo from "../../../components/seo";
 import resetPasswordValidator from "../../../validators/members-reset-password-validator";
 
 const MembersResetPassword = () => {
@@ -55,6 +56,7 @@ const MembersResetPassword = () => {
   return (
     <Layout>
       <div className="container flex flex-col items-center space-y-6 bg-darkGray p-5 rounded-lg mx-auto max-w-md ">
+        <Seo title="Reset Password" />
         <h6 className="text-white uppercase font-bold tracking-widest text-xl">
           Reset Password
         </h6>

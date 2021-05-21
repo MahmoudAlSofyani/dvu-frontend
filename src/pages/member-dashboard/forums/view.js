@@ -1,25 +1,38 @@
 import React, { useEffect, useState } from "react";
 import Layout from "../../../components/layout";
 import SectionHeader from "../../../components/section-header";
-import { useLocation } from "react-router-dom";
+import { useLocation, useHistory } from "react-router-dom";
 import axios from "axios";
 import MemberDashboardMenu from "../../../components/dashboard-menu/members";
 import InputField from "../../../components/input-field";
 import TextArea from "../../../components/text-area";
 import { FiSend } from "react-icons/fi";
 import moment from "moment";
-import { useStoreState } from "easy-peasy";
+import { useStoreActions, useStoreState } from "easy-peasy";
 import { addComment } from "../../../validators/comments-validator";
+import Seo from "../../../components/seo";
 
 const MemberDashboard_Forums_View = () => {
   const location = useLocation();
+  const history = useHistory();
   const [currentPost, setCurrentPost] = useState({});
   const [isDataLoaded, setIsDataLoaded] = useState(false);
   const [formData, setFormData] = useState({});
   const currentUser = useStoreState((state) => state.currentUser.currentUser);
+  const setCurrentUser = useStoreActions(
+    (actions) => actions.currentUser.setCurrentUser
+  );
 
   useEffect(() => {
     try {
+      if (!localStorage.getItem("token")) {
+        history.push("/members/login");
+      }
+
+      if (Object.keys(currentUser).length === 0) {
+        setCurrentUser(JSON.parse(localStorage.getItem("currentUser")));
+      }
+
       fetchPost();
     } catch (err) {
       console.log(err);
@@ -28,9 +41,14 @@ const MemberDashboard_Forums_View = () => {
 
   const fetchPost = async () => {
     try {
-      const { id } = location.state;
+      let postId;
+      if (location.state === undefined) {
+        postId = localStorage.getItem("postId");
+      } else {
+        postId = location.state.postId;
+      }
 
-      const _response = await axios.get(`/posts/${id}`);
+      const _response = await axios.get(`/posts/${postId}`);
       if (_response.status === 200) {
         setCurrentPost(_response.data);
         setIsDataLoaded(true);
@@ -81,9 +99,13 @@ const MemberDashboard_Forums_View = () => {
         <div className="w-full flex flex-col space-y-5">
           {isDataLoaded ? (
             <>
+              <Seo title={currentPost.title} />
               <div className="bg-red text-white p-4 rounded-md shadow-md">
                 <p className="font-bold">{currentPost.title}</p>
-                <p className="text-sm">{currentPost.description}</p>
+                <p
+                  className="text-sm"
+                  dangerouslySetInnerHTML={{ __html: currentPost.description }}
+                />
                 <p className="text-xs">
                   {currentPost.member.firstName} {currentPost.member.lastName}
                 </p>

@@ -73,6 +73,13 @@ const AdminTab_Announcements_Edit = () => {
   };
 
   useEffect(() => {
+    let announcementId;
+    if (location.state === undefined) {
+      announcementId = localStorage.getItem("announcementId");
+    } else {
+      announcementId = location.state.announcementId;
+    }
+
     axios.get(`/announcements/${announcementId}`).then((_response) => {
       if (_response.status === 200) {
         const { data } = _response;

@@ -101,6 +101,14 @@ const AdminTab_Events_Edit = () => {
   };
 
   useEffect(() => {
+
+    let eventId;
+    if (location.state === undefined) {
+      eventId = localStorage.getItem("eventId");
+    } else {
+      eventId = location.state.eventId;
+    }
+
     axios
       .get(`/events/${eventId}`)
       .then((_response) => {

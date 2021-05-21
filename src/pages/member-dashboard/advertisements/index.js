@@ -4,14 +4,28 @@ import Layout from "../../../components/layout";
 import axios from "axios";
 import SectionHeader from "../../../components/section-header";
 import AdvertisementCard from "../../../components/advertisement-card";
-import { useStoreState } from "easy-peasy";
+import { useStoreActions, useStoreState } from "easy-peasy";
+import Seo from "../../../components/seo";
+import { useHistory } from "react-router-dom";
 const MemberDashboard_Advertisements = () => {
   const [advertisements, setAdvertisements] = useState([]);
   const [isDataLoaded, setIsDataLoaded] = useState(false);
   const currentUser = useStoreState((state) => state.currentUser.currentUser);
+  const setCurrentUser = useStoreActions(
+    (actions) => actions.currentUser.setCurrentUser
+  );
+  const history = useHistory();
 
   useEffect(() => {
     try {
+      if (!localStorage.getItem("token")) {
+        history.push("/members/login");
+      }
+
+      if (Object.keys(currentUser).length === 0) {
+        setCurrentUser(JSON.parse(localStorage.getItem("currentUser")));
+      }
+
       axios
         .get("/advertisements/true")
         .then((_response) => {
@@ -41,6 +55,7 @@ const MemberDashboard_Advertisements = () => {
   return (
     <Layout>
       <div className="container flex flex-col space-y-6 bg-darkGray p-5 rounded-lg mx-auto max-w-md ">
+        <Seo title="Advertisements" />
         <SectionHeader
           heading="Advertisements"
           buttonLabel="Add"

@@ -1,10 +1,12 @@
 import React from "react";
 import CustomButton from "../../components/custom-button";
 import Layout from "../../components/layout";
+import Seo from "../../components/seo";
 
 const PortalPage = () => {
   return (
     <Layout>
+      <Seo title="Portal" />
       <div
         className="
        flex flex-col items-center space-y-6 bg-darkGray p-5 w-4/5 rounded-lg mx-auto max-w-md "

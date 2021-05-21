@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useStoreState } from "easy-peasy";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import CustomButton from "../../../components/custom-button";
 import CustomEditor from "../../../components/custom-editor";
 import InputField from "../../../components/input-field";
@@ -8,12 +8,19 @@ import Layout from "../../../components/layout";
 import SectionHeader from "../../../components/section-header";
 import { addAdvertisement } from "../../../validators/advertisements-validator";
 import { useHistory } from "react-router-dom";
+import Seo from "../../../components/seo";
 
 const MemberDashboard_Advertisements_Add = () => {
   const currentUser = useStoreState((state) => state.currentUser.currentUser);
   const [formData, setFormData] = useState({});
   const [validationErrors, setValidationErrors] = useState({});
-  const history = useHistory()
+  const history = useHistory();
+
+  useEffect(() => {
+    if (!localStorage.getItem("token")) {
+      history.push("/members/login");
+    }
+  });
 
   const handleFormChange = (e) => {
     const { value, name } = e.target;
@@ -96,6 +103,7 @@ const MemberDashboard_Advertisements_Add = () => {
   return (
     <Layout>
       <div className="container flex flex-col space-y-6 bg-darkGray p-5 rounded-lg mx-auto max-w-md ">
+        <Seo title="Add Advertisement" />
         <SectionHeader
           heading="Advertisements"
           subHeading="Add new advertisement"

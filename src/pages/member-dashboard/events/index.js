@@ -5,12 +5,18 @@ import EventCard from "../../../components/event-card";
 import axios from "axios";
 import moment from "moment";
 import SectionHeader from "../../../components/section-header";
+import Seo from "../../../components/seo";
+import { useHistory } from "react-router-dom";
 const MemberDashboard_Events = () => {
   const [events, setEvents] = useState([]);
   const [isDataLoaded, setIsDataLoaded] = useState(false);
-
+  const history = useHistory();
   useEffect(() => {
     try {
+      if (!localStorage.getItem("token")) {
+        history.push("/members/login");
+      }
+
       axios
         .get("/events")
         .then((_response) => {
@@ -28,6 +34,7 @@ const MemberDashboard_Events = () => {
   return (
     <Layout>
       <div className="container flex flex-col space-y-6 bg-darkGray p-5 rounded-lg mx-auto max-w-md ">
+        <Seo title="Events" />
         <SectionHeader heading="Events" />
         <div className="w-full flex flex-col space-y-5">
           {isDataLoaded && events.length > 0 ? (

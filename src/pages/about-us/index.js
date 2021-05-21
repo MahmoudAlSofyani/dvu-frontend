@@ -1,10 +1,12 @@
 import React from "react";
 import Layout from "../../components/layout";
 import SectionContainerLayout from "../../components/section-container-layout";
+import Seo from "../../components/seo";
 
 const AboutUsPage = () => {
   return (
     <Layout>
+      <Seo title="About Us" />
       <SectionContainerLayout title="The #Circle">
         <div className="mx-auto w-full">
           <img

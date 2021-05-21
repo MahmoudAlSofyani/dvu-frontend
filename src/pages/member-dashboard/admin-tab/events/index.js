@@ -27,6 +27,9 @@ const AdminTab_Events = () => {
   }, [setEvents]);
 
   const handleEditEvent = (eventId) => {
+
+    localStorage.setItem("eventId", eventId)
+
     history.push({
       pathname: "/admin/events/edit",
       state: { eventId },

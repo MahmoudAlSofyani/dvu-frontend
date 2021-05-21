@@ -1,10 +1,12 @@
 import React from "react";
 import CustomButton from "../../components/custom-button";
 import Layout from "../../components/layout";
+import Seo from "../../components/seo";
 
 const HomePage = () => {
   return (
     <div className="bgImage">
+      <Seo noPipe />
       <Layout>
         <div className=" space-y-5 text-center text-white w-4/5 fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
           <h1 className="font-bold text-2xl uppercase">We are the #Circle</h1>

@@ -23,6 +23,8 @@ const AdminTab_Announcements = () => {
   }, [setAnnouncements]);
 
   const handleEditAnnouncement = (announcementId) => {
+    localStorage.setItem("announcementId", announcementId);
+
     history.push({
       pathname: "/admin/announcements/edit",
       state: { announcementId },

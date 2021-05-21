@@ -18,12 +18,19 @@ import SectionHeader from "../../../components/section-header";
 import { generateYearArray } from "../../../helpers/common";
 import CustomAvatarEditor from "../../../components/custom-avatar-editor";
 import axios from "axios";
+import Seo from "../../../components/seo";
+import { useHistory } from "react-router-dom";
 
 const MemberDashboard_Settings = () => {
   const currentUser = useStoreState((state) => state.currentUser.currentUser);
+  const history = useHistory();
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [carYears, setCarYears] = useState([]);
-  const [memberData, setMemberData] = useState(currentUser);
+  const [memberData, setMemberData] = useState(
+    Object.keys(currentUser).length === 0
+      ? JSON.parse(localStorage.getItem("currentUser"))
+      : currentUser
+  );
   const [carModels, setCarModels] = useState([]);
   const [carColors, setCarColors] = useState([]);
   const [plateEmirates, setPlateEmirates] = useState([]);
@@ -45,6 +52,14 @@ const MemberDashboard_Settings = () => {
 
   useEffect(() => {
     try {
+      if (!localStorage.getItem("token")) {
+        history.push("/members/login");
+      }
+
+      if (Object.keys(currentUser).length === 0) {
+        setCurrentUser(JSON.parse(localStorage.getItem("currentUser")));
+      }
+
       Promise.all([
         getCarModels(),
         getCarColors(),
@@ -134,9 +149,9 @@ const MemberDashboard_Settings = () => {
         setCurrentUser({ ...currentUser, ..._updatedUser });
         setMemberData({
           ...currentUser,
-          ..._updatedUser
-        })
-        setIsDataLoaded(true)
+          ..._updatedUser,
+        });
+        setIsDataLoaded(true);
       }
     } catch (err) {
       console.log(err);
@@ -146,6 +161,7 @@ const MemberDashboard_Settings = () => {
   return (
     <Layout>
       <div className="container flex flex-col space-y-6 bg-darkGray p-5 rounded-lg mx-auto max-w-md ">
+        <Seo title="Settings" />
         <SectionHeader heading="Settings" />
         <p className="text-white">Personal Information</p>
         <div className="flex flex-row">
