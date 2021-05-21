@@ -9,6 +9,7 @@ import { useStoreState } from "easy-peasy";
 import { useHistory } from "react-router-dom";
 import { addPost } from "../../../validators/forums-validator";
 import Seo from "../../../components/seo";
+import CustomEditor from "../../../components/custom-editor";
 const MemberDashboard_Forums_Add = () => {
   const [formData, setFormData] = useState({});
   const [validationErrors, setValidationErrors] = useState({});
@@ -26,6 +27,19 @@ const MemberDashboard_Forums_Add = () => {
     setFormData({
       ...formData,
       [e.target.name]: e.target.value,
+    });
+  };
+
+  const handleEditorChange = (event, editor) => {
+    const data = editor.getData();
+
+    setFormData({
+      ...formData,
+      description: data,
+    });
+    setValidationErrors({
+      ...validationErrors,
+      description: null,
     });
   };
 
@@ -81,14 +95,25 @@ const MemberDashboard_Forums_Add = () => {
             handleInputChange={handleFormChange}
             errorMessage={validationErrors.title}
           />
-          <TextArea
+          {/* <TextArea
             rows={5}
             placeholder="Your question"
             name="description"
             required
             handleInputChange={handleFormChange}
             errorMessage={validationErrors.description}
-          />
+          /> */}
+          <div>
+            <CustomEditor
+              placeholder="Your question"
+              handleOnChange={handleEditorChange}
+            />
+            {validationErrors.description ? (
+              <p className="text-red text-sm mt-1">
+                {validationErrors.description}
+              </p>
+            ) : null}
+          </div>
           {/* <DropdownField
               handleInputChange={handleFormChange}
               options={categories}

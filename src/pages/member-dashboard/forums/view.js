@@ -29,7 +29,6 @@ const MemberDashboard_Forums_View = () => {
         history.push("/members/login");
       }
 
-
       if (Object.keys(currentUser).length === 0) {
         setCurrentUser(JSON.parse(localStorage.getItem("currentUser")));
       }
@@ -103,7 +102,10 @@ const MemberDashboard_Forums_View = () => {
               <Seo title={currentPost.title} />
               <div className="bg-red text-white p-4 rounded-md shadow-md">
                 <p className="font-bold">{currentPost.title}</p>
-                <p className="text-sm">{currentPost.description}</p>
+                <p
+                  className="text-sm"
+                  dangerouslySetInnerHTML={{ __html: currentPost.description }}
+                />
                 <p className="text-xs">
                   {currentPost.member.firstName} {currentPost.member.lastName}
                 </p>
