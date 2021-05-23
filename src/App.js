@@ -32,23 +32,9 @@ import MembersResetPassword from "./pages/portal/members/reset-password";
 import MembersUpdatePassword from "./pages/portal/members/update-password";
 import AdminTab_Sponsors from "./pages/member-dashboard/admin-tab/sponsors";
 import AdminTab_Sponsors_New from "./pages/member-dashboard/admin-tab/sponsors/new";
+import MemberDashboard_Advertisements_View from "./pages/member-dashboard/advertisements/view";
 
 function App() {
-  // useEffect(() => {
-  //   try {
-  //     const token = localStorage.getItem("token");
-
-  //     if (token) {
-  //       axios.get("/auth/verify-token").then((_response) => {
-  //         if (_response.status === 200) {
-  //           setCurrentUser(_response.data._member);
-  //         }
-  //       });
-  //     }
-  //   } catch (err) {
-  //     console.log(err);
-  //   }
-  // });
   return (
     <Switch>
       <Route exact path="/" component={HomePage} />
@@ -85,6 +71,11 @@ function App() {
         exact
         path="/advertisements/add"
         component={MemberDashboard_Advertisements_Add}
+      />
+      <Route
+        exact
+        path="/advertisements/:advertisementId"
+        component={MemberDashboard_Advertisements_View}
       />
       <Route exact path="/forums" component={MemberDashboard_Forums} />
       <Route exact path="/forums/add" component={MemberDashboard_Forums_Add} />

@@ -21,7 +21,7 @@ const AdminTab_Advertisements = () => {
       }
 
       axios
-        .get("/advertisements/false")
+        .get("/advertisements/status/false")
         .then((_response) => {
           if (_response.status === 200) {
             setAdvertisements(_response.data);
@@ -41,10 +41,14 @@ const AdminTab_Advertisements = () => {
         verified: true,
       };
 
+      let _updatedAdvertisements = advertisements.filter(
+        (_advertisement) => _advertisement.id !== id
+      );
+
       const _response = await axios.put("/advertisements", body);
 
       if (_response.status === 200) {
-        setIsDataLoaded(false);
+        setAdvertisements(_updatedAdvertisements);
       }
     } catch (err) {
       console.log(err);
@@ -58,9 +62,13 @@ const AdminTab_Advertisements = () => {
         verified: false,
       };
 
+      let _updatedAdvertisements = advertisements.filter(
+        (_advertisement) => _advertisement.id !== id
+      );
+
       const _response = await axios.put("/advertisements", body);
       if (_response.status === 200) {
-        setIsDataLoaded(false);
+        setAdvertisements(_updatedAdvertisements);
       }
     } catch (err) {
       console.log(err);

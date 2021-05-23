@@ -41,8 +41,6 @@ const AdvertisementCard = ({
     }
   };
 
- 
-
   return (
     <div className="bg-charcoal p-3 rounded-md text-white space-y-4">
       <div className="flex flex-row justify-between">

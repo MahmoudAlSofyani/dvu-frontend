@@ -3,7 +3,6 @@ import MemberDashboardMenu from "../../../components/dashboard-menu/members";
 import Layout from "../../../components/layout";
 import axios from "axios";
 import SectionHeader from "../../../components/section-header";
-import AdvertisementCard from "../../../components/advertisement-card";
 import { useStoreActions, useStoreState } from "easy-peasy";
 import Seo from "../../../components/seo";
 import { useHistory } from "react-router-dom";
@@ -27,7 +26,7 @@ const MemberDashboard_Advertisements = () => {
       }
 
       axios
-        .get("/advertisements/true")
+        .get("/advertisements/status/true")
         .then((_response) => {
           if (_response.status === 200) {
             setAdvertisements(_response.data);
@@ -40,15 +39,9 @@ const MemberDashboard_Advertisements = () => {
     }
   }, [setAdvertisements]);
 
-  const handleDelete = async (id) => {
-    try {
-      const _response = await axios.delete(`/advertisements/${id}`);
-      if (_response) {
-        setIsDataLoaded(false);
-      }
-    } catch (err) {
-      console.log(err);
-    }
+  const handleGoToAdvertisement = (urlSlug) => {
+    localStorage.setItem("advertisementUrlSlug", urlSlug);
+    history.push(`/advertisements/${urlSlug}`);
   };
 
   return (
@@ -62,22 +55,24 @@ const MemberDashboard_Advertisements = () => {
         />
         {isDataLoaded && advertisements.length > 0 ? (
           advertisements.map((_advertisement, index) => (
-            <AdvertisementCard
+            <div
               key={index}
-              id={_advertisement.id}
-              sold={_advertisement.sold}
-              price={_advertisement.price}
-              imageId={_advertisement.image.id}
-              title={_advertisement.title}
-              description={_advertisement.description}
-              member={_advertisement.member}
-              mobileNumber={_advertisement.member.mobileNumber}
-              whatsAppNumber={_advertisement.member.whatsAppNumber}
-              currentUserId={currentUser.id}
-              verified={_advertisement.verified}
-              showDeleteButton={localStorage.getItem("isAdmin")}
-              handleDelete={() => handleDelete(_advertisement.id)}
-            />
+              className="bg-charcoal rounded-md p-4 flex flex-row justify-between shadow-md cursor-pointer "
+              onClick={() => handleGoToAdvertisement(_advertisement.urlSlug)}
+            >
+              <div className="w-full">
+                <p className="text-white">{_advertisement.title}</p>
+                <p className="text-red text-sm">
+                  {_advertisement.member.firstName}{" "}
+                  {_advertisement.member.lastName}
+                </p>
+              </div>
+              <div className="w-3/5 flex flex-col self-center bg-red rounded-md shadow-md">
+                <p className="text-white text-center">
+                  {"AED " + _advertisement.price}
+                </p>
+              </div>
+            </div>
           ))
         ) : (
           <p className="text-white opacity-50">No advertisements...</p>
