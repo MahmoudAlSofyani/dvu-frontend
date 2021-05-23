@@ -5,7 +5,7 @@ import Layout from "../../../components/layout";
 import SectionHeader from "../../../components/section-header";
 import TextArea from "../../../components/text-area";
 import axios from "axios";
-import { useStoreState } from "easy-peasy";
+import { useStoreActions, useStoreState } from "easy-peasy";
 import { useHistory } from "react-router-dom";
 import { addPost } from "../../../validators/forums-validator";
 import Seo from "../../../components/seo";
@@ -16,10 +16,17 @@ const MemberDashboard_Forums_Add = () => {
   const history = useHistory();
 
   const currentUser = useStoreState((state) => state.currentUser.currentUser);
+  const setCurrentUser = useStoreActions(
+    (actions) => actions.currentUser.setCurrentUser
+  );
 
   useEffect(() => {
     if (!localStorage.getItem("token")) {
       history.push("/members/login");
+    }
+
+    if (Object.keys(currentUser).length === 0) {
+      setCurrentUser(JSON.parse(localStorage.getItem("currentUser")));
     }
   });
 
@@ -59,7 +66,7 @@ const MemberDashboard_Forums_Add = () => {
           const _response = await axios.post("/posts", body);
 
           if (_response.status === 200) {
-            history.push("/members/forums");
+            history.push("/forums");
           }
         })
         .catch((err) => {
@@ -82,7 +89,7 @@ const MemberDashboard_Forums_Add = () => {
         <Seo title="Add Post" />
         <SectionHeader
           heading="Forums"
-          backLink="/members/forums"
+          backLink="/forums"
           subHeading="Post your Question"
         />
         <div className="w-full flex flex-col space-y-5">

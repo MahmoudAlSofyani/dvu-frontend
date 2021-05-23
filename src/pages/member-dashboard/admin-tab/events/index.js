@@ -18,7 +18,6 @@ const AdminTab_Events = () => {
         .then((_response) => {
           if (_response.status === 200) {
             setEvents(_response.data);
-            console.log(_response.data);
             setIsDataLoaded(true);
           }
         })

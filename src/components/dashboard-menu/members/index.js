@@ -13,7 +13,7 @@ const MemberDashboardMenu = () => {
   // useEffect(() => {
   //   try {
   //     axios
-  //       .post("/members/role", { id: currentUser.id, role: "Admin" })
+  //       .post("/role", { id: currentUser.id, role: "Admin" })
   //       .then((_response) => {
   //         if (_response.status === 200) {
   //           const { _isRoleExist } = _response.data;
@@ -30,46 +30,46 @@ const MemberDashboardMenu = () => {
 
   return (
     <div className="fixed right-0 left-0 bottom-0 flex items-center justify-between p-3 bg-darkGray">
-      <NavLink to="/members/forums">
+      <NavLink to="/forums">
         <MdForum
           className={` ${
-            location.pathname === "/members/forums"
+            location.pathname === "/forums"
               ? "text-white text-4xl"
               : "text-red text-3xl"
           }`}
         />
       </NavLink>
-      <NavLink to="/members/events">
+      <NavLink to="/events">
         <BsCalendar
           className={` ${
-            location.pathname === "/members/events"
+            location.pathname === "/events"
               ? "text-white text-4xl"
               : "text-red text-3xl"
           }`}
         />
       </NavLink>
-      <NavLink to="/members/announcements">
+      <NavLink to="/announcements">
         <MdAnnouncement
           className={` ${
-            location.pathname === "/members/announcements"
+            location.pathname === "/announcements"
               ? "text-white text-4xl"
               : "text-red text-3xl"
           }`}
         />
       </NavLink>
-      <NavLink to="/members/dashboard">
+      <NavLink to="/dashboard">
         <AiOutlineHome
           className={` ${
-            location.pathname === "/members/dashboard"
+            location.pathname === "/dashboard"
               ? "text-white text-4xl"
               : "text-red text-3xl"
           }`}
         />
       </NavLink>
-      <NavLink to="/members/settings">
+      <NavLink to="/settings">
         <BsGear
           className={` ${
-            location.pathname === "/members/settings"
+            location.pathname === "/settings"
               ? "text-white text-4xl"
               : "text-red text-3xl"
           }`}
@@ -84,20 +84,20 @@ const MemberDashboardMenu = () => {
           }`}
         />
       </NavLink>
-      <NavLink to="/members/advertisements">
+      <NavLink to="/advertisements">
         <RiAdvertisementLine
           className={` ${
-            location.pathname === "/members/advertisements"
+            location.pathname === "/advertisements"
               ? "text-white text-4xl"
               : "text-red text-3xl"
           }`}
         />
       </NavLink>
       {isAdmin ? (
-        <NavLink to="/members/admin">
+        <NavLink to="/admin">
           <AiOutlineLock
             className={` ${
-              location.pathname === "/members/admin"
+              location.pathname === "/admin"
                 ? "text-white text-4xl"
                 : "text-red text-3xl"
             }`}

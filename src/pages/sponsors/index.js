@@ -42,8 +42,8 @@ const SponsorsPage = () => {
             <p className="text-white opacity-80 leading-7">
               3W Healthcare Solutions provides an extensive range of healthcare
               products such as walking aids, first aid kits, surgical
-              equipments, dentail accessories and first aid products along with
-              a unique client/vendor management system for First Aid products.
+              equipments, dental accessories and first aid products along with a
+              unique client/vendor management system for First Aid products.
             </p>
           </div>
           <hr className="text-red w-1/4 mx-auto" />

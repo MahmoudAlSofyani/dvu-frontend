@@ -12,8 +12,7 @@ import { useStoreActions, useStoreState } from "easy-peasy";
 import { addComment } from "../../../validators/comments-validator";
 import Seo from "../../../components/seo";
 
-const MemberDashboard_Forums_View = () => {
-  const location = useLocation();
+const MemberDashboard_Forums_View = ({ match }) => {
   const history = useHistory();
   const [currentPost, setCurrentPost] = useState({});
   const [isDataLoaded, setIsDataLoaded] = useState(false);
@@ -22,6 +21,10 @@ const MemberDashboard_Forums_View = () => {
   const setCurrentUser = useStoreActions(
     (actions) => actions.currentUser.setCurrentUser
   );
+
+  const {
+    params: { postId },
+  } = match;
 
   useEffect(() => {
     try {
@@ -41,14 +44,9 @@ const MemberDashboard_Forums_View = () => {
 
   const fetchPost = async () => {
     try {
-      let postId;
-      if (location.state === undefined) {
-        postId = localStorage.getItem("postId");
-      } else {
-        postId = location.state.postId;
-      }
+      let _postId = postId.substring(0, 36);
 
-      const _response = await axios.get(`/posts/${postId}`);
+      const _response = await axios.get(`/posts/${_postId}`);
       if (_response.status === 200) {
         setCurrentPost(_response.data);
         setIsDataLoaded(true);
@@ -83,7 +81,7 @@ const MemberDashboard_Forums_View = () => {
               ...formData,
               comment: "",
             });
-            fetchPost();
+            // fetchPost();
           }
         })
         .catch((err) => console.log(err));
@@ -95,7 +93,7 @@ const MemberDashboard_Forums_View = () => {
   return (
     <Layout>
       <div className="container flex flex-col space-y-6 bg-darkGray p-5 rounded-lg mx-auto max-w-md">
-        <SectionHeader heading="Forums" backLink="/members/forums" />
+        <SectionHeader heading="Forums" backLink="/forums" />
         <div className="w-full flex flex-col space-y-5">
           {isDataLoaded ? (
             <>

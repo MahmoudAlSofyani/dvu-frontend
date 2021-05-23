@@ -83,7 +83,7 @@ const MemberDashboard_Advertisements_Add = () => {
             },
           });
           if (_response.status === 200) {
-            history.push("/members/advertisements");
+            history.push("/advertisements");
           }
         })
         .catch((err) => {
@@ -107,7 +107,7 @@ const MemberDashboard_Advertisements_Add = () => {
         <SectionHeader
           heading="Advertisements"
           subHeading="Add new advertisement"
-          backLink="/members/advertisements"
+          backLink="/advertisements"
         />
         <div className="space-y-5">
           <InputField
@@ -144,6 +144,13 @@ const MemberDashboard_Advertisements_Add = () => {
             accept="image/*"
             errorMessage={validationErrors.imageFile}
           />
+          <div>
+            <p className="text-white opacity-70 leading-8">
+              After you submit your ad, please allow some time for an admin to
+              ensure your advertisement is safe for publishing. Once it has been
+              approved, everyone will be able to see your advertisement.
+            </p>
+          </div>
           <CustomButton
             label="Submit"
             styleType={2}
