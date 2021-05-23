@@ -68,41 +68,29 @@ function App() {
       <Route exact path="/sponsors" component={SponsorsPage} />
       <Route exact path="/about-us" component={AboutUsPage} />
       <Route exact path="/sponsors/login" component={SponsorsLoginPage} />
+      <Route exact path="/dashboard" component={MembersDashboardIndexPage} />
+      <Route exact path="/settings" component={MemberDashboard_Settings} />
+      <Route exact path="/events" component={MemberDashboard_Events} />
       <Route
         exact
-        path="/members/dashboard"
-        component={MembersDashboardIndexPage}
-      />
-      <Route
-        exact
-        path="/members/settings"
-        component={MemberDashboard_Settings}
-      />
-      <Route exact path="/members/events" component={MemberDashboard_Events} />
-      <Route
-        exact
-        path="/members/announcements"
+        path="/announcements"
         component={MemberDashboard_Announcements}
       />
       <Route
         exact
-        path="/members/advertisements"
+        path="/advertisements"
         component={MemberDashboard_Advertisements}
       />
       <Route
         exact
-        path="/members/advertisements/add"
+        path="/advertisements/add"
         component={MemberDashboard_Advertisements_Add}
       />
-      <Route exact path="/members/forums" component={MemberDashboard_Forums} />
+      <Route exact path="/forums" component={MemberDashboard_Forums} />
+      <Route exact path="/forums/add" component={MemberDashboard_Forums_Add} />
       <Route
         exact
-        path="/members/forums/add"
-        component={MemberDashboard_Forums_Add}
-      />
-      <Route
-        exact
-        path="/members/forums/view"
+        path="/forums/:postId"
         component={MemberDashboard_Forums_View}
       />
       <Route
@@ -110,7 +98,7 @@ function App() {
         path="/members/profile"
         component={MemberDashboard_Profile}
       />
-      <Route exact path="/members/admin" component={MemberDashboard_Admin} />
+      <Route exact path="/admin" component={MemberDashboard_Admin} />
       <Route
         exact
         path="/admin/announcements"

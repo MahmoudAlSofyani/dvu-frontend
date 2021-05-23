@@ -59,7 +59,7 @@ const MemberDashboard_Advertisements = () => {
         <SectionHeader
           heading="Advertisements"
           buttonLabel="Add"
-          buttonLink="/members/advertisements/add"
+          buttonLink="/advertisements/add"
         />
         {isDataLoaded && advertisements.length > 0 ? (
           advertisements.map((_advertisement, index) => (

@@ -83,7 +83,7 @@ const MemberDashboard_Advertisements_Add = () => {
             },
           });
           if (_response.status === 200) {
-            history.push("/members/advertisements");
+            history.push("/advertisements");
           }
         })
         .catch((err) => {
@@ -107,7 +107,7 @@ const MemberDashboard_Advertisements_Add = () => {
         <SectionHeader
           heading="Advertisements"
           subHeading="Add new advertisement"
-          backLink="/members/advertisements"
+          backLink="/advertisements"
         />
         <div className="space-y-5">
           <InputField

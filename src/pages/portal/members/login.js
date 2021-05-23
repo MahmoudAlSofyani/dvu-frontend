@@ -64,7 +64,7 @@ const MembersLoginPage = () => {
                   },
                 });
               } else {
-                history.push("/members/dashboard");
+                history.push("/dashboard");
               }
             }
           } else if (_response.status === 401) {
@@ -94,7 +94,7 @@ const MembersLoginPage = () => {
         axios.get("/auth/verify-token").then((_response) => {
           if (_response.status === 200) {
             setCurrentUser(_response.data._member);
-            history.push("/members/dashboard");
+            history.push("/dashboard");
           }
         });
       }

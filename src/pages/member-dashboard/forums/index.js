@@ -19,6 +19,7 @@ const MemberDashboard_Forums = () => {
       Promise.all([axios.get("/posts")]).then((_responses) => {
         if (_responses[0].status === 200) {
           setPosts(_responses[0].data);
+          console.log(_responses[0].data);
         }
       });
     } catch (err) {
@@ -26,12 +27,15 @@ const MemberDashboard_Forums = () => {
     }
   }, [setPosts]);
 
-  const handleGoToPost = (id) => {
-    localStorage.setItem("postId", id);
-    history.push({
-      pathname: "/members/forums/view",
-      state: { postId: id },
-    });
+  const handleGoToPost = (urlSlug) => {
+    localStorage.setItem("postUrlSlug", urlSlug);
+    // history.push({
+    //   pathname: "/members/forums/view",
+    //   state: { postId: id },
+    // });
+    console.log(urlSlug);
+
+    history.push(`/forums/${urlSlug}`);
   };
 
   const handleSearch = async (e) => {
@@ -57,7 +61,7 @@ const MemberDashboard_Forums = () => {
         <Seo title="Forums" />
         <SectionHeader
           heading="Forums"
-          buttonLink="/members/forums/add"
+          buttonLink="/forums/add"
           buttonLabel="New"
         />
         <div className="w-full flex flex-col space-y-5">
@@ -87,7 +91,7 @@ const MemberDashboard_Forums = () => {
             <div
               key={index}
               className="bg-charcoal rounded-md p-4 flex flex-row justify-between shadow-md cursor-pointer "
-              onClick={() => handleGoToPost(_post.id)}
+              onClick={() => handleGoToPost(_post.urlSlug)}
             >
               <div className="w-full">
                 <p className="text-white">{_post.title}</p>
