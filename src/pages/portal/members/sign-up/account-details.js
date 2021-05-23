@@ -76,6 +76,15 @@ const MembersSignUpPageAccountDetails = () => {
       <p className="text-white">
         <span className="text-red">*</span> Required
       </p>
+      <div>
+        <p className="text-white opacity-60">
+          After submitting the form, please give us time to verify your details
+          and approve your account. <br />
+          <br />
+          During this time, you will not be able to log in. We will notify you
+          by email when your account has been approved.
+        </p>
+      </div>
       <div className="flex space-x-6">
         <CustomButton
           handleOnClick={() => setStepNumber(2)}

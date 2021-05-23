@@ -62,10 +62,10 @@ const MemberDashboard_Advertisements = () => {
             >
               <div className="w-full">
                 <p className="text-white">{_advertisement.title}</p>
-                <p className="text-red text-sm">
+                {/* <p className="text-red text-sm">
                   {_advertisement.member.firstName}{" "}
                   {_advertisement.member.lastName}
-                </p>
+                </p> */}
               </div>
               <div className="w-3/5 flex flex-col self-center bg-red rounded-md shadow-md">
                 <p className="text-white text-center">
