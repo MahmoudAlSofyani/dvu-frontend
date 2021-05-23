@@ -19,7 +19,6 @@ const MemberDashboard_Forums = () => {
       Promise.all([axios.get("/posts")]).then((_responses) => {
         if (_responses[0].status === 200) {
           setPosts(_responses[0].data);
-          console.log(_responses[0].data);
         }
       });
     } catch (err) {
@@ -33,7 +32,6 @@ const MemberDashboard_Forums = () => {
     //   pathname: "/members/forums/view",
     //   state: { postId: id },
     // });
-    console.log(urlSlug);
 
     history.push(`/forums/${urlSlug}`);
   };

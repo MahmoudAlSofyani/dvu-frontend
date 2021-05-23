@@ -32,7 +32,6 @@ const MemberDashboard_Advertisements = () => {
           if (_response.status === 200) {
             setAdvertisements(_response.data);
             setIsDataLoaded(true);
-            console.log(_response.data);
           }
         })
         .catch((err) => console.log(err));
