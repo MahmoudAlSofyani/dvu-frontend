@@ -34,7 +34,7 @@ const MembersResetPassword = () => {
             .post("/auth/members/reset-password", formData)
             .then((_response) => {
               setConfirmationMessage(
-                `If the email ${formData.emailAddress} exists, you will receieve an email with your new password.`
+                `If the email ${formData.emailAddress} exists, you will recieve an email with your new password.`
               );
             })
             .catch((err) => console.log(err));

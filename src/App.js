@@ -33,6 +33,8 @@ import MembersUpdatePassword from "./pages/portal/members/update-password";
 import AdminTab_Sponsors from "./pages/member-dashboard/admin-tab/sponsors";
 import AdminTab_Sponsors_New from "./pages/member-dashboard/admin-tab/sponsors/new";
 import MemberDashboard_Advertisements_View from "./pages/member-dashboard/advertisements/view";
+import MemberDashboard_Announcements_View from "./pages/member-dashboard/announcements/view";
+import MemberDashboard_Events_View from "./pages/member-dashboard/events/view";
 
 function App() {
   return (
@@ -59,8 +61,18 @@ function App() {
       <Route exact path="/events" component={MemberDashboard_Events} />
       <Route
         exact
+        path="/events/:eventId"
+        component={MemberDashboard_Events_View}
+      />
+      <Route
+        exact
         path="/announcements"
         component={MemberDashboard_Announcements}
+      />
+      <Route
+        exact
+        path="/announcements/:announcementId"
+        component={MemberDashboard_Announcements_View}
       />
       <Route
         exact

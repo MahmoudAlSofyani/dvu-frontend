@@ -153,15 +153,20 @@ const MembersSignUpPageCarDetails = () => {
             errorMessage={validationErrors.plateNumber}
             defaultValue={formData.plateNumber}
           />
-          <InputField
-            placeholder="Vin Number"
-            name="vinNumber"
-            required
-            styleType={2}
-            handleInputChange={handleFormChange}
-            errorMessage={validationErrors.vinNumber}
-            defaultValue={formData.vinNumber}
-          />
+          <div>
+            <InputField
+              placeholder="Vin Number"
+              name="vinNumber"
+              required
+              styleType={2}
+              handleInputChange={handleFormChange}
+              errorMessage={validationErrors.vinNumber}
+              defaultValue={formData.vinNumber}
+            />
+            <p className="text-white text-sm opacity-60 mt-1">
+              Please make sure the VIN number is in all caps
+            </p>
+          </div>
         </div>
       </div>
       <p className="text-white">

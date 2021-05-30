@@ -98,7 +98,9 @@ const MembersDashboardIndexPage = () => {
                   announcements.map((_announcement, index) => (
                     <Fragment key={index}>
                       <p
-                        onClick={() => history.push("/members/announcements")}
+                        onClick={() =>
+                          history.push(`/announcements/${_announcement.id}`)
+                        }
                         className="text-white opacity-80 text-sm py-2 cursor-pointer"
                       >
                         <span className="text-red font-bold">
@@ -125,7 +127,7 @@ const MembersDashboardIndexPage = () => {
                   events.map((_event, index) => (
                     <Fragment key={index}>
                       <p
-                        onClick={() => history.push("/members/events")}
+                        onClick={() => history.push(`/events/${_event.id}`)}
                         className="text-white opacity-80 text-sm py-2 cursor-pointer"
                       >
                         <span className="text-red font-bold">
