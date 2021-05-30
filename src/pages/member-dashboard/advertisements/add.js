@@ -135,15 +135,20 @@ const MemberDashboard_Advertisements_Add = () => {
               </p>
             ) : null}
           </div>
-          <InputField
-            name="image"
-            placeholder="Image"
-            type="file"
-            styleType={2}
-            handleInputChange={handleFileUpload}
-            accept="image/*"
-            errorMessage={validationErrors.imageFile}
-          />
+          <div>
+            <InputField
+              name="image"
+              placeholder="Image"
+              type="file"
+              styleType={2}
+              handleInputChange={handleFileUpload}
+              accept="image/*"
+              errorMessage={validationErrors.imageFile}
+            />
+            <p className="text-white text-sm opacity-60 mt-1">
+              Image must be one of the following: JPG, PNG, JPEG
+            </p>
+          </div>
           <div>
             <p className="text-white opacity-70 leading-8">
               After you submit your ad, please allow some time for an admin to
